@@ -1,0 +1,21 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    notes                                              :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/11/12 14:07:31 by cbretagn          #+#    #+#              #
+#    Updated: 2019/11/12 14:35:36 by cbretagn         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+//hash table
+
+adjency list
+table ind -> ind in adjency list
+table ind -> name of the room
+
+function that places name in table
+function that finds name in table
+both depend on hash fun + quadratic search

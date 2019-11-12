@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/11/12 14:40:34 by cbretagn         ###   ########.fr       */
-=======
-/*   Updated: 2019/11/12 14:51:42 by cbretagn         ###   ########.fr       */
->>>>>>> hash_fun
+/*   Created: 2019/11/06 15:40:50 by cbretagn          #+#    #+#             */
+/*   Updated: 2019/11/06 18:47:50 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_H
-# define LEM_IN_H
+#include "./libft.h"
+#include <stdio.h>
 
-# include "libft/libft.h"
-# include "get_next_line.h"
-# include <unistd.h>
-# include <stdlib.h>
+int			main(int argc, char **argv)
+{
+	(void)argc;
 
-int			hash_fun(char *str);
-char		**put_in_table(char *str, char **tab, int size);
-int			search_in_table(char *str, char **tab, int size);
-
-#endif
+	char c;
+	int i = -1;
+	int hash = 456;
+	while ((c = argv[1][++i]))
+	{
+		hash = hash * 31 + c;
+	}
+	hash = hash;
+	printf("%d\n", hash);
+}
