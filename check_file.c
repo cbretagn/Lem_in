@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/12 18:25:18 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/13 15:09:03 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,25 @@ static char		*read_file(char *str)
 	int			fd;
 	int			ret;
 	char		buff[4096];
-	char		*file;
+	t_dstring	*file;
 
+	file = NULL;
 	fd = open(str, O_RDONLY);
-	if (!(file = ft_strnew(0)))
-		return (NULL);
 	if (fd != -1)
 	{
 		while ((ret = read(fd, buff, 4095)))
 		{
 			buff[ret] = '\0';
-			if (!(file = ft_strnjoin_free(file, buff, ret)))
+			if (!file)
+			{
+				if (!(file = create_dstring(4096, buff)))
+					return (NULL);
+			}
+			else if (!(file = push_str(file, buff)))
 				return (NULL);
 		}
 	}
-	return (file);
+	return (file->str);
 }
 
 int				main(int argc, char **argv)
