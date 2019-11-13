@@ -6,11 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/11/12 14:40:34 by cbretagn         ###   ########.fr       */
-=======
-/*   Updated: 2019/11/12 14:51:42 by cbretagn         ###   ########.fr       */
->>>>>>> hash_fun
+/*   Updated: 2019/11/12 17:13:30 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +15,7 @@
 
 # include "libft/libft.h"
 # include "get_next_line.h"
+# include "dynamic.h"
 # include <unistd.h>
 # include <stdlib.h>
 

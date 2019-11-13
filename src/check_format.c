@@ -6,11 +6,11 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:29:45 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/13 12:23:20 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/13 17:44:01 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in_checker.h"
+#include "../lem_in_checker.h"
 
 int			check_ant_number(char *file)
 {

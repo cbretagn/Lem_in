@@ -6,11 +6,11 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/13 15:09:03 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/13 17:43:52 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in_checker.h"
+#include "../lem_in_checker.h"
 
 static t_bool	*init_struct(void)
 {

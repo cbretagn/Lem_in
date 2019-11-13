@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dynamic_string_arrays.c                            :+:      :+:    :+:   */
+/*   dynamic_string.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 14:03:21 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/12 17:56:06 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/13 15:00:54 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../dynamic.h"
+#include "lem_in_checker.h"
 
 t_dstring			*create_dstring(unsigned int cap, char *str)
 {
@@ -18,12 +18,12 @@ t_dstring			*create_dstring(unsigned int cap, char *str)
 	unsigned int	len;
 
 	if (!(ret = (t_dstring *)malloc(sizeof(t_dstring))))
-		malloc_error();
+		return (NULL);
 	len = ft_strlen(str);
 	ret->capacity = cap;
 	ret->size = len;
 	if (!(ret->str = ft_strnew(ret->capacity)))
-		malloc_error();
+		return (NULL);
 	if (str[0] != '\0')
 		ft_strcpy(ret->str, str);
 	return (ret);
@@ -53,7 +53,7 @@ t_dstring			*push_str(t_dstring *dest, char *src)
 		while (len >= new_cap - dest->size)
 			new_cap *= 2;
 		if (!(temp = create_dstring(new_cap, dest->str)))
-			malloc_error();
+			return (NULL);
 		delete_dstring(dest);
 		ft_strcpy((temp->str + temp->size), src);
 	}
@@ -78,7 +78,7 @@ t_dstring			*push_str_nchar(t_dstring *dest, char *src, int n)
 		while (len >= new_cap - dest->size)
 			new_cap *= 2;
 		if (!(temp = create_dstring(new_cap, dest->str)))
-			malloc_error();
+			return (NULL);
 		delete_dstring(dest);
 		ft_strncpy((temp->str + temp->size), src, n);
 	}
