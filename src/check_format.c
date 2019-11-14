@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:29:45 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/14 16:06:21 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/14 16:28:02 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,29 +53,27 @@ int			check_command(t_bool *b, char *file)
 static int		is_room(char *line)
 {
 	int			i;
-	char		**room;
-	int			j;
+	int			space;
 
-	if (!(room = ft_strsplit(line, ' ')))
-		return (0);
-	if (!room[1] || room[0][0] == 'L' || room[3] || !room[2])
+	if (line[0] == 'L')
 		return (0);
 	i = 0;
-	j = 1;
-	while (j < 3)
+	space = 0;
+	while (line[i])
 	{
-		while (room[j][i])
+		while (line[i] != ' ' && line[i])
 		{
-			if (!(ft_isdigit(room[j][i]))
-				&& room[j][i] != '-' && room[j][i] != '+')
-			{
-				write(1, "Coordonnees non valides\n", 24);
+			if (space > 0 && !(ft_isdigit(line[i]))
+				&& line[i] != '-' && line[i] != '+')
 				return (0);
-			}
 			i++;
 		}
-		j++;
+		if (line[i] == ' ' && line[i + 1])
+			space++;
+		i++;
 	}
+	if (space != 2)
+		return (0);
 	return (1);
 }
 
