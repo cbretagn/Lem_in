@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/14 13:43:44 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/14 17:13:13 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,13 @@ static int		check_return(int i, t_bool *b)
 	return (i);
 }
 
-int				check_file(char *file)
+int				check_file(char *file, t_bool *b)
 {
 	int			i;
 	int			j;
-	t_bool		*b;
 
 	i = 0;
 	j = 0;
-	if (!(b = init_struct()))
-		return (0);
 	if (!(i = check_ant_number(file)))
 		return (0);
 	while (file[++i])
@@ -90,20 +87,23 @@ char			*read_file(char *str)
 	return (file->str);
 }
 
-/*int				main(int argc, char **argv)
-{
-	char		*file;
-	char		*graph;
+// int				main(int argc, char **argv)
+// {
+// 	char		*file;
+// 	char		*graph;
+// 	t_bool		*b;
 
-	if (argc != 2)
-	{
-		write(1, "Not enough arguments\n", 21);
-		return (0);
-	}
-	if (!(file = read_file(argv[1])))
-		return (0);
-	if (!(graph = ft_strsub(file, 0, check_file(file))))
-		return (0);
-	printf("%s", graph);
-	return (1);
-}*/
+// 	if (!(b = init_struct()))
+// 		return (0);
+// 	if (argc != 2)
+// 	{
+// 		write(1, "Not enough arguments\n", 21);
+// 		return (0);
+// 	}
+// 	if (!(file = read_file(argv[1])))
+// 		return (0);
+// 	if (!(graph = ft_strsub(file, 0, check_file(file, b))))
+// 		return (0);
+// 	printf("%s", graph);
+// 	return (1);
+// }
