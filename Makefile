@@ -6,7 +6,7 @@
 #    By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2019/11/14 13:58:03 by cbretagn         ###   ########.fr        #
+#    Updated: 2019/11/14 17:52:55 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC_NAME	= parsing.c\
 			  dynamic_string.c\
 			  get_next_line.c\
 			  hash_table.c\
+			  create_del_struct.c\
 			  main_for_test.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)
