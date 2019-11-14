@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/12 14:49:14 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/14 16:06:55 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,39 @@ static void		print_tab(char **tab, int size)
 	int		i;
 
 	i = -1;
-	while (++i < SIZE)
-		ft_putendl(tab[i]);
+	while (++i < size)
+	{
+		if (tab[i])
+			ft_putendl(tab[i]);
+		else
+			ft_putendl("(NULL)");
+	}
+}
+
+static void		init_tab(char **tab, int size)
+{
+	int		i;
+
+	i = -1;
+	while (++i < size)
+		tab[i] = NULL;
 }
 
 int				main(int argc, char **argv)
 {
-	char	**tab;
-	char	*str;
+	t_anthill	*anthill;
+	char		*str;
 
-	if (!(tab = (char **)malloc(sizeof(char *) * SIZE)))
+	if (!(anthill = (t_anthill *)malloc(sizeof(t_anthill))))
 		return (-1);
-	while (get_next_line(0, &str) > 0)
+	if (!(anthill->rooms = (char **)malloc(sizeof(char *) * 2592)))
+		return (-1);
+	init_tab(anthill->rooms, 2592);
+	if (argc == 2)
 	{
-		tab = put_in_table(str, tab, SIZE);
-		ft_strdel(&str);
+		str = read_file(argv[1]);
+		anthill = parser(str, anthill, 2592); //size temporary
 	}
-	print_tab(tab, SIZE);
-	ft_putendl(tab[152]);
-	ft_putendl(tab[search_in_table(tab[152], tab, SIZE)]);
+	print_tab(anthill->rooms, 2592);
 	return (0);
 }

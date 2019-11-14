@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/13 17:43:52 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/14 13:43:44 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		check_return(int i, t_bool *b)
 	return (i);
 }
 
-static int		check_file(char *file)
+int				check_file(char *file)
 {
 	int			i;
 	int			j;
@@ -63,7 +63,7 @@ static int		check_file(char *file)
 	return (check_return(i, b));
 }
 
-static char		*read_file(char *str)
+char			*read_file(char *str)
 {
 	int			fd;
 	int			ret;
@@ -86,10 +86,11 @@ static char		*read_file(char *str)
 				return (NULL);
 		}
 	}
+	close(fd);
 	return (file->str);
 }
 
-int				main(int argc, char **argv)
+/*int				main(int argc, char **argv)
 {
 	char		*file;
 	char		*graph;
@@ -105,4 +106,4 @@ int				main(int argc, char **argv)
 		return (0);
 	printf("%s", graph);
 	return (1);
-}
+}*/

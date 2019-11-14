@@ -6,12 +6,12 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 14:29:36 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/06 18:28:15 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/14 13:35:35 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include "libft.h"
+#include "../get_next_line.h"
+#include "../libft/libft.h"
 #include <stdlib.h>
 #include <unistd.h>
 

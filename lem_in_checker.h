@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 12:03:44 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/13 15:04:19 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/14 13:17:58 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,6 @@ int                 check_ant_number(char *file);
 int                 check_command(t_bool *b, char *file);
 int                 check_tubes_rooms(t_bool *b, char *file);
 
+int					check_file(char *file);
+char				*read_file(char *str);
 #endif

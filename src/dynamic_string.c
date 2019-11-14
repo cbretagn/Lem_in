@@ -6,11 +6,11 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 14:03:21 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/13 15:00:54 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/14 13:35:05 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in_checker.h"
+#include "../lem_in_checker.h"
 
 t_dstring			*create_dstring(unsigned int cap, char *str)
 {

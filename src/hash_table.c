@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:11:49 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/12 17:56:04 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/14 15:50:19 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ int			hash_fun(char *str)
 char		**put_in_table(char *str, char **tab, int size)
 {
 	int		hash;
-	int		quadra;
 
-	quadra = 1;
 	hash = hash_fun(str) % size;
 	while (tab[hash] != NULL)
 	{
@@ -50,8 +48,7 @@ char		**put_in_table(char *str, char **tab, int size)
 			delete_table(tab, size);
 			return (NULL);
 		}
-		hash = (hash + quadra * quadra) % size;
-		quadra++;
+		hash = (hash + 1) % size;
 	}
 	if (!(tab[hash] = ft_strdup(str)))
 	{
