@@ -6,28 +6,30 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/14 17:13:13 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 13:03:55 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in_checker.h"
 
-static t_bool	*init_struct(void)
+static t_data	*init_struct(void)
 {
-	t_bool		*b;
+	t_data		*data;
 
-	if (!(b = malloc(sizeof(t_bool))))
+	if (!(data = malloc(sizeof(t_data))))
 		return (NULL);
-	b->end = 0;
-	b->start = 0;
-	b->tubes = 0;
-	b->rooms = 0;
-	return (b);
+	data->end = 0;
+	data->start = 0;
+	data->tubes = 0;
+	data->rooms = 0;
+	data->ants = 0;
+	return (data);
 }
 
-static int		check_return(int i, t_bool *b)
+static int		check_return(int i, t_data *data)
 {
-	if (b->start == 0 || b->end == 0 || b->tubes == 0 || b->rooms < 2)
+	if (data->start == 0 || data->end == 0
+		|| data->tubes == 0 || data->rooms < 2)
 	{
 		write(1, "No path, start or end\n", 22);
 		return (0);
@@ -35,29 +37,29 @@ static int		check_return(int i, t_bool *b)
 	return (i);
 }
 
-int				check_file(char *file, t_bool *b)
+int				check_file(char *file, t_data *data)
 {
 	int			i;
 	int			j;
 
 	i = 0;
 	j = 0;
-	if (!(i = check_ant_number(file)))
+	if (!(i = check_ant_number(file, data)))
 		return (0);
 	while (file[++i])
 	{
 		if (!file[i] || (file[i] == '\n'))
-			return (check_return(i, b));
+			return (check_return(i, data));
 		if (file[i] == '#')
 		{
-			if ((j = check_command(b, &file[i])) == 0)
-				return (check_return(i, b));
+			if ((j = check_command(data, &file[i])) == 0)
+				return (check_return(i, data));
 		}
-		else if ((j = check_tubes_rooms(b, &file[i])) == 0)
-			return (check_return(i, b));
+		else if ((j = check_tubes_rooms(data, &file[i])) == 0)
+			return (check_return(i, data));
 		i += j;
 	}
-	return (check_return(i, b));
+	return (check_return(i, data));
 }
 
 char			*read_file(char *str)
@@ -87,23 +89,25 @@ char			*read_file(char *str)
 	return (file->str);
 }
 
-// int				main(int argc, char **argv)
-// {
-// 	char		*file;
-// 	char		*graph;
-// 	t_bool		*b;
+int				main(int argc, char **argv)
+{
+	char		*file;
+	char		*graph;
+	t_data		*data;
 
-// 	if (!(b = init_struct()))
-// 		return (0);
-// 	if (argc != 2)
-// 	{
-// 		write(1, "Not enough arguments\n", 21);
-// 		return (0);
-// 	}
-// 	if (!(file = read_file(argv[1])))
-// 		return (0);
-// 	if (!(graph = ft_strsub(file, 0, check_file(file, b))))
-// 		return (0);
-// 	printf("%s", graph);
-// 	return (1);
-// }
+	if (!(data = init_struct()))
+		return (0);
+	if (argc != 2)
+	{
+		write(1, "Not enough arguments\n", 21);
+		return (0);
+	}
+	if (!(file = read_file(argv[1])))
+		return (0);
+	if (!(graph = ft_strsub(file, 0, check_file(file, data))))
+		return (0);
+	ft_putnbr(data->ants);
+	ft_putchar('\n');
+
+	return (1);
+}

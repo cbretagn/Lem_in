@@ -6,13 +6,13 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:29:45 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/14 16:28:02 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 13:01:41 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in_checker.h"
 
-int			check_ant_number(char *file)
+int			check_ant_number(char *file, t_data *data)
 {
 	int		i;
 
@@ -20,17 +20,15 @@ int			check_ant_number(char *file)
 	while (file[i] && file[i] != '\n')
 	{
 		if (!ft_isdigit(file[i]))
-		{
-			write(1, "Wrong number of ants\n", 21);
 			return (0);
-		}
 		while (ft_isdigit(file[i]))
 			i++;
 	}
+	data->ants = ft_atoi(file);
 	return (i);
 }
 
-int			check_command(t_bool *b, char *file)
+int			check_command(t_data *data, char *file)
 {
 	int		i;
 //  char cmd_tab[][] = {"##start", "##end"};
@@ -42,10 +40,10 @@ int			check_command(t_bool *b, char *file)
 	if (!(cmd = ft_strsub(file, 0, i)))
 		return (0);
 	if (!ft_strcmp(cmd, "##start"))
-		b->start++;
+		data->start++;
 	if (!ft_strcmp(cmd, "##end"))
-		b->end++;
-	if (b->start > 1 || b->end > 1)
+		data->end++;
+	if (data->start > 1 || data->end > 1)
 		return (0);
 	return (i);
 }
@@ -91,7 +89,7 @@ static int		is_tube(char *line)
 	return (1);
 }
 
-int				check_tubes_rooms(t_bool *b, char *file)
+int				check_tubes_rooms(t_data *data, char *file)
 {
 	int			i;
 	char		*line;
@@ -103,12 +101,12 @@ int				check_tubes_rooms(t_bool *b, char *file)
 		return (0);
 	if (is_room(line) > 0)
 	{
-		if (b->tubes > 0)
+		if (data->tubes > 0)
 			return (0);
-		b->rooms++;
+		data->rooms++;
 	}
 	else if (is_tube(line) > 0)
-		b->tubes++;
+		data->tubes++;
 	else
 		return (0);
 	return (i);
