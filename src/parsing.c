@@ -6,16 +6,17 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 16:17:06 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 16:25:06 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../lem_in.h"
 
 //receives char *, hash room, check if repetition
 //creates adjency list
 
-static int			next_line(char *str, int i)
+int			next_line(char *str, int i)
 {
 	while (str[i] != '\n' && str[i])
 		i++;
