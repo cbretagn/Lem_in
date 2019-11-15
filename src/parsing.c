@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 16:51:04 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 18:46:46 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,23 @@ int				next_line(char *str, int i)
 	if (str[i] == '\0')
 		return (i);
 	return (i + 1);
+}
+
+static int		in_array(t_dynode *dynode, int node)
+{
+	int			i;
+
+	i = 0;
+	while (i < dynode->size)
+	{
+		ft_putnbr(dynode->tab[i]);
+		ft_putchar('\n');
+		
+		if (!(dynode->tab[i] == node))
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 //dynamic string to hold the word
@@ -56,8 +73,11 @@ t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
 		word->size = 0;
 		word = push_str_nchar(word, str + i, j - i);
 		connect = search_in_table(word->str, anthill->rooms, anthill->nb_room);
-		anthill->nodes[node] = push_int(anthill->nodes[node], connect);
-		anthill->nodes[connect] = push_int(anthill->nodes[connect], node);
+		// check in nodes[node] if connect exists
+		if (!(in_array(anthill->nodes[node], connect)))
+			anthill->nodes[node] = push_int(anthill->nodes[node], connect);
+		if (!(in_array(anthill->nodes[connect], node)))
+			anthill->nodes[connect] = push_int(anthill->nodes[connect], node);
 		word->size = 0;
 		i = next_line(str, i);
 	}
