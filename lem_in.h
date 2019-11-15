@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 16:29:47 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/15 16:35:39 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_anthill
 	char		**rooms;
 	int			nb_room;
 	int			nb_tubes;
+	int			start;
+	int			end;
 	t_dynode	**nodes;
 }				t_anthill;
 
