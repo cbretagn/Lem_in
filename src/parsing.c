@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 14:36:42 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 16:17:06 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ t_anthill			*handle_tubes(t_anthill *anthill, char *str, int i,
 		while (str[j] != '-')
 			j++;
 		word = push_str_nchar(word, str + i, j - i);
-		if ((node = search_in_table(word->str, anthill->rooms, anthill->nb_room)) == -1)
-			return (NULL);
+		node = search_in_table(word->str, anthill->rooms, anthill->nb_room);
 		j++;
 		i = j;
 		while (str[j] != '\n' && str[j])
