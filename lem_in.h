@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 16:35:39 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/15 16:46:42 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int				hash_fun(char *str);
 char			**put_in_table(char *str, char **tab, int size);
 int				search_in_table(char *str, char **tab, int size);
 
-t_anthill		*parser(char *str, t_anthill *anthill, int size);
+t_anthill		*parser(char *str, t_anthill *anthill);
 
 t_dynode		*create_dynode(int capacity);
 t_dynode		*push_int(t_dynode *node, int nb);

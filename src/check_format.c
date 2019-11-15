@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:29:45 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/15 16:43:46 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 18:08:26 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static int	is_room(char *line)
 			if (space > 0 && !(ft_isdigit(line[i]))
 				&& line[i] != '-' && line[i] != '+')
 				return (0);
+			if (space == 0 && line[i] == '-')
+				return (0);
 			i++;
 		}
 		if (line[i] == ' ' && line[i + 1])
@@ -87,15 +89,19 @@ static int	is_room(char *line)
 
 static int	is_tube(char *line)
 {
-	char	**tube;
+	int		i;
+	int		dash;
 
-	if (!(tube = ft_strsplit(line, '-')))
-		return (0);
-	if (tube[2] || !tube[1])
+	i = 0;
+	dash = 0;
+	while (line[i])
 	{
-		write(1, "Tube format invalid\n", 20);
-		return (0);
+		if (line[i] == '-' || line[i] == ' ')
+			dash++;
+		i++;
 	}
+	if (dash != 1)
+		return (0);
 	return (1);
 }
 
