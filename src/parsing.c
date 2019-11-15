@@ -6,17 +6,16 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 16:25:06 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 16:51:04 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../lem_in.h"
 
 //receives char *, hash room, check if repetition
 //creates adjency list
 
-int			next_line(char *str, int i)
+int				next_line(char *str, int i)
 {
 	while (str[i] != '\n' && str[i])
 		i++;
@@ -29,12 +28,12 @@ int			next_line(char *str, int i)
 //reset size to 0 to write new
 //use push_str_nchar with size of room name
 
-t_anthill			*handle_tubes(t_anthill *anthill, char *str, int i,
-									t_dstring *word)
+t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
+				t_dstring *word)
 {
-	int		j;
-	int		node;
-	int		connecting;
+	int			j;
+	int			node;
+	int			connect;
 
 	// write(1, str + i, 10);
 	// ft_putnbr(ft_strlen(str));
@@ -56,9 +55,9 @@ t_anthill			*handle_tubes(t_anthill *anthill, char *str, int i,
 			j++;
 		word->size = 0;
 		word = push_str_nchar(word, str + i, j - i);
-		connecting = search_in_table(word->str, anthill->rooms, anthill->nb_room);
-		anthill->nodes[node] = push_int(anthill->nodes[node], connecting);
-		anthill->nodes[connecting] = push_int(anthill->nodes[connecting], node);
+		connect = search_in_table(word->str, anthill->rooms, anthill->nb_room);
+		anthill->nodes[node] = push_int(anthill->nodes[node], connect);
+		anthill->nodes[connect] = push_int(anthill->nodes[connect], node);
 		word->size = 0;
 		i = next_line(str, i);
 	}
@@ -66,7 +65,7 @@ t_anthill			*handle_tubes(t_anthill *anthill, char *str, int i,
 	return (anthill);
 }
 
-t_anthill			*parser(char *str, t_anthill *anthill, int size) // and adjency list /matrix i dunno
+t_anthill		*parser(char *str, t_anthill *anthill) // and adjency list /matrix i dunno
 {
 	int			i;
 	int			j;
@@ -86,7 +85,8 @@ t_anthill			*parser(char *str, t_anthill *anthill, int size) // and adjency list
 		if (str[j] == '\n')
 			break ;
 		word = push_str_nchar(word, str + i, j - i);
-		if (!(anthill->rooms = put_in_table(word->str, anthill->rooms, size)))
+		if (!(anthill->rooms = put_in_table(word->str, anthill->rooms,
+			anthill->nb_room)))
 			return (NULL); //free anthill
 		word->size = 0;
 	}

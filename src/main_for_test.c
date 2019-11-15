@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 15:29:41 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/15 16:39:18 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int				main(int argc, char **argv)
 	anthill = create_anthill(data->rooms);
 	if (anthill)
 		write(1, "Anthill is here !\n", 18);
-	anthill = parser(graph, anthill, data->rooms); //size temporary // size needed ?
+	anthill = parser(graph, anthill);
 	if (anthill)
 	{
 		write(1, "\nAnthill is still here !\n", 25);

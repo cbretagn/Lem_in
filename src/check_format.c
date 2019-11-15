@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:29:45 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/15 15:50:46 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 16:43:46 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			check_command(t_data *data, char *file)
 		if (!(data->end_room = ft_strsub(file, i + 1, j - i)))
 			return (0);
 	}
-	return ((data->start > 1 || data->end > 1) ? 0 : i); 
+	return ((data->start > 1 || data->end > 1) ? 0 : i);
 }
 
 static int	is_room(char *line)

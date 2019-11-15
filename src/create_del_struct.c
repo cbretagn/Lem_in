@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_del_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:09:15 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/14 18:12:55 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/15 16:47:15 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-t_dynode	*create_dynode(int capacity)
+t_dynode		*create_dynode(int capacity)
 {
 	t_dynode	*node;
 
@@ -29,7 +29,7 @@ t_dynode	*create_dynode(int capacity)
 	return (node);
 }
 
-t_dynode	*push_int(t_dynode *node, int nb)
+t_dynode		*push_int(t_dynode *node, int nb)
 {
 	t_dynode	*tmp;
 	int			i;
@@ -57,7 +57,7 @@ t_dynode	*push_int(t_dynode *node, int nb)
 	return (node);
 }
 
-void		delete_dynode(t_dynode *node)
+void			delete_dynode(t_dynode *node)
 {
 	free(node->tab);
 	node->tab = NULL;
@@ -65,7 +65,7 @@ void		delete_dynode(t_dynode *node)
 	node = NULL;
 }
 
-t_anthill	*create_anthill(int	size)
+t_anthill		*create_anthill(int size)
 {
 	t_anthill	*ret;
 	int			i;
@@ -96,9 +96,9 @@ t_anthill	*create_anthill(int	size)
 	return (ret);
 }
 
-void		delete_anthill(t_anthill *anthill)
+void			delete_anthill(t_anthill *anthill)
 {
-	int	 i;
+	int			i;
 
 	i = -1;
 	while (++i < anthill->nb_room)
