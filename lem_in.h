@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 13:14:35 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 15:08:48 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_anthill
 }				t_anthill;
 
 t_data			*init_struct(void);
+int				next_line(char *str, int i);
 
 int				hash_fun(char *str);
 char			**put_in_table(char *str, char **tab, int size);

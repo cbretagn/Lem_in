@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 12:03:44 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/15 12:59:28 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 15:19:59 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@
  
 typedef struct      s_file_data
 {
-    int start;
-    int end;
-    int tubes;
-    int rooms;
-    int ants;
+    int             start;
+    int             end;
+    int             tubes;
+    int             rooms;
+    int             ants;
+    char            *start_room;
+    char            *end_room;
 }                   t_data;
 
 typedef struct		s_dstring

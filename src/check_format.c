@@ -6,11 +6,12 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:29:45 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/15 13:01:41 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 15:50:46 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in_checker.h"
+#include "../lem_in.h"
 
 int			check_ant_number(char *file, t_data *data)
 {
@@ -31,27 +32,36 @@ int			check_ant_number(char *file, t_data *data)
 int			check_command(t_data *data, char *file)
 {
 	int		i;
-//  char cmd_tab[][] = {"##start", "##end"};
 	char	*cmd;
+	int		j;
 
 	i = 0;
-	while (file[i] != '\n' && file[i])
+	while (file[i] && file[i] != '\n')
 		i++;
+	j = i;
+	while (file[j] && file[j + 1] != ' ')
+		j++;
 	if (!(cmd = ft_strsub(file, 0, i)))
 		return (0);
 	if (!ft_strcmp(cmd, "##start"))
+	{
 		data->start++;
-	if (!ft_strcmp(cmd, "##end"))
+		if (!(data->start_room = ft_strsub(file, i + 1, j - i)))
+			return (0);
+	}
+	else if (!ft_strcmp(cmd, "##end"))
+	{
 		data->end++;
-	if (data->start > 1 || data->end > 1)
-		return (0);
-	return (i);
+		if (!(data->end_room = ft_strsub(file, i + 1, j - i)))
+			return (0);
+	}
+	return ((data->start > 1 || data->end > 1) ? 0 : i); 
 }
 
-static int		is_room(char *line)
+static int	is_room(char *line)
 {
-	int			i;
-	int			space;
+	int		i;
+	int		space;
 
 	if (line[0] == 'L')
 		return (0);
@@ -75,9 +85,9 @@ static int		is_room(char *line)
 	return (1);
 }
 
-static int		is_tube(char *line)
+static int	is_tube(char *line)
 {
-	char		**tube;
+	char	**tube;
 
 	if (!(tube = ft_strsplit(line, '-')))
 		return (0);
@@ -89,10 +99,10 @@ static int		is_tube(char *line)
 	return (1);
 }
 
-int				check_tubes_rooms(t_data *data, char *file)
+int			check_tubes_rooms(t_data *data, char *file)
 {
-	int			i;
-	char		*line;
+	int		i;
+	char	*line;
 
 	i = 0;
 	while (file[i] != '\n' && file[i])
