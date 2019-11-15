@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 14:32:56 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 15:29:41 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,26 @@ static void		print_dynode(t_dynode **nodes, char **rooms, int size)
 	}
 }
 
+static void		print_solo_and_connectors(t_dynode **nodes, int size)
+{
+	int		solo;
+	int		connectors;
+	int		i;
+
+	i = -1;
+	solo = 0;
+	connectors = 0;
+	while (++i < size)
+	{
+		if (nodes[i]->size == 1)
+			solo++;
+		if (nodes[i]->size > 2)
+			connectors++;
+	}
+	printf("There are %d solo nodes and %d connectors in this graph\n",
+			solo, connectors);
+}
+
 int				main(int argc, char **argv)
 {
 	t_anthill	*anthill;
@@ -67,6 +87,7 @@ int				main(int argc, char **argv)
 		write(1, "\nAnthill is still here !\n", 25);
 		print_tab(anthill->rooms, data->rooms);
 		print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
+		print_solo_and_connectors(anthill->nodes, anthill->nb_room);
 	}
 	return (0);
 }
