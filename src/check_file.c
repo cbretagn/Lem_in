@@ -6,13 +6,13 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/15 13:06:27 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 13:14:23 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in_checker.h"
 
-static t_data	*init_struct(void)
+t_data			*init_struct(void)
 {
 	t_data		*data;
 
@@ -106,8 +106,5 @@ char			*read_file(char *str)
 // 		return (0);
 // 	if (!(graph = ft_strsub(file, 0, check_file(file, data))))
 // 		return (0);
-// 	ft_putnbr(data->ants);
-// 	ft_putchar('\n');
-
 // 	return (1);
 // }

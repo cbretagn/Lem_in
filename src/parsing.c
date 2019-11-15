@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/14 18:36:16 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/15 13:27:51 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ t_anthill			*handle_tubes(t_anthill *anthill, char *str, int i,
 	int		node;
 	int		connecting;
 
-	write(1, str + i, 10);
-	ft_putnbr(ft_strlen(str));
-	ft_putchar('\n');
+	// write(1, str + i, 10);
+	// ft_putnbr(ft_strlen(str));
+	// ft_putchar('\n');
 	while (str[i])
 	{
 		while (str[i] == '#')

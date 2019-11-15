@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_for_test.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/14 18:36:14 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/15 13:26:12 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,19 @@ static void		print_dynode(t_dynode **nodes, char **rooms, int size)
 int				main(int argc, char **argv)
 {
 	t_anthill	*anthill;
-	char		*str;
+	char		*file;
+	char		*graph;
+	t_data		*data;
 
-	anthill = create_anthill(2592);
-	if (argc == 2)
-	{
-		str = read_file(argv[1]);
-		anthill = parser(str, anthill, 2592); //size temporary
-	}
-	print_tab(anthill->rooms, 2592);
+	if (!(data = init_struct()) || argc != 2)
+		return (0);
+	if (!(file = read_file(argv[1])))
+		return (0);
+	if (!(graph = ft_strsub(file, 0, check_file(file, data))))
+		return (0);
+	anthill = create_anthill(data->rooms);
+	anthill = parser(graph, anthill, data->rooms); //size temporary // size needed ?
+	print_tab(anthill->rooms, data->rooms);
 	print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
 	return (0);
 }

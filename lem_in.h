@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/14 18:32:44 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/15 13:14:35 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,18 @@ typedef struct s_anthill
 	t_dynode	**nodes;
 }				t_anthill;
 
-int			hash_fun(char *str);
-char		**put_in_table(char *str, char **tab, int size);
-int			search_in_table(char *str, char **tab, int size);
+t_data			*init_struct(void);
 
-t_anthill	*parser(char *str, t_anthill *anthill, int size);
+int				hash_fun(char *str);
+char			**put_in_table(char *str, char **tab, int size);
+int				search_in_table(char *str, char **tab, int size);
 
-t_dynode	*create_dynode(int capacity);
-t_dynode	*push_int(t_dynode *node, int nb);
-void		delete_dynode(t_dynode *node);
-t_anthill	*create_anthill(int size);
-void		delete_anthill(t_anthill *anthill);
+t_anthill		*parser(char *str, t_anthill *anthill, int size);
+
+t_dynode		*create_dynode(int capacity);
+t_dynode		*push_int(t_dynode *node, int nb);
+void			delete_dynode(t_dynode *node);
+t_anthill		*create_anthill(int size);
+void			delete_anthill(t_anthill *anthill);
 
 #endif
