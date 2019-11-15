@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/15 13:14:23 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 15:51:50 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_data			*init_struct(void)
 	data->tubes = 0;
 	data->rooms = 0;
 	data->ants = 0;
+	data->start_room = NULL;
+	data->end_room = NULL;
 	return (data);
 }
 
@@ -88,23 +90,3 @@ char			*read_file(char *str)
 	close(fd);
 	return (file->str);
 }
-
-// int				main(int argc, char **argv)
-// {
-// 	char		*file;
-// 	char		*graph;
-// 	t_data		*data;
-
-// 	if (!(data = init_struct()))
-// 		return (0);
-// 	if (argc != 2)
-// 	{
-// 		write(1, "Not enough arguments\n", 21);
-// 		return (0);
-// 	}
-// 	if (!(file = read_file(argv[1])))
-// 		return (0);
-// 	if (!(graph = ft_strsub(file, 0, check_file(file, data))))
-// 		return (0);
-// 	return (1);
-// }
