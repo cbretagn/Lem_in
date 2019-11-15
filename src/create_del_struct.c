@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:09:15 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/14 18:12:55 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/15 19:16:43 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,31 +71,27 @@ t_anthill	*create_anthill(int	size)
 	int			i;
 
 	if (!(ret = (t_anthill *)malloc(sizeof(t_anthill))))
-		return (NULL);
+		exit(-2);
 	if (!(ret->rooms = (char **)malloc(sizeof(char *) * size)))
-	{
-		free(ret);
-		ret = NULL;
-		return (NULL);
-	}
+		exit(-2);
 	i = -1;
 	while (++i < size)
 		ret->rooms[i] = NULL;
 	if (!(ret->nodes = (t_dynode **)malloc(sizeof(t_dynode *) * size)))
-	{
-		free(ret->rooms);
-		ret->rooms = NULL;
-		free(ret);
-		ret = NULL;
-		return (NULL);
-	}
+		exit(-2);
 	i = -1;
 	while (++i < size)
 		ret->nodes[i] = create_dynode(BASE_DYN_NODES);
 	ret->nb_room = size;
+	if (!(ret->connectors = (t_connector **)malloc(sizeof(t_connector *) * size)))
+		exit(-2);
+	i = -1;
+	while (++i < size)
+		ret->connectors[i] = NULL;
 	return (ret);
 }
 
+//add delete connector to delete anthill
 void		delete_anthill(t_anthill *anthill)
 {
 	int	 i;

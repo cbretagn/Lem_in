@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 15:29:41 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/15 19:24:07 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,25 @@ static void		print_dynode(t_dynode **nodes, char **rooms, int size)
 			printf("%d ", nodes[i]->tab[j]);
 		printf("\n");
 	}
+}
+
+static void		print_smallergraph(t_anthill *anthill)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < anthill->nb_room)
+	{
+		if (!CONNECTORS[i])
+			continue ;
+		printf("hub %d is connected to hubs : ", i);
+		j = -1;
+		while (++j < CONNECTORS[i]->size)
+			printf("%d at distance %d, ", CONNECTORS[i]->tab[j].name,
+					CONNECTORS[i]->tab[j].dist);
+	}
+	printf("\n");
 }
 
 static void		print_solo_and_connectors(t_dynode **nodes, int size)
@@ -82,12 +101,14 @@ int				main(int argc, char **argv)
 	if (anthill)
 		write(1, "Anthill is here !\n", 18);
 	anthill = parser(graph, anthill, data->rooms); //size temporary // size needed ?
+	//anthill = create_connector_graph(anthill);
 	if (anthill)
 	{
 		write(1, "\nAnthill is still here !\n", 25);
 		print_tab(anthill->rooms, data->rooms);
 		print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
 		print_solo_and_connectors(anthill->nodes, anthill->nb_room);
+		//print_smallergraph(anthill);
 	}
 	return (0);
 }
