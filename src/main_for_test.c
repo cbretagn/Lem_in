@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 13:26:12 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 13:33:46 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,13 @@ int				main(int argc, char **argv)
 		return (0);
 	if (!(graph = ft_strsub(file, 0, check_file(file, data))))
 		return (0);
+	ft_putstr(graph);
 	anthill = create_anthill(data->rooms);
+	if (anthill)
+		write(1, "\nAnthill is here !\n", 19);
 	anthill = parser(graph, anthill, data->rooms); //size temporary // size needed ?
+	if (anthill)
+		write(1, "\nAnthill is still here !\n", 25);
 	print_tab(anthill->rooms, data->rooms);
 	print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
 	return (0);
