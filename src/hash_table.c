@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:11:49 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 14:35:41 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/15 15:56:58 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,6 @@ int			search_in_table(char *str, char **tab, int size)
 		i++;
 	}
 	if (i == size)
-		return (-1);
+		exit(EXIT_FAILURE);
 	return (hash);
 }
