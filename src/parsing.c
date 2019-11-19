@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 18:46:46 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/19 15:23:29 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ static int		in_array(t_dynode *dynode, int node)
 	i = 0;
 	while (i < dynode->size)
 	{
-		ft_putnbr(dynode->tab[i]);
-		ft_putchar('\n');
-		
-		if (!(dynode->tab[i] == node))
+		if (dynode->tab[i] == node)
 			return (1);
 		i++;
 	}
