@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:21:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 19:24:09 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/20 15:42:07 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,24 @@ static t_anthill	*find_next_connector(int start, t_anthill *anthill, int hub_nam
 	int		distance;
 	int		next;
 	int		prev;
+	int		tmp;
 
 	next = start;
 	prev = hub_name;
 	distance = 1;
+	ft_putnbr(NODES[next]->size);
 	while (NODES[next]->size == 2)
 	{
-		prev = next;
+		tmp = next;
 		next = NODES[next]->tab[0] == prev ? NODES[next]->tab[1]
 			: NODES[next]->tab[0];
+		prev = tmp;
 		distance++;
 	}
 	if (NODES[next]->size < 2)
+	{
 		return (anthill);
-	if (!CONNECTORS[hub_name])
-		CONNECTORS[hub_name] = create_connector(BASE_CONNECTORS);
+	}
 	CONNECTORS[hub_name] = push_vertex(CONNECTORS[hub_name], next, distance);
 	return (anthill);
 }
@@ -48,6 +51,10 @@ t_anthill		*create_connector_graph(t_anthill *anthill)
 			continue ;
 		if (NODES[i]->size > 2)
 		{
+			if (!ROOMS[i])
+				ft_putstr("(null)\n");
+			else
+				ft_putendl(ROOMS[i]);
 			j = -1;
 			CONNECTORS[i] = create_connector(BASE_CONNECTORS);
 			while (++j < NODES[i]->size)
