@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/20 15:51:12 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/22 14:33:22 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static void		print_smallergraph(t_anthill *anthill)
 		printf("\nhub %d is connected to hubs : ", i);
 		j = -1;
 		while (++j < CONNECTORS[i]->size)
-			printf("%d at distance %d, ", CONNECTORS[i]->tab[j].name,
-					CONNECTORS[i]->tab[j].dist);
+			printf("%d at distance %d from %d, ", CONNECTORS[i]->tab[j].name,
+					CONNECTORS[i]->tab[j].dist, CONNECTORS[i]->tab[j].from);
 	}
 	printf("\n");
 }

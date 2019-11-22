@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/20 15:51:22 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/22 14:33:06 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 typedef struct	s_vertex
 {
 	int			name;
+	int			from;
 	int			dist;
 }				t_vertex;
 
@@ -75,7 +76,8 @@ void			delete_anthill(t_anthill *anthill);
 
 t_connector		*create_connector(int size);
 void			delete_connector(t_connector *del);
-t_connector		*push_vertex(t_connector *connector, int room, int distance);
+t_connector		*push_vertex(t_connector *connector, int room, int distance,
+							int from);
 
 t_anthill		*create_connector_graph(t_anthill *anthill);
 #endif

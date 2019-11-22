@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:00:30 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 19:20:47 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/22 14:33:41 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void			delete_connector(t_connector *del)
 	del = NULL;
 }
 
-t_connector		*push_vertex(t_connector *connector, int room, int distance)
+t_connector		*push_vertex(t_connector *connector, int room, int distance,
+								int first_node)
 {
 	t_connector		*tmp;
 	int				i;
@@ -53,12 +54,14 @@ t_connector		*push_vertex(t_connector *connector, int room, int distance)
 		}
 		connector->tab[tmp->size].name = room;
 		connector->tab[tmp->size].dist = distance;
+		connector->tab[tmp->size].from = first_node;
 		connector->size = tmp->size + 1;
 		delete_connector(tmp);
 		return (connector);
 	}
 	connector->tab[connector->size].name = room;
 	connector->tab[connector->size].dist = distance;	
+	connector->tab[connector->size].from = first_node;	
 	connector->size++;
 	return (connector);
 }
