@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_del_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:09:15 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 19:16:43 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/23 17:37:27 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		delete_dynode(t_dynode *node)
 	node = NULL;
 }
 
-t_anthill	*create_anthill(int	size)
+t_anthill	*create_anthill(int	size, t_data *data)
 {
 	t_anthill	*ret;
 	int			i;
@@ -74,6 +74,9 @@ t_anthill	*create_anthill(int	size)
 		exit(-2);
 	if (!(ret->rooms = (char **)malloc(sizeof(char *) * size)))
 		exit(-2);
+	ret->ants = data->ants;
+	ret->start = 0;
+	ret->end = 0;
 	i = -1;
 	while (++i < size)
 		ret->rooms[i] = NULL;

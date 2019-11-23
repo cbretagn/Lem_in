@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   connector_graph_struct.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:00:30 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 19:20:47 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/23 18:51:37 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,28 @@ t_connector		*push_vertex(t_connector *connector, int room, int distance)
 		{
 			connector->tab[i].name = tmp->tab[i].name;
 			connector->tab[i].dist = tmp->tab[i].dist;
+			//need another function for init int in vertex or delete commented part below (or both)
+			connector->tab[i].flow = 0;
+			connector->tab[i].xflow = 0;
+			connector->tab[i].cap = 0;
+			connector->tab[i].height = 0;
 		}
-		connector->tab[tmp->size].name = room;
-		connector->tab[tmp->size].dist = distance;
-		connector->size = tmp->size + 1;
+		// connector->tab[tmp->size].name = room;
+		// connector->tab[tmp->size].dist = distance;
+		// connector->tab[tmp->size].flow = 0;
+		// connector->tab[tmp->size].xflow = 0;
+		// connector->tab[tmp->size].cap = 0;
+		// connector->tab[tmp->size].height = 0;
+		// connector->size = tmp->size + 1;
 		delete_connector(tmp);
-		return (connector);
+		// return (connector);
 	}
 	connector->tab[connector->size].name = room;
-	connector->tab[connector->size].dist = distance;	
+	connector->tab[connector->size].dist = distance;
+	connector->tab[connector->size].flow = 0;
+	connector->tab[connector->size].xflow = 0;
+	connector->tab[connector->size].cap = 0;
+	connector->tab[connector->size].height = 0;
 	connector->size++;
 	return (connector);
 }

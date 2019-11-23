@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/20 15:51:22 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/23 18:42:08 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ typedef struct	s_vertex
 {
 	int			name;
 	int			dist;
+	int			flow;
+	int			xflow;
+	int			cap;
+	int			height;
 }				t_vertex;
 
 typedef struct s_connector
@@ -65,12 +69,12 @@ int				hash_fun(char *str);
 char			**put_in_table(char *str, char **tab, int size);
 int				search_in_table(char *str, char **tab, int size);
 
-t_anthill		*parser(char *str, t_anthill *anthill, int size);
+t_anthill		*parser(char *str, t_anthill *anthill, int size, t_data *data);
 
 t_dynode		*create_dynode(int capacity);
 t_dynode		*push_int(t_dynode *node, int nb);
 void			delete_dynode(t_dynode *node);
-t_anthill		*create_anthill(int size);
+t_anthill		*create_anthill(int size, t_data *data);
 void			delete_anthill(t_anthill *anthill);
 
 t_connector		*create_connector(int size);

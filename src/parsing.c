@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 16:25:06 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/23 18:50:50 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ t_anthill			*handle_tubes(t_anthill *anthill, char *str, int i,
 	int		node;
 	int		connecting;
 
-	// write(1, str + i, 10);
-	// ft_putnbr(ft_strlen(str));
-	// ft_putchar('\n');
 	while (str[i])
 	{
 		while (str[i] == '#')
@@ -66,7 +63,7 @@ t_anthill			*handle_tubes(t_anthill *anthill, char *str, int i,
 	return (anthill);
 }
 
-t_anthill			*parser(char *str, t_anthill *anthill, int size) // and adjency list /matrix i dunno
+t_anthill			*parser(char *str, t_anthill *anthill, int size, t_data *data) // and adjency list /matrix i dunno
 {
 	int			i;
 	int			j;
@@ -91,5 +88,7 @@ t_anthill			*parser(char *str, t_anthill *anthill, int size) // and adjency list
 		word->size = 0;
 	}
 	anthill = handle_tubes(anthill, str, i, word);
+	anthill->start = search_in_table(data->start_room, ROOMS, size);
+	anthill->end = search_in_table(data->end_room, ROOMS, size);
 	return (anthill);
 }
