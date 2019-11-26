@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/22 14:33:06 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/26 16:58:21 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@
 # define CONNECTORS anthill->connectors
 # define BASE_DYN_NODES 10
 # define BASE_CONNECTORS 10
+# define VISITED 1
+# define NOTVIS 0
+# define NAN -1
+
+typedef struct	s_dijkstra
+{
+	int			prev;
+	int			dist;
+	int			visited;
+}				t_dijkstra;
 
 typedef struct	s_vertex
 {
@@ -47,6 +57,14 @@ typedef struct	s_dynode
 	int 		cap;
 }			 	t_dynode;
 
+typedef struct	s_path
+{
+	int			size;
+	int			cap;
+	int			*path_length;
+	t_dynode	**tab;
+}				t_path;
+
 typedef struct s_anthill
 {
 	int			ants;
@@ -66,7 +84,7 @@ int				hash_fun(char *str);
 char			**put_in_table(char *str, char **tab, int size);
 int				search_in_table(char *str, char **tab, int size);
 
-t_anthill		*parser(char *str, t_anthill *anthill, int size);
+t_anthill		*parser(char *str, t_anthill *anthill, t_data *data);
 
 t_dynode		*create_dynode(int capacity);
 t_dynode		*push_int(t_dynode *node, int nb);
@@ -80,4 +98,11 @@ t_connector		*push_vertex(t_connector *connector, int room, int distance,
 							int from);
 
 t_anthill		*create_connector_graph(t_anthill *anthill);
+
+t_path			*next_shortest_path(t_anthill *anthill);
+t_path			*create_path_tab(int size);
+t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start);
+void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab, int curr);
+void			check_neighbours(t_anthill *anthill, t_dijkstra *tab, int curr);
+
 #endif

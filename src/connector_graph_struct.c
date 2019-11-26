@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:00:30 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/22 14:33:41 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/26 14:05:42 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_connector		*push_vertex(t_connector *connector, int room, int distance,
 		{
 			connector->tab[i].name = tmp->tab[i].name;
 			connector->tab[i].dist = tmp->tab[i].dist;
+			connector->tab[i].from = tmp->tab[i].from;
 		}
 		connector->tab[tmp->size].name = room;
 		connector->tab[tmp->size].dist = distance;

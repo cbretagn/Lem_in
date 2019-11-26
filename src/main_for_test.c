@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/22 14:33:22 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/26 17:49:55 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,12 @@ int				main(int argc, char **argv)
 	char		*file;
 	char		*graph;
 	t_data		*data;
+	t_path		*routes;
+	int			i;
+	int			j;
 
+	i = -1;
+	j = -1;
 	if (!(data = init_struct()) || argc != 2)
 		return (0);
 	if (!(file = read_file(argv[1])))
@@ -103,7 +108,7 @@ int				main(int argc, char **argv)
 	printf("data contains start %d end %d tubes %d rooms %d ants %d start %s end %s\n",
 			data->start, data->end, data->tubes, data->rooms, data->ants,
 			data->start_room, data->end_room);
-	anthill = parser(graph, anthill, data->rooms); //size temporary // size needed ?
+	anthill = parser(graph, anthill, data); //size temporary // size needed ?
 	anthill = create_connector_graph(anthill);
 	if (anthill)
 	{
@@ -112,6 +117,18 @@ int				main(int argc, char **argv)
 		print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
 		print_smallergraph(anthill);
 		print_solo_and_connectors(anthill->nodes, anthill->nb_room);
+		routes = next_shortest_path(anthill);
+		while (++j < routes->size)
+		{
+			i = -1;
+			printf("shortest path is %d : ", j);
+			while (++i < routes->tab[j]->size)
+			{
+				printf("%d %s ", routes->tab[j]->tab[i], anthill->rooms
+								[routes->tab[j]->tab[i]]);
+			}
+			printf("total length is %d\n", routes->path_length[j]);
+		}
 	}
 	return (0);
 }
