@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/23 18:42:08 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/26 11:15:43 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ typedef struct	s_vertex
 	int			name;
 	int			dist;
 	int			flow;
-	int			xflow;
-	int			cap;
-	int			height;
+	int			cap_flow;
 }				t_vertex;
 
 typedef struct s_connector
@@ -41,6 +39,8 @@ typedef struct s_connector
 	t_vertex	*tab;
 	int			size;
 	int			cap;
+	int			xflow;
+	int			height;
 }				t_connector;
 
 typedef struct	s_dynode
@@ -82,4 +82,6 @@ void			delete_connector(t_connector *del);
 t_connector		*push_vertex(t_connector *connector, int room, int distance);
 
 t_anthill		*create_connector_graph(t_anthill *anthill);
+
+void			init_preflow(t_anthill *anthill);
 #endif

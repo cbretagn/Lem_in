@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:00:30 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/23 18:51:37 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/26 11:21:22 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_connector		*create_connector(int size)
 		exit(-2);
 	ret->size = 0;
 	ret->cap = size;
+	ret->xflow = 0;
+	ret->height = 0;
 	if (!(ret->tab = (t_vertex *)malloc(sizeof(t_vertex) * size)))
 			exit(-2);
 	return (ret);
@@ -50,11 +52,10 @@ t_connector		*push_vertex(t_connector *connector, int room, int distance)
 		{
 			connector->tab[i].name = tmp->tab[i].name;
 			connector->tab[i].dist = tmp->tab[i].dist;
-			//need another function for init int in vertex or delete commented part below (or both)
 			connector->tab[i].flow = 0;
-			connector->tab[i].xflow = 0;
-			connector->tab[i].cap = 0;
-			connector->tab[i].height = 0;
+			// connector->tab[i].xflow = 0;
+			connector->tab[i].cap_flow = tmp->tab[i].dist;
+			// connector->tab[i].height = 0;
 		}
 		// connector->tab[tmp->size].name = room;
 		// connector->tab[tmp->size].dist = distance;
@@ -69,9 +70,9 @@ t_connector		*push_vertex(t_connector *connector, int room, int distance)
 	connector->tab[connector->size].name = room;
 	connector->tab[connector->size].dist = distance;
 	connector->tab[connector->size].flow = 0;
-	connector->tab[connector->size].xflow = 0;
-	connector->tab[connector->size].cap = 0;
-	connector->tab[connector->size].height = 0;
+	// connector->tab[connector->size].xflow = 0;
+	connector->tab[connector->size].cap_flow = distance;
+	// connector->tab[connector->size].height = 0;
 	connector->size++;
 	return (connector);
 }
