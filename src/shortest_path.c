@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 15:07:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/26 17:49:50 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/27 15:27:14 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,28 +92,6 @@ t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start)
 	routes->tab[i] = push_int(routes->tab[i], end);
 	routes->size++;
 	return (routes);
-}
-
-t_path			*create_path_tab(int size)
-{
-	t_path		*ret;
-	int			i;
-
-	i = -1;
-	if (!(ret = (t_path *)malloc(sizeof(t_path))))
-		return (NULL);
-	if (!(ret->tab = (t_dynode **)malloc(sizeof(t_dynode *) * size)))
-		return (NULL);
-	if (!(ret->path_length = (int *)malloc(sizeof(int) * size)))
-		return (NULL);
-	while (++i < size)
-	{
-		if (!(ret->tab[i] = create_dynode(BASE_DYN_NODES)))
-			return (NULL);
-	}
-	ret->size = 0;
-	ret->cap = size;
-	return (ret);
 }
 
 t_path			*next_shortest_path(t_anthill *anthill)

@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/26 16:58:21 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/27 15:15:13 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ t_anthill		*create_connector_graph(t_anthill *anthill);
 
 t_path			*next_shortest_path(t_anthill *anthill);
 t_path			*create_path_tab(int size);
+void			delete_path_tab(t_path *del);
+t_anthill		*sort(t_anthill *anthill, int co);
 t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start);
 void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab, int curr);
 void			check_neighbours(t_anthill *anthill, t_dijkstra *tab, int curr);
