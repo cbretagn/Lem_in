@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/28 14:51:36 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/28 16:34:40 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct	s_path
 	int			size;
 	int			cap;
 	int			*path_length;
+	int			*nb_ants;
 	t_dynode	**tab;
 }				t_path;
 
@@ -106,5 +107,7 @@ int				find_min(t_dijkstra *tab, int size);
 t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start);
 void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab);
 void			check_neighbours(t_anthill *anthill, t_dijkstra *tab, int curr);
+
+t_path			*get_nb_ants(t_path *routes, int nb_ants);
 
 #endif

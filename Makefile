@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2019/11/27 15:02:04 by cbretagn         ###   ########.fr        #
+#    Updated: 2019/11/28 16:34:57 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC_NAME	= parsing.c\
 			  get_connector_graph.c\
 			  shortest_path.c\
 			  utility_path_algo.c\
+			  get_nb_ants.c\
 			  main_for_test.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)
