@@ -6,12 +6,11 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/27 15:57:50 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/28 14:51:33 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
-#define SIZE 400
 
 static void		print_tab(char **tab, int size)
 {
@@ -115,16 +114,9 @@ int				main(int argc, char **argv)
 		write(1, "\nAnthill is still here !\n", 25);
 		print_tab(anthill->rooms, data->rooms);
 		print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
-		i = -1;
-		while (++i < anthill->nb_room)
-		{
-			if (!CONNECTORS[i])
-				continue ;
-			anthill = sort(anthill, i);
-		}
 		print_smallergraph(anthill);
 		print_solo_and_connectors(anthill->nodes, anthill->nb_room);
-		/*routes = next_shortest_path(anthill);
+		routes = next_shortest_path(anthill);
 		while (++j < routes->size)
 		{
 			i = -1;
@@ -135,7 +127,7 @@ int				main(int argc, char **argv)
 								[routes->tab[j]->tab[i]]);
 			}
 			printf("total length is \033[1;32m%d\033[0m\n", routes->path_length[j]);
-		}*/
+		}
 	}
 	return (0);
 }

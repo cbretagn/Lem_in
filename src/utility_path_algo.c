@@ -6,12 +6,12 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:34:39 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/27 15:15:36 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/28 14:17:58 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
-
+#include <limits.h>
 
 t_path			*create_path_tab(int size)
 {
@@ -56,40 +56,23 @@ void			delete_path_tab(t_path *del)
 //init tab w/ NAN NOTVIS and start at 0
 //quicksort
 
-static t_anthill		*switch_vertex(t_anthill *anthill, int co, int a, int b)
+int			find_min(t_dijkstra *tab, int size)
 {
-	int		tmp_dist;
-	int		tmp_from;
-	int		tmp_name;
+	int		ret;
+	int		dist;
+	int		i;
 
-	tmp_dist = CONNECTORS[co]->tab[a].dist;
-	tmp_from = CONNECTORS[co]->tab[a].from;
-	tmp_name = CONNECTORS[co]->tab[a].name;
-	CONNECTORS[co]->tab[a].dist = CONNECTORS[co]->tab[b].dist;
-	CONNECTORS[co]->tab[a].from = CONNECTORS[co]->tab[b].from;
-	CONNECTORS[co]->tab[a].name = CONNECTORS[co]->tab[b].name;
-	CONNECTORS[co]->tab[b].dist = tmp_dist;
-	CONNECTORS[co]->tab[b].from = tmp_from;
-	CONNECTORS[co]->tab[b].name = tmp_name;
-	return (anthill);
-}
-
-t_anthill				*sort(t_anthill *anthill, int co)
-{
-	int			i;
-	int			j;
-
-	i = 0;
-	while (++i < CONNECTORS[co]->size)
+	i = -1;
+	dist = INT_MAX;
+	while (++i < size)
 	{
-		j = i - 1;
-		while (CONNECTORS[co]->tab[i].dist < CONNECTORS[co]->tab[j].dist
-					&& j >= 0)
+		if (tab[i].visited != NOTVIS)
+			continue ;
+		if (tab[i].dist < dist)
 		{
-			switch_vertex(anthill, co, i, j);
-			i--;
-			j--;
+			ret = i;
+			dist = tab[i].dist;
 		}
 	}
-	return (anthill);
+	return (ret);
 }

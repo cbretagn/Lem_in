@@ -6,11 +6,12 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 15:07:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/27 15:27:14 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/28 14:51:31 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
+#include <limits.h>
 
 //create tab of paths
 //push next node on path
@@ -41,8 +42,7 @@ void			check_neighbours(t_anthill *anthill, t_dijkstra *tab, int curr)
 			continue ;
 		else
 		{
-			if (tab[next].prev == -1 || tab[next].dist > 
-					distance + tab[curr].dist)
+			if (tab[next].dist > distance + tab[curr].dist)
 			{
 				tab[next].prev = curr;
 				tab[next].dist = distance + tab[curr].dist;
@@ -51,23 +51,19 @@ void			check_neighbours(t_anthill *anthill, t_dijkstra *tab, int curr)
 	}
 }
 
-//if start check neighbours then mark start as visited
-//then for each neighbour of start check them then mark them all as visited
-//then for each of their neighbours repeat step 2
-//
-void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab, int curr)
-{
-	int		i;
+//while i != end check neighbours, mark as visited choose next one (closest)
+//repeat
 
-	i = -1;
-	if (curr == anthill->end)
-		return ;
-	check_neighbours(anthill, tab, curr);
-	tab[curr].visited = VISITED;
-	while (++i < CONNECTORS[curr]->size)
+void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab)
+{
+	int		curr;
+
+	curr = anthill->start;
+	while (curr != anthill->end)
 	{
-		if (tab[CONNECTORS[curr]->tab[i].name].visited == NOTVIS)
-			rec_dijkstra(anthill, tab, CONNECTORS[curr]->tab[i].name);
+		check_neighbours(anthill, tab, curr);
+		tab[curr].visited = VISITED;
+		curr = find_min(tab, anthill->nb_room);
 	}
 }
 
@@ -109,7 +105,7 @@ t_path			*next_shortest_path(t_anthill *anthill)
 			tab[i].visited = NAN;
 		else
 			tab[i].visited = NOTVIS;
-		tab[i].prev = -1;
+		tab[i].dist = 10000;
 	}
 	tab[anthill->start].prev = anthill->start;
 	tab[anthill->start].dist = 0;
@@ -117,9 +113,10 @@ t_path			*next_shortest_path(t_anthill *anthill)
 		CONNECTORS[anthill->start]->size : CONNECTORS[anthill->end]->size;
 	if (!(routes = create_path_tab(i)))
 		return (NULL);
+	printf("i is %d\n", i);
 	while (--i > 0)
 	{
-		rec_dijkstra(anthill, tab, anthill->start);
+		rec_dijkstra(anthill, tab);
 		routes = get_route(routes, tab, anthill->end, anthill->start);
 		int	j = -1;
 		while (++j < anthill->nb_room)
@@ -127,9 +124,11 @@ t_path			*next_shortest_path(t_anthill *anthill)
 			if (tab[j].visited != NAN)
 			{
 				tab[j].visited = NOTVIS;
-				tab[j].prev = -1;
+				tab[j].dist = 10000;
 			}
 		}
+		tab[anthill->start].prev = anthill->start;
+		tab[anthill->start].dist = 0;
 	}
 	return (routes);
 }
