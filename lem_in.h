@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/28 16:34:40 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/28 18:16:57 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ typedef struct	s_path
 	int			*nb_ants;
 	t_dynode	**tab;
 }				t_path;
+
+typedef struct s_ants
+{
+	int			*path;
+	int			*curr;
+}				t_ants;
 
 typedef struct s_anthill
 {
