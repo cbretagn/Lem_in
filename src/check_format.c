@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:29:45 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/15 15:50:46 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/28 18:09:07 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			check_command(t_data *data, char *file)
 		if (!(data->end_room = ft_strsub(file, i + 1, j - i)))
 			return (0);
 	}
-	return ((data->start > 1 || data->end > 1) ? 0 : i); 
+	return ((data->start > 1 || data->end > 1) ? 0 : i);
 }
 
 static int	is_room(char *line)
@@ -87,15 +87,25 @@ static int	is_room(char *line)
 
 static int	is_tube(char *line)
 {
-	char	**tube;
+	int		i;
+	int		dash;
 
-	if (!(tube = ft_strsplit(line, '-')))
-		return (0);
-	if (tube[2] || !tube[1])
+	dash = 0;
+	i = 0;
+	while (line[i])
 	{
-		write(1, "Tube format invalid\n", 20);
-		return (0);
+		while (line[i] != '-' && line[i])
+			i++;
+		if (line[i] == '-' && line[i + 1])
+		{
+			dash++;
+			if (i == 0)
+				return (0);
+		}
+		i++;
 	}
+	if (dash != 1)
+		return (0);
 	return (1);
 }
 
