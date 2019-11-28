@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/28 14:51:33 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/28 18:09:16 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,16 +117,19 @@ int				main(int argc, char **argv)
 		print_smallergraph(anthill);
 		print_solo_and_connectors(anthill->nodes, anthill->nb_room);
 		routes = next_shortest_path(anthill);
+		routes = get_nb_ants(routes, anthill->ants);
 		while (++j < routes->size)
 		{
-			i = -1;
-			printf("shortest path is %d : ", j);
-			while (++i < routes->tab[j]->size)
-			{
-				printf("%d %s ", routes->tab[j]->tab[i], anthill->rooms
+				i = -1;
+				printf("shortest path is %d : ", j);
+				while (++i < routes->tab[j]->size)
+				{
+					printf("%d %s ", routes->tab[j]->tab[i], anthill->rooms
 								[routes->tab[j]->tab[i]]);
-			}
-			printf("total length is \033[1;32m%d\033[0m\n", routes->path_length[j]);
+				}
+				printf("total length is \033[1;32m%d\033[0m\n",
+						routes->path_length[j]);
+				printf("nb ants\033[1;32m %d\033[0m\n", routes->nb_ants[j]);
 		}
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/22 17:45:40 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:51:15 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ t_anthill			*parser(char *str, t_anthill *anthill, t_data *data) // and adjency 
 	anthill = handle_tubes(anthill, str, i, word);
 	anthill->start = search_in_table(data->start_room, anthill->rooms, anthill->nb_room);
 	anthill->end = search_in_table(data->end_room, anthill->rooms, anthill->nb_room);
+	anthill->ants = data->ants;
 	return (anthill);
 }
