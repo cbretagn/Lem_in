@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/20 15:51:22 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/28 14:34:11 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "lem_in_checker.h"
+# include "lem_in_dinic.h"
 
 # define NB_ROOM anthill->nb_room
 # define ROOMS anthill->rooms
@@ -32,16 +33,26 @@ typedef struct	s_vertex
 	int			dist;
 }				t_vertex;
 
-typedef struct s_connector
+typedef struct	s_connector
 {
 	t_vertex	*tab;
 	int			size;
 	int			cap;
 }				t_connector;
 
+typedef struct	s_vert
+{
+	int			name;
+	int			dist;
+	int			vis;
+	int 		pred;
+}				t_vert;
+
+
+
 typedef struct	s_dynode
 {
-	int			*tab;
+	t_edge		*tab;
 	int			size;
 	int 		cap;
 }			 	t_dynode;
@@ -65,12 +76,12 @@ int				hash_fun(char *str);
 char			**put_in_table(char *str, char **tab, int size);
 int				search_in_table(char *str, char **tab, int size);
 
-t_anthill		*parser(char *str, t_anthill *anthill, int size);
+t_anthill		*parser(char *str, t_anthill *anthill, int size, t_data *data);
 
 t_dynode		*create_dynode(int capacity);
 t_dynode		*push_int(t_dynode *node, int nb);
 void			delete_dynode(t_dynode *node);
-t_anthill		*create_anthill(int size);
+t_anthill		*create_anthill(int size, t_data *data);
 void			delete_anthill(t_anthill *anthill);
 
 t_connector		*create_connector(int size);

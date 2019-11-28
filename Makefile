@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2019/11/15 19:23:22 by cbretagn         ###   ########.fr        #
+#    Updated: 2019/11/26 14:50:53 by sadahan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC_NAME	= parsing.c\
 			  create_del_struct.c\
 			  connector_graph_struct.c\
 			  get_connector_graph.c\
-			  main_for_test.c
+			  main_for_test.c\
+			  dinic.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)
 

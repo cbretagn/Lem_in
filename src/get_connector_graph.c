@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_connector_graph.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:21:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/20 15:42:07 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/26 16:34:35 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static t_anthill	*find_next_connector(int start, t_anthill *anthill, int hub_nam
 	while (NODES[next]->size == 2)
 	{
 		tmp = next;
-		next = NODES[next]->tab[0] == prev ? NODES[next]->tab[1]
-			: NODES[next]->tab[0];
+		next = NODES[next]->tab[0].to == prev ? NODES[next]->tab[1].to
+			: NODES[next]->tab[0].to;
 		prev = tmp;
 		distance++;
 	}
@@ -58,7 +58,7 @@ t_anthill		*create_connector_graph(t_anthill *anthill)
 			j = -1;
 			CONNECTORS[i] = create_connector(BASE_CONNECTORS);
 			while (++j < NODES[i]->size)
-				anthill = find_next_connector(NODES[i]->tab[j], anthill, i);
+				anthill = find_next_connector(NODES[i]->tab[j].to, anthill, i);
 		}
 			// it's a connector, create t_vertex at CONNECTORS[i] and fill it
 			// w/ all the vertices it's connected to

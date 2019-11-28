@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_del_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:09:15 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 19:16:43 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/28 14:34:29 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_dynode	*create_dynode(int capacity)
 		return (NULL);
 	node->cap = capacity;
 	node->size = 0;
-	if (!(node->tab = (int *)malloc(sizeof(int) * capacity)))
+	if (!(node->tab = (t_vert *)malloc(sizeof(t_vert) * capacity)))
 	{
 		free(node);
 		node = NULL;
@@ -44,14 +44,25 @@ t_dynode	*push_int(t_dynode *node, int nb)
 			return (NULL);
 		}
 		while (++i < tmp->size)
-			node->tab[i] = tmp->tab[i];
-		node->tab[i] = nb;
+		{
+			node->tab[i].name = tmp->tab[i].name;
+			node->tab[i].vis = 0;
+			node->tab[i].dist = INT_MAX;
+			node->tab[i].pred = -1;
+		}
+		node->tab[i].name = nb;
+		node->tab[i].vis = 0;
+		node->tab[i].dist = INT_MAX;
+		node->tab[i].pred = -1;
 		node->size = tmp->size + 1;
 		delete_dynode(tmp);
 	}
 	else
 	{
-		node->tab[node->size] = nb;
+		node->tab[node->size].name = nb;
+		node->tab[node->size].vis = 0;
+		node->tab[node->size].dist = INT_MAX;
+		node->tab[node->size].pred = -1;
 		node->size++;
 	}
 	return (node);
@@ -65,7 +76,7 @@ void		delete_dynode(t_dynode *node)
 	node = NULL;
 }
 
-t_anthill	*create_anthill(int	size)
+t_anthill	*create_anthill(int	size, t_data *data)
 {
 	t_anthill	*ret;
 	int			i;
@@ -74,6 +85,9 @@ t_anthill	*create_anthill(int	size)
 		exit(-2);
 	if (!(ret->rooms = (char **)malloc(sizeof(char *) * size)))
 		exit(-2);
+	ret->ants = data->ants;
+	ret->start = 0;
+	ret->end = 0;
 	i = -1;
 	while (++i < size)
 		ret->rooms[i] = NULL;

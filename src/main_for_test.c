@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/20 15:51:12 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/26 16:35:26 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void		print_dynode(t_dynode **nodes, char **rooms, int size)
 		printf("node %d / %s is connected to nodes : ", i, rooms[i]);
 		j = -1;
 		while (++j < nodes[i]->size)
-			printf("%d ", nodes[i]->tab[j]);
+			printf("%d ", nodes[i]->tab[j].to);
 		printf("\n");
 	}
 }
@@ -97,13 +97,13 @@ int				main(int argc, char **argv)
 		return (0);
 	if (!(graph = ft_strsub(file, 0, check_file(file, data))))
 		return (0);
-	anthill = create_anthill(data->rooms);
+	anthill = create_anthill(data->rooms, data);
 	if (anthill)
 		write(1, "Anthill is here !\n", 18);
 	printf("data contains start %d end %d tubes %d rooms %d ants %d start %s end %s\n",
 			data->start, data->end, data->tubes, data->rooms, data->ants,
 			data->start_room, data->end_room);
-	anthill = parser(graph, anthill, data->rooms); //size temporary // size needed ?
+	anthill = parser(graph, anthill, data->rooms, data); //size temporary // size needed ?
 	anthill = create_connector_graph(anthill);
 	if (anthill)
 	{
