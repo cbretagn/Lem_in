@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/28 18:16:51 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/29 13:39:57 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,13 @@ int				main(int argc, char **argv)
 		return (0);
 	anthill = create_anthill(data->rooms);
 	if (anthill)
-		write(1, "Anthill is here !\n", 18);
 	printf("data contains start %d end %d tubes %d rooms %d ants %d start %s end %s\n",
 			data->start, data->end, data->tubes, data->rooms, data->ants,
 			data->start_room, data->end_room);
-	anthill = parser(graph, anthill, data); //size temporary // size needed ?
+	anthill = parser(graph, anthill, data);
 	anthill = create_connector_graph(anthill);
 	if (anthill)
 	{
-		write(1, "\nAnthill is still here !\n", 25);
 		print_tab(anthill->rooms, data->rooms);
 		print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
 		print_smallergraph(anthill);
