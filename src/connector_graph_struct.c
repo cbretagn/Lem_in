@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   connector_graph_struct.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:00:30 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/26 14:05:42 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:37:56 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_connector		*create_connector(int size)
 	ret->size = 0;
 	ret->cap = size;
 	if (!(ret->tab = (t_vertex *)malloc(sizeof(t_vertex) * size)))
-			exit(-2);
+		exit(-2);
 	return (ret);
 }
 
@@ -46,7 +46,7 @@ t_connector		*push_vertex(t_connector *connector, int room, int distance,
 	{
 		tmp = connector;
 		if (!(connector = create_connector(tmp->cap * 2)))
-			exit (-2);
+			exit(-2);
 		while (++i < tmp->size)
 		{
 			connector->tab[i].name = tmp->tab[i].name;
@@ -61,8 +61,8 @@ t_connector		*push_vertex(t_connector *connector, int room, int distance,
 		return (connector);
 	}
 	connector->tab[connector->size].name = room;
-	connector->tab[connector->size].dist = distance;	
-	connector->tab[connector->size].from = first_node;	
+	connector->tab[connector->size].dist = distance;
+	connector->tab[connector->size].from = first_node;
 	connector->size++;
 	return (connector);
 }
