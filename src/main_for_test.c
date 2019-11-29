@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/29 18:13:01 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/29 18:27:07 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,27 +83,36 @@ static void		print_solo_and_connectors(t_dynode **nodes, int size)
 			solo, connectors);
 }
 
+static char		*create_file(t_data *data, char *str)
+{
+	char		*file;
+	int			x;
+	char		*graph;
+
+	if (!(file = read_file(str)))
+		return (NULL);
+	x = check_file(file, data);
+	if (x == 0 || !(graph = ft_strsub(file, 0, x)))
+		return (NULL);
+	return (graph);
+}
+
 int				main(int argc, char **argv)
 {
 	t_anthill	*anthill;
-	char		*file;
 	char		*graph;
 	t_data		*data;
 	t_path		*routes;
 	int			i;
 	int			j;
-	int			x;
 	
 	i = -1;
 	j = -1;
-	if (!(data = init_struct()) || argc != 2)
+	if (argc != 2 || !(data = init_struct()))
 		return (0);
-	if (!(file = read_file(argv[1])))
+	if (!(graph = create_file(data, argv[1])))
 		return (0);
-	// need x to protect from segfault when graph is empty
-	x = check_file(file, data);
-	if (x == 0 || !(graph = ft_strsub(file, 0, x)))
-		return (0);
+	printf("%s\n", graph);
 	anthill = create_anthill(data->rooms);
 	if (anthill)
 	printf("data contains start %d end %d tubes %d rooms %d ants %d start %s end %s\n",
@@ -111,27 +120,27 @@ int				main(int argc, char **argv)
 			data->start_room, data->end_room);
 	anthill = parser(graph, anthill, data);
 	anthill = create_connector_graph(anthill);
-	// if (anthill)
-	// {
-	// 	print_tab(anthill->rooms, data->rooms);
-	// 	print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
-	// 	print_smallergraph(anthill);
-	// 	print_solo_and_connectors(anthill->nodes, anthill->nb_room);
-	// 	routes = next_shortest_path(anthill);
-	// 	routes = get_nb_ants(routes, anthill->ants);
-	// 	while (++j < routes->size)
-	// 	{
-	// 			i = -1;
-	// 			printf("shortest path is %d : ", j);
-	// 			while (++i < routes->tab[j]->size)
-	// 			{
-	// 				printf("%d %s ", routes->tab[j]->tab[i], anthill->rooms
-	// 							[routes->tab[j]->tab[i]]);
-	// 			}
-	// 			printf("total length is \033[1;32m%d\033[0m\n",
-	// 					routes->path_length[j]);
-	// 			printf("nb ants\033[1;32m %d\033[0m\n", routes->nb_ants[j]);
-	// 	}
-	// }
+	if (anthill)
+	{
+		print_tab(anthill->rooms, data->rooms);
+		print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
+		print_smallergraph(anthill);
+		print_solo_and_connectors(anthill->nodes, anthill->nb_room);
+		routes = next_shortest_path(anthill);
+		routes = get_nb_ants(routes, anthill->ants);
+		while (++j < routes->size)
+		{
+				i = -1;
+				printf("shortest path is %d : ", j);
+				while (++i < routes->tab[j]->size)
+				{
+					printf("%d %s ", routes->tab[j]->tab[i], anthill->rooms
+								[routes->tab[j]->tab[i]]);
+				}
+				printf("total length is \033[1;32m%d\033[0m\n",
+						routes->path_length[j]);
+				printf("nb ants\033[1;32m %d\033[0m\n", routes->nb_ants[j]);
+		}
+	}
 	return (0);
 }
