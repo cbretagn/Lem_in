@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/28 18:16:57 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/29 16:24:36 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_ants
 {
 	int			*path;
 	int			*curr;
+	int			*next;
 }				t_ants;
 
 typedef struct s_anthill
