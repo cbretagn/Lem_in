@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 14:58:41 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/29 16:36:20 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/29 17:47:44 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		check_path(int ant, t_anthill *anthill, t_ants *pos_ants)
 	return (1);
 }
 
-t_ants			print_ants(t_path *path, t_anthill *anthill)
+static t_ants	print_ants(t_path *path, t_anthill *anthill)
 {
 	// t_dstring	*buff;
 

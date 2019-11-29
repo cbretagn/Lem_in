@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/29 16:24:36 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/29 18:13:15 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct	s_vertex
 	int			dist;
 }				t_vertex;
 
-typedef struct s_connector
+typedef struct	s_connector
 {
 	t_vertex	*tab;
 	int			size;
@@ -66,14 +66,22 @@ typedef struct	s_path
 	t_dynode	**tab;
 }				t_path;
 
-typedef struct s_ants
+typedef struct	s_ants
 {
 	int			*path;
 	int			*curr;
 	int			*next;
 }				t_ants;
 
-typedef struct s_anthill
+//replace char **rooms dans anthill to add coordinates
+// typedef struct	s_rooms
+// {
+// 	char		*rooms;
+// 	int			*x;
+// 	int			*y;
+// }				t_rooms;
+
+typedef struct	s_anthill
 {
 	int			ants;
 	char		**rooms;
@@ -116,5 +124,7 @@ void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab);
 void			check_neighbours(t_anthill *anthill, t_dijkstra *tab, int curr);
 
 t_path			*get_nb_ants(t_path *routes, int nb_ants);
+
+// void     		print_path(char *graph, t_path *path, t_anthill *anthill);
 
 #endif
