@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/29 16:05:41 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/11/29 16:11:03 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
 	delete_dstring(word);
 	return (anthill);
 }
+
+// need handle_room function
 
 t_anthill		*parser(char *str, t_anthill *anthill, t_data *data)
 {
