@@ -6,11 +6,13 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/15 15:51:50 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/12/04 14:54:15 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in_checker.h"
+
+#include <stdio.h>
 
 t_data			*init_struct(void)
 {
@@ -32,10 +34,7 @@ static int		check_return(int i, t_data *data)
 {
 	if (data->start == 0 || data->end == 0
 		|| data->tubes == 0 || data->rooms < 2)
-	{
-		write(1, "No path, start or end\n", 22);
 		return (0);
-	}
 	return (i);
 }
 

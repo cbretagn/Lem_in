@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/28 18:09:16 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/12/04 14:54:13 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,39 +83,51 @@ static void		print_solo_and_connectors(t_dynode **nodes, int size)
 			solo, connectors);
 }
 
+static char		*create_file(t_data *data, char *str)
+{
+	char		*file;
+	int			x;
+	char		*graph;
+
+	if (!(file = read_file(str)))
+		return (NULL);
+	x = check_file(file, data);
+	printf("x = %d\n", x);
+	if (x == 0 || !(graph = ft_strsub(file, 0, x)))
+		return (NULL);
+	return (graph);
+}
+
 int				main(int argc, char **argv)
 {
 	t_anthill	*anthill;
-	char		*file;
 	char		*graph;
 	t_data		*data;
 	t_path		*routes;
 	int			i;
 	int			j;
-
+	
 	i = -1;
 	j = -1;
-	if (!(data = init_struct()) || argc != 2)
+	if (argc != 2 || !(data = init_struct()))
 		return (0);
-	if (!(file = read_file(argv[1])))
+	if (!(graph = create_file(data, argv[1])))
 		return (0);
-	if (!(graph = ft_strsub(file, 0, check_file(file, data))))
-		return (0);
+	printf("%s\n", graph);
 	anthill = create_anthill(data->rooms);
 	if (anthill)
-		write(1, "Anthill is here !\n", 18);
 	printf("data contains start %d end %d tubes %d rooms %d ants %d start %s end %s\n",
 			data->start, data->end, data->tubes, data->rooms, data->ants,
 			data->start_room, data->end_room);
-	anthill = parser(graph, anthill, data); //size temporary // size needed ?
+	anthill = parser(graph, anthill, data);
 	anthill = create_connector_graph(anthill);
 	if (anthill)
 	{
-		write(1, "\nAnthill is still here !\n", 25);
 		print_tab(anthill->rooms, data->rooms);
 		print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
 		print_smallergraph(anthill);
 		print_solo_and_connectors(anthill->nodes, anthill->nb_room);
+		// floating point exception with very small graphs
 		routes = next_shortest_path(anthill);
 		routes = get_nb_ants(routes, anthill->ants);
 		while (++j < routes->size)
