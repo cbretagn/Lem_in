@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/29 18:41:29 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/12/04 14:54:13 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ static char		*create_file(t_data *data, char *str)
 	if (!(file = read_file(str)))
 		return (NULL);
 	x = check_file(file, data);
+	printf("x = %d\n", x);
 	if (x == 0 || !(graph = ft_strsub(file, 0, x)))
 		return (NULL);
 	return (graph);
