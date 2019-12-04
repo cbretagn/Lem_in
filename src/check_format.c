@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:29:45 by sadahan           #+#    #+#             */
-/*   Updated: 2019/12/04 14:54:17 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/12/04 15:48:42 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ static int	is_tube(char *line)
 			if (i == 0)
 				return (0);
 		}
-		i++;
+		if (line[i])
+			i++;
 	}
 	if (dash != 1)
 		return (0);
