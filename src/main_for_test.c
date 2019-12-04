@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/12/04 14:58:06 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/12/04 17:03:58 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int				main(int argc, char **argv)
 		return (0);
 	if (!(graph = create_file(data, argv[1])))
 		return (0);
-	printf("%s\n", graph);
+	ft_putstr(graph);
 	anthill = create_anthill(data->rooms);
 	if (anthill)
 	printf("data contains start %d end %d tubes %d rooms %d ants %d start %s end %s\n",

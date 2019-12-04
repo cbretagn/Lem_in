@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 12:03:44 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/20 15:51:16 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/12/04 15:49:00 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_dstring			*push_str(t_dstring *dest, char *src);
 t_dstring			*push_str_nchar(t_dstring *dest, char *src, int n);
 void				delete_dstring(t_dstring *del);
 int                 check_ant_number(char *file, t_data *data);
-int                 check_command(t_data *data, char *file);
+int					check_command(t_data *data, char *file);
 int                 check_tubes_rooms(t_data *data, char *file);
 int					check_file(char *file, t_data *data);
 char				*read_file(char *str);
