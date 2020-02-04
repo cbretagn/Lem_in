@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/12/04 15:52:50 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:22:56 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int				main(int argc, char **argv)
 		print_smallergraph(anthill);
 		print_solo_and_connectors(anthill->nodes, anthill->nb_room);
 		// floating point exception with very small graphs
-		routes = next_shortest_path(anthill);
+		/*routes = next_shortest_path(anthill);
 		routes = get_nb_ants(routes, anthill->ants);
 		while (++j < routes->size)
 		{
@@ -142,7 +142,9 @@ int				main(int argc, char **argv)
 				printf("total length is \033[1;32m%d\033[0m\n",
 						routes->path_length[j]);
 				printf("nb ants\033[1;32m %d\033[0m\n", routes->nb_ants[j]);
-		}
+		}*/
+		int		**matrix;
+		matrix = edmond_karps(anthill);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 15:07:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/28 17:56:29 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:22:54 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start)
 	return (routes);
 }
 
-static int		compute_stop(t_path *routes, int ants)
+int				compute_stop(t_path *routes, int ants)
 {
 	int		j;
 	int		ret;
