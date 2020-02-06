@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 13:52:11 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/04 18:22:50 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/06 17:22:40 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int			**create_capacity_matrix(int nb)
 	{
 		j = -1;
 		while (++j < nb)
-			capacity_matrix[i][j] = 1;
+			capacity_matrix[i][j] = -1;
 	}
 	return (capacity_matrix);
 }
 
 
-static int		check_neighbours2(t_anthill *anthill, t_dijkstra *tab, int curr,
+static void		check_neighbours2(t_anthill *anthill, t_dijkstra *tab, int curr,
 									int **capacity_matrix)
 {
 	int		i;
@@ -65,7 +65,7 @@ static int		check_neighbours2(t_anthill *anthill, t_dijkstra *tab, int curr,
 		next = CONNECTORS[curr]->tab[i].name;
 		distance  = CONNECTORS[curr]->tab[i].dist;
 		if (tab[next].visited == VISITED || tab[next].visited == NAN
-				|| capacity_matrix[curr][next] < 1)
+				|| capacity_matrix[curr][next] != -1)
 			continue ;
 		else
 		{
@@ -74,10 +74,8 @@ static int		check_neighbours2(t_anthill *anthill, t_dijkstra *tab, int curr,
 				tab[next].prev = curr;
 				tab[next].dist = distance + tab[curr].dist;
 			}
-			found++;
 		}
 	}
-	return (found);
 }
 
 //while i != end check neighbours, mark as visited choose next one (closest)
@@ -91,6 +89,7 @@ static int		find_min_dist(t_dijkstra *tab, int size, int curr, int **matrix)
 
 	i = -1;
 	dist = INT_MAX;
+	ret = -1;
 	while (++i < size)
 	{
 		if (tab[i].visited != NOTVIS)
@@ -111,10 +110,11 @@ static int		dijkstra(t_anthill *anthill, t_dijkstra *tab, int **matrix)
 	curr = anthill->start;
 	while (curr != anthill->end)
 	{
-		if (check_neighbours2(anthill, tab, curr, matrix) == 0)
-			return (0);
+		check_neighbours2(anthill, tab, curr, matrix);
 		tab[curr].visited = VISITED;
 		curr = find_min_dist(tab, anthill->nb_room, curr, matrix);
+		if (curr == -1)
+			return (-1);
 	}
 	return (1);
 }
@@ -136,15 +136,20 @@ static void		init_table(t_dijkstra *tab, t_anthill *anthill)
 	tab[anthill->start].dist = 0;
 }
 
-static void		update_matrix(int **matrix, t_dijkstra *tab, t_anthill *anthill)
+static void		update_matrix(int **matrix, t_dijkstra *table, t_anthill *anthill)
 {
 	int		node;
+	int		from;
 
 	node = anthill->end;
 	while (node != anthill->start)
 	{
-		matrix[tab[node].prev][node] -= 1;
-		node = tab[node].prev;
+		from = -1;
+		while (anthill->connectors[table[node].prev]->tab[from].name != node)
+			from++;
+		matrix[table[node].prev][node] 
+			= anthill->connectors[table[node].prev]->tab[from].from;;
+		node = table[node].prev;
 	}
 }
 
@@ -163,30 +168,31 @@ static void		print_matrix(int **matrix, int nb)
 	}
 }
 
-static void		print_paths(int **matrix, t_dijkstra *tab, t_anthill *anthill)
+static void		print_paths(int **matrix, t_anthill *anthill)
 {
-	int		curr;
-	int		next;
+	int		node;
+	int		i;
+	int		j;
 
-	init_table(tab, anthill);
-	while (42)
+	i = -1;
+	while (++i < anthill->nb_room)
 	{
-		printf("\n");
-		curr = anthill->start;
-		while (curr != anthill->end)
+		if (matrix[anthill->start][i] != -1 && matrix[i][anthill->start] == -1)
 		{
-			printf("%d ", curr);
-			int	i = -1;
-			while (++i < anthill->connectors[curr]->size)
+			printf("\n");
+			printf("start %d -> %d from %d ", anthill->start, i, matrix[anthill->start][i]);
+			node = i;
+			while (node != anthill->end)
 			{
-				next = anthill->connectors[curr]->tab[i].name;
-				if (tab[next].visited != NOTVIS)
-					continue ;
-				if (matrix[curr][next] == 0 && matrix[next][curr] != 0)
+				j = -1;
+				while (++j < anthill->nb_room)
 				{
-					printf("%d ", next);
-					curr = next;
-					tab[curr].visited = VISITED;
+					if (matrix[node][j] != -1 && matrix[j][node] == -1)
+					{
+						printf("then %d from %d ", j, matrix[node][j]);
+						node = j;
+						break ;
+					}
 				}
 			}
 		}
@@ -201,6 +207,7 @@ int				**edmond_karps(t_anthill *anthill)
 {
 	int				**matrix;
 	t_dijkstra 		*tab;
+	int				ret;
 
 	if (!(matrix = create_capacity_matrix(anthill->nb_room)))
 		exit(-1);
@@ -209,12 +216,16 @@ int				**edmond_karps(t_anthill *anthill)
 	while (42)
 	{
 		init_table(tab, anthill);
-		if ((dijkstra(anthill, tab, matrix) == 0))
+		ft_putstr("hey\n");
+		ret = dijkstra(anthill, tab, matrix);
+		printf("ret is %d\n", ret);
+		if (ret == -1)
 			break ;
 		update_matrix(matrix, tab, anthill);
 	}
-	print_matrix(matrix, anthill->nb_room);
-	print_paths(matrix, tab, anthill);
+	//print_matrix(matrix, anthill->nb_room);
+	print_paths(matrix, anthill);
+	t_path	*routes = get_paths(anthill, matrix);
 	return (matrix);
 }
 

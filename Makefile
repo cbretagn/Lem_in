@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/02/04 15:46:16 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/02/06 17:18:53 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC_NAME	= parsing.c\
 			  utility_path_algo.c\
 			  get_nb_ants.c\
 			  edmond_karps1.c\
+			  get_paths.c\
 			  main_for_test.c\
 			#   print_path.c
 
