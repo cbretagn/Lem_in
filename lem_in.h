@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/07 12:53:04 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/02/11 16:14:23 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,16 @@ int				find_min(t_dijkstra *tab, int size);
 t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start, t_anthill *anthill);
 void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab);
 void			check_neighbours(t_anthill *anthill, t_dijkstra *tab, int curr);
+int				compute_stop(t_path *routes, int ants);
 
 t_path			*get_nb_ants(t_path *routes, int nb_ants);
+
+
+void			print_suggestions(t_anthill *anthill);
+t_path			*superposition_path(t_anthill *anthill, int node);
+void			shortest_path_to(t_anthill *anthill, t_dijkstra *tab, int node);
+
+int				**edmond_karps(t_anthill *anthill);
 
 // void     		print_path(char *graph, t_path *path, t_anthill *anthill);
 int				**init_matrice(t_anthill *a);

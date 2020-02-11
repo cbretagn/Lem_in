@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 15:07:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/06 11:51:42 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/02/11 16:14:28 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start, t_anthi
 	return (routes);
 }
 
-static int		compute_stop(t_path *routes, int ants)
+int				compute_stop(t_path *routes, int ants)
 {
 	int		j;
 	int		ret;

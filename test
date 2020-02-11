@@ -1,3 +1,7 @@
+## ne pas boucler sur chemin direct -> stocker dans un noeud distance zero de la fin ?
+## chercher un nouveau chemin si pas assez
+##  -> fixer un %
+##  -> chercher par noeuds connectes a end ?
 4
 3 2 2
 ##start

@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/02/07 12:52:28 by sadahan          ###   ########.fr        #
+#    Updated: 2020/02/11 16:14:21 by sadahan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ SRC_NAME	= parsing.c\
 			  get_connector_graph.c\
 			  utility_path_algo.c\
 			  get_nb_ants.c\
+			  edmond_karps1.c\
+			  get_paths.c\
 			  main_for_test.c\
 			  util_EK_algo.c\
 			  manage_pile.c\
