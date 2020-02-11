@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/12/04 17:05:49 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/07 12:53:04 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct	s_dijkstra
 {
 	int			prev;
 	int			dist;
-	int			visited;
+	// int			visited;
 }				t_dijkstra;
 
 typedef struct	s_vertex
@@ -81,6 +81,29 @@ typedef struct	s_ants
 // 	int			*y;
 // }				t_rooms;
 
+// typedef struct	s_edges
+// {
+// 	int			from;
+// 	int			to;
+// 	int			flow;
+// 	int			dist;
+// 	int			visited;
+// }				t_edges;
+
+typedef	struct		s_elem
+{
+	int				nb;
+	struct s_elem	*next;
+	struct s_elem	*prev;
+}					t_element;
+
+typedef	struct	s_pile
+{
+	t_element	*top;
+	t_element	*bottom;
+	int			nb_elem;
+}				t_pile;
+
 typedef struct	s_anthill
 {
 	int			ants;
@@ -119,12 +142,20 @@ t_path			*next_shortest_path(t_anthill *anthill);
 t_path			*create_path_tab(int size);
 void			delete_path_tab(t_path *del);
 int				find_min(t_dijkstra *tab, int size);
-t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start);
+t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start, t_anthill *anthill);
 void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab);
 void			check_neighbours(t_anthill *anthill, t_dijkstra *tab, int curr);
 
 t_path			*get_nb_ants(t_path *routes, int nb_ants);
 
 // void     		print_path(char *graph, t_path *path, t_anthill *anthill);
-
+int				**init_matrice(t_anthill *a);
+t_path			*edmonds_karp(t_anthill *a);
+void			print_matrix(int **res, int size);
+int		*init_parent(t_anthill *a);
+// t_dijkstra				*init_parent(t_anthill *a);
+void			add_to_top(t_pile *pile, int data);
+t_pile			*init_pile(int data);
+int				del_pile(t_pile *pile);
+int				del_bottom(t_pile *pile);
 #endif

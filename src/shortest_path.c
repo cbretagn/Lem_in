@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shortest_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 15:07:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/28 17:56:29 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/06 11:51:42 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,12 @@ void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab)
 	}
 }
 
-t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start)
+t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start, t_anthill *anthill)
 {
 	int		i;
 	int		length;
+		int		j;
+		int		k;
 
 	if (tab[end].prev < 0)
 		return (routes);
@@ -138,7 +140,7 @@ t_path			*next_shortest_path(t_anthill *anthill)
 	while (--i >= 0)
 	{
 		rec_dijkstra(anthill, tab);
-		routes = get_route(routes, tab, anthill->end, anthill->start);
+		routes = get_route(routes, tab, anthill->end, anthill->start, anthill);
 		if ((compute_stop(routes, anthill->ants) <= 0))
 				break ;
 		int	j = -1;
