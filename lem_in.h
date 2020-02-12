@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/12 17:31:51 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/12 18:53:19 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@
 # define VISITED 1
 # define NOTVIS 0
 # define NAN -1
+# define NO 1
+# define YES 0
 
 typedef struct	s_dijkstra
 {
 	int			prev;
 	int			dist;
-	// int			visited;
+	int			visited;
 }				t_dijkstra;
 
 typedef struct	s_vertex
@@ -72,6 +74,14 @@ typedef struct	s_ants
 	int			*curr;
 	int			*next;
 }				t_ants;
+
+typedef struct	s_pos
+{
+	int			prev;
+	int			curr;
+	int			hub;
+	int			move;
+}				t_pos;
 
 //replace char **rooms dans anthill to add coordinates
 // typedef struct	s_rooms
@@ -112,6 +122,7 @@ typedef struct	s_anthill
 	int			nb_tubes;
 	int			start;
 	int			end;
+	int			lines;
 	t_dynode	**nodes;
 	t_connector	**connectors;
 }				t_anthill;
@@ -159,11 +170,14 @@ int				**edmond_karps(t_anthill *anthill);
 t_path			*get_paths(t_anthill *anthill, int **matrix);
 t_path			*handle_collision(t_path *routes, t_anthill *anthill);
 t_path			*sort_routes(t_path *routes);
+
+t_dstring		*print_ek(t_anthill *anthill, int **matrix);
+
 int				nb_lines(t_path *routes);
 // void     		print_path(char *graph, t_path *path, t_anthill *anthill);
 int				**init_matrice(t_anthill *a);
 t_path			*edmonds_karp(t_anthill *a);
-void			print_matrix(int **res, int size);
+//void			print_matrix(int **res, int size);
 int		*init_parent(t_anthill *a);
 // t_dijkstra				*init_parent(t_anthill *a);
 void			add_to_top(t_pile *pile, int data);

@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/12 17:31:29 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/12 19:13:09 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ int				main(int argc, char **argv)
 		int		**matrix;
 		matrix = edmond_karps(anthill);
 		printf("nb_lines first algo %d\n", nb_lines(routes));
+		t_dstring *ret = print_ek(anthill, matrix);
 	}
 	free_data(data);
 	return (0);

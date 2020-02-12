@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 13:52:11 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/12 16:35:04 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/12 18:51:42 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void		check_neighbours2(t_anthill *anthill, t_dijkstra *tab, int curr,
 //while i != end check neighbours, mark as visited choose next one (closest)
 //repeat
 
-static int		find_min_dist(t_dijkstra *tab, int size, int curr, int **matrix)
+static int		find_min_dist(t_dijkstra *tab, int size)
 {
 	int		ret;
 	int		dist;
@@ -112,7 +112,7 @@ static int		dijkstra(t_anthill *anthill, t_dijkstra *tab, int **matrix)
 	{
 		check_neighbours2(anthill, tab, curr, matrix);
 		tab[curr].visited = VISITED;
-		curr = find_min_dist(tab, anthill->nb_room, curr, matrix);
+		curr = find_min_dist(tab, anthill->nb_room);
 		if (curr == -1)
 			return (-1);
 	}
