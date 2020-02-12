@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utility_path_algo.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:34:39 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/11 15:48:25 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/12 17:30:24 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,23 @@ void			delete_path_tab(t_path *del)
 //init tab w/ NAN NOTVIS and start at 0
 //quicksort
 
-int			find_min(t_dijkstra *tab, int size)
-{
-	int		ret;
-	int		dist;
-	int		i;
+// int			find_min(t_dijkstra *tab, int size)
+// {
+// 	int		ret;
+// 	int		dist;
+// 	int		i;
 
-	i = -1;
-	dist = INT_MAX;
-	while (++i < size)
-	{
-		if (tab[i].visited != NOTVIS)
-			continue ;
-		if (tab[i].dist < dist)
-		{
-			ret = i;
-			dist = tab[i].dist;
-		}
-	}
-	return (ret);
-}
+// 	i = -1;
+// 	dist = INT_MAX;
+// 	while (++i < size)
+// 	{
+// 		if (tab[i].visited != NOTVIS)
+// 			continue ;
+// 		if (tab[i].dist < dist)
+// 		{
+// 			ret = i;
+// 			dist = tab[i].dist;
+// 		}
+// 	}
+// 	return (ret);
+// }

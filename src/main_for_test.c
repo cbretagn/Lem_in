@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/12 17:24:09 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/12 17:31:29 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static char		*create_file(t_data *data, char *str)
 	if (!(file = read_file(str)))
 		exit(-2);
 	x = check_file(file, data);
-	printf("x = %d\n", x);
+	// printf("x = %d\n", x);
 	if (x == 0 || !(graph = ft_strsub(file, 0, x)))
 		exit(-2);
 	return (graph);
@@ -113,12 +113,16 @@ int				main(int argc, char **argv)
 		return (0);
 	if (!(graph = create_file(data, argv[1])))
 		return (0);
-	ft_putstr(graph);
+	// ft_putstr(graph);
 	anthill = create_anthill(data->rooms);
 	//if (anthill)
 	//printf("data contains start %d end %d tubes %d rooms %d ants %d start %s end %s\n",
 	//		data->start, data->end, data->tubes, data->rooms, data->ants,
 	//		data->start_room, data->end_room);
+	// if (anthill)
+	// printf("data contains start %d end %d tubes %d rooms %d ants %d start %s end %s\n",
+	// 		data->start, data->end, data->tubes, data->rooms, data->ants,
+	// 		data->start_room, data->end_room);
 	anthill = parser(graph, anthill, data);
 	anthill = create_connector_graph(anthill);
 	ft_strdel(&graph);
