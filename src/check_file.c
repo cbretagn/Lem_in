@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2019/12/04 15:52:52 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/11 13:53:10 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ t_data			*init_struct(void)
 	data->start_room = NULL;
 	data->end_room = NULL;
 	return (data);
+}
+
+void			free_data(t_data *data)
+{
+	ft_strdel(&data->start_room);
+	ft_strdel(&data->end_room);
+	free(data);
+	data = NULL;
 }
 
 static int		check_return(int i, t_data *data)

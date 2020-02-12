@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/06 17:22:42 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/12 17:24:05 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct	s_anthill
 }				t_anthill;
 
 t_data			*init_struct(void);
+void			free_data(t_data *data);
 int				next_line(char *str, int i);
 
 int				hash_fun(char *str);
@@ -132,7 +133,10 @@ t_path			*superposition_path(t_anthill *anthill, int node);
 void			shortest_path_to(t_anthill *anthill, t_dijkstra *tab, int node);
 
 int				**edmond_karps(t_anthill *anthill);
-
+t_path			*get_paths(t_anthill *anthill, int **matrix);
+t_path			*handle_collision(t_path *routes, t_anthill *anthill);
+t_path			*sort_routes(t_path *routes);
+int				nb_lines(t_path *routes);
 // void     		print_path(char *graph, t_path *path, t_anthill *anthill);
 
 #endif

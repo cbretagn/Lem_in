@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:09:15 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/29 15:52:30 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/02/11 15:43:48 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ t_dynode		*create_dynode(int capacity)
 	node->size = 0;
 	if (!(node->tab = (int *)malloc(sizeof(int) * capacity)))
 	{
-		free(node);
-		node = NULL;
-		return (NULL);
+		exit(-1);
 	}
 	return (node);
 }

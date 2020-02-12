@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 13:52:11 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/06 17:22:40 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:35:04 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ static void		update_matrix(int **matrix, t_dijkstra *table, t_anthill *anthill)
 	node = anthill->end;
 	while (node != anthill->start)
 	{
-		from = -1;
+		from = 0;
 		while (anthill->connectors[table[node].prev]->tab[from].name != node)
 			from++;
 		matrix[table[node].prev][node] 
@@ -224,7 +224,7 @@ int				**edmond_karps(t_anthill *anthill)
 		update_matrix(matrix, tab, anthill);
 	}
 	//print_matrix(matrix, anthill->nb_room);
-	print_paths(matrix, anthill);
+	//print_paths(matrix, anthill);
 	t_path	*routes = get_paths(anthill, matrix);
 	return (matrix);
 }

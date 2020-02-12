@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/02/06 17:18:53 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/02/12 15:36:30 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_NAME	= parsing.c\
 			  get_nb_ants.c\
 			  edmond_karps1.c\
 			  get_paths.c\
+			  collisions.c\
 			  main_for_test.c\
 			#   print_path.c
 
@@ -43,7 +44,7 @@ LIB_PATH	= libft/libft.a
 
 CC			= gcc
 
-CFLAGS		= -Wall -Wextra -g
+CFLAGS		= -Wall -Wextra -g -fsanitize=address
 
 .PHONY		: all clean fclean re
 

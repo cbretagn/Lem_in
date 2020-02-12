@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 15:07:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/06 17:22:38 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:33:57 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int				compute_stop(t_path *routes, int ants)
 		sub = (routes->path_length[curr] - routes->path_length[j]);
 		ret -= sub;
 	}
-	printf("ants = %d last sub %d\n", ret, sub);
 	return (ret);
 }
 
@@ -153,6 +152,5 @@ t_path			*next_shortest_path(t_anthill *anthill)
 		tab[anthill->start].prev = anthill->start;
 		tab[anthill->start].dist = 0;
 	}
-	printf("final i %d\n", i);
 	return (routes);
 }
