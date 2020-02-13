@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2019/12/04 15:40:33 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/02/07 12:52:28 by sadahan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,14 @@ SRC_NAME	= parsing.c\
 			  create_del_struct.c\
 			  connector_graph_struct.c\
 			  get_connector_graph.c\
-			  shortest_path.c\
 			  utility_path_algo.c\
 			  get_nb_ants.c\
 			  main_for_test.c\
+			  util_EK_algo.c\
+			  manage_pile.c\
+			  edmonds_karp.c
+			#   shortest_path.c
+			# EK_2.c
 			#   print_path.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)

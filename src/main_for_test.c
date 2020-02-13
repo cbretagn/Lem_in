@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/12/04 17:03:58 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/02/13 13:53:05 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static char		*create_file(t_data *data, char *str)
 	if (!(file = read_file(str)))
 		return (NULL);
 	x = check_file(file, data);
-	printf("x = %d\n", x);
+	// printf("x = %d\n", x);
 	if (x == 0 || !(graph = ft_strsub(file, 0, x)))
 		return (NULL);
 	return (graph);
@@ -113,22 +113,23 @@ int				main(int argc, char **argv)
 		return (0);
 	if (!(graph = create_file(data, argv[1])))
 		return (0);
-	ft_putstr(graph);
+	// ft_putstr(graph);
 	anthill = create_anthill(data->rooms);
-	if (anthill)
-	printf("data contains start %d end %d tubes %d rooms %d ants %d start %s end %s\n",
-			data->start, data->end, data->tubes, data->rooms, data->ants,
-			data->start_room, data->end_room);
+	// if (anthill)
+	// printf("data contains start %d end %d tubes %d rooms %d ants %d start %s end %s\n",
+	// 		data->start, data->end, data->tubes, data->rooms, data->ants,
+	// 		data->start_room, data->end_room);
 	anthill = parser(graph, anthill, data);
 	anthill = create_connector_graph(anthill);
 	if (anthill)
 	{
-		print_tab(anthill->rooms, data->rooms);
-		print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
-		print_smallergraph(anthill);
-		print_solo_and_connectors(anthill->nodes, anthill->nb_room);
-		// floating point exception with very small graphs
-		routes = next_shortest_path(anthill);
+	routes = edmonds_karp(anthill);
+
+		// print_tab(anthill->rooms, data->rooms);
+		//  print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
+		// print_smallergraph(anthill);
+		// print_solo_and_connectors(anthill->nodes, anthill->nb_room);
+		// routes = next_shortest_path(anthill);
 		routes = get_nb_ants(routes, anthill->ants);
 		while (++j < routes->size)
 		{
