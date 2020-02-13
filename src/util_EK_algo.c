@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 14:16:14 by sadahan           #+#    #+#             */
-/*   Updated: 2020/02/13 13:14:00 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/02/13 14:19:22 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,13 @@ static t_dynode	**bfs_false_nodes(t_anthill *a, t_dynode **nodes, int *visited)
 		nodes[a->start] = push_int(nodes[a->start], a->nodes[a->start]->tab[i]);
 		// nodes[a->nodes[a->start]->tab[i]] = push_int(nodes[a->nodes[a->start]->tab[i]], a->start);
 	}
-	visited[a->start] = 0;
+	visited[a->start] = -2;
 	while (queue->nb_elem > 0)
 	{
 		i = -1;
 		u = del_bottom(queue);
+		if (visited[u] == 0)
+			continue ;
 		if (u != a->start)
 		{
 			// printf("u = %d\n", u);
@@ -98,7 +100,6 @@ static t_dynode	**bfs_false_nodes(t_anthill *a, t_dynode **nodes, int *visited)
 			// printf("v = %d\n", v);
 			if (visited[v] == -1)
 			{
-				// visited[v] = 0;
 				// printf("queued\n");
 				if (u != a->start)
 				{
@@ -118,13 +119,67 @@ static t_dynode	**bfs_false_nodes(t_anthill *a, t_dynode **nodes, int *visited)
 	return (nodes);
 }
 
+// static t_dynode	**bfs_false_nodes(t_anthill *a, t_dynode **nodes, int *visited)
+// {
+// 	t_pile		*queue;
+// 	int			u;
+// 	int			v;
+// 	int			i;
+
+// 	if (!(queue = init_pile(a->start)))
+// 		exit(-2);
+// 	i = -1;
+// 	while (++i < a->connectors[a->start]->size)
+// 	{
+// 		nodes[a->start] = push_int(nodes[a->start], a->connectors[a->start]->tab[i].name);
+// 		nodes[a->connectors[a->start]->tab[i].name] = push_int(nodes[a->connectors[a->start]->tab[i].name], a->start);
+// 	}
+// 	visited[a->start] = -2;
+// 	while (queue->nb_elem > 0)
+// 	{
+// 		i = -1;
+// 		u = del_bottom(queue);
+// 		if (visited[u] == 0)
+// 			continue ;
+// 		if (u != a->start)
+// 		{
+// 			// printf("----\nu = %d\n", u);
+// 			nodes[u] = push_int(nodes[u], u + a->nb_room);
+// 			nodes[u + a->nb_room] = push_int(nodes[u + a->nb_room], u);
+// 			visited[u] = 0;
+// 		}
+// 		while (++i < a->nodes[u]->size)
+// 		{
+// 			v = a->connectors[u]->tab[i].name;
+// 			// printf("v = %d\n", v);
+// 			if (visited[v] == -1)
+// 			{
+// 				if (u != a->start)
+// 				{
+// 					nodes[v] = push_int(nodes[v], u + a->nb_room);
+// 					nodes[u + a->nb_room] = push_int(nodes[u + a->nb_room], v);
+// 				}
+// 				if (v != a->end)
+// 				{
+// 					// printf("queued\n");
+// 					if (queue->nb_elem > 0)
+// 						add_to_top(queue, v);
+// 					else
+// 						queue = init_pile(v);
+// 				}
+// 			}
+// 		}
+// 	}
+// 	return (nodes);
+// }
+
 t_dynode		**create_false_nodes(t_anthill *a)
 {
 	t_dynode	**false_nodes;
 	int			i;
 	int			*visited;
 	
-	if (!(visited = init_parent(a)))
+	if (!(visited = init_parent(a->nb_room)))
 		exit(-2);
 	if (!(false_nodes = (t_dynode **)malloc(sizeof(t_dynode *) * a->nb_room *2)))
 		exit(-2);
@@ -165,6 +220,5 @@ int		*init_parent(int size)
 		exit(-2);
 	while (++i < size)
 		parent[i] = -1;
-	parent[a->start] = -2;
 	return (parent);
 }
