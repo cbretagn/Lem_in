@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/02/07 12:52:28 by sadahan          ###   ########.fr        #
+#    Updated: 2020/02/13 14:58:31 by sadahan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,17 @@ SRC_NAME	= parsing.c\
 			  get_connector_graph.c\
 			  utility_path_algo.c\
 			  get_nb_ants.c\
+			  edmond_karps1.c\
+			  get_paths.c\
+			  collisions.c\
 			  main_for_test.c\
 			  util_EK_algo.c\
 			  manage_pile.c\
 			  edmonds_karp.c
 			#   shortest_path.c
 			# EK_2.c
+			  print_ek.c\
+			  shortest_path.c
 			#   print_path.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)
@@ -45,7 +50,7 @@ LIB_PATH	= libft/libft.a
 
 CC			= gcc
 
-CFLAGS		= -Wall -Wextra -g
+CFLAGS		= -Wall -Wextra -g -fsanitize=address
 
 .PHONY		: all clean fclean re
 

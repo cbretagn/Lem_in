@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/13 13:12:04 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/02/13 14:57:56 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define VISITED 1
 # define NOTVIS 0
 # define NAN -1
+# define NO 1
+# define YES 0
 
 typedef struct	s_dijkstra
 {
@@ -74,6 +76,14 @@ typedef struct	s_ants
 	int			*next;
 }				t_ants;
 
+typedef struct	s_pos
+{
+	int			prev;
+	int			curr;
+	int			hub;
+	int			move;
+}				t_pos;
+
 //replace char **rooms dans anthill to add coordinates
 // typedef struct	s_rooms
 // {
@@ -113,11 +123,13 @@ typedef struct	s_anthill
 	int			nb_tubes;
 	int			start;
 	int			end;
+	int			lines;
 	t_dynode	**nodes;
 	t_connector	**connectors;
 }				t_anthill;
 
 t_data			*init_struct(void);
+void			free_data(t_data *data);
 int				next_line(char *str, int i);
 
 int				hash_fun(char *str);
@@ -146,14 +158,29 @@ int				find_min(t_dijkstra *tab, int size);
 t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start, t_anthill *anthill);
 void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab);
 void			check_neighbours(t_anthill *anthill, t_dijkstra *tab, int curr);
+int				compute_stop(t_path *routes, int ants);
 
 t_path			*get_nb_ants(t_path *routes, int nb_ants);
 
+
+void			print_suggestions(t_anthill *anthill);
+t_path			*superposition_path(t_anthill *anthill, int node);
+void			shortest_path_to(t_anthill *anthill, t_dijkstra *tab, int node);
+
+int				**edmond_karps(t_anthill *anthill);
+t_path			*get_paths(t_anthill *anthill, int **matrix);
+t_path			*handle_collision(t_path *routes, t_anthill *anthill);
+t_path			*sort_routes(t_path *routes);
+
+t_dstring		*print_ek(t_anthill *anthill, int **matrix);
+
+int				nb_lines(t_path *routes);
 // void     		print_path(char *graph, t_path *path, t_anthill *anthill);
-int				**init_matrice(int size);
+int				**init_matrice(t_anthill *a);
 t_path			*edmonds_karp(t_anthill *a);
-void			print_matrix(int **res, int size);
-int				*init_parent(int size);
+//void			print_matrix(int **res, int size);
+int		*init_parent(t_anthill *a);
+// t_dijkstra				*init_parent(t_anthill *a);
 void			add_to_top(t_pile *pile, int data);
 t_pile			*init_pile(int data);
 int				del_pile(t_pile *pile);

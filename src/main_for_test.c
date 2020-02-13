@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/13 13:53:05 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/02/13 14:56:17 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ static char		*create_file(t_data *data, char *str)
 	char		*graph;
 
 	if (!(file = read_file(str)))
-		return (NULL);
+		exit(-2);
 	x = check_file(file, data);
 	// printf("x = %d\n", x);
 	if (x == 0 || !(graph = ft_strsub(file, 0, x)))
-		return (NULL);
+		exit(-2);
 	return (graph);
 }
 
@@ -115,12 +115,17 @@ int				main(int argc, char **argv)
 		return (0);
 	// ft_putstr(graph);
 	anthill = create_anthill(data->rooms);
+	//if (anthill)
+	//printf("data contains start %d end %d tubes %d rooms %d ants %d start %s end %s\n",
+	//		data->start, data->end, data->tubes, data->rooms, data->ants,
+	//		data->start_room, data->end_room);
 	// if (anthill)
 	// printf("data contains start %d end %d tubes %d rooms %d ants %d start %s end %s\n",
 	// 		data->start, data->end, data->tubes, data->rooms, data->ants,
 	// 		data->start_room, data->end_room);
 	anthill = parser(graph, anthill, data);
 	anthill = create_connector_graph(anthill);
+	ft_strdel(&graph);
 	if (anthill)
 	{
 	routes = edmonds_karp(anthill);
@@ -144,6 +149,11 @@ int				main(int argc, char **argv)
 						routes->path_length[j]);
 				printf("nb ants\033[1;32m %d\033[0m\n", routes->nb_ants[j]);
 		}
+		int		**matrix;
+		matrix = edmond_karps(anthill);
+		printf("nb_lines first algo %d\n", nb_lines(routes));
+		t_dstring *ret = print_ek(anthill, matrix);
 	}
+	free_data(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/12 14:07:52 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/02/13 14:56:36 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,6 @@ t_anthill		*parser(char *str, t_anthill *anthill, t_data *data)
 			break ;
 		word = push_str_nchar(word, str + i, j - i);
 		word->size = 0;
-		// printf("str = %.6s j-i = %d\n", str + i, j - i);
-		// printf("word is %s\n", word->str);
 		if (!(ROOMS = put_in_table(word->str, ROOMS, data->rooms)))
 			return (NULL); //free anthill
 	}
