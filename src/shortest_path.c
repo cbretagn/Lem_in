@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 15:07:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/12 17:30:44 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/20 16:14:55 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab)
 	{
 		check_neighbours(anthill, tab, curr);
 		tab[curr].visited = VISITED;
-		curr = find_min(tab, anthill->nb_room);
+		curr = find_min(tab, anthill->nb_room * 2);
 	}
 }
 
@@ -119,7 +119,7 @@ t_path			*next_shortest_path(t_anthill *anthill)
 	t_path			*routes;
 
 	i = -1;
-	if (!(tab = (t_dijkstra *)malloc(sizeof(t_dijkstra) * anthill->nb_room)))
+	if (!(tab = (t_dijkstra *)malloc(sizeof(t_dijkstra) * anthill->nb_room * 2)))
 		return (NULL);
 	while (++i < anthill->nb_room)
 	{

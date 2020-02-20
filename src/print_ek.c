@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 17:36:57 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/12 19:13:05 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/18 17:26:46 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ static int	next_unoccupied(t_pos ant, int *occupied, t_anthill *anthill, int **m
 		while (++i < anthill->nb_room)
 		{
 			if (matrix[curr][i] != -1 && matrix[i][curr] == -1 
-					&& (occupied[matrix[curr][i]] == NO 
-						|| matrix[curr][i] == anthill->end))
-				return (matrix[curr][i]);
+					&& (occupied[i] == NO || i == anthill->end))
+				return (i);
 		}
 	}
 	else
@@ -54,7 +53,10 @@ static int	one_step(t_pos *all_ants, t_anthill *anthill, int *occupied,
 	while (++i < anthill->ants)
 	{
 		if (all_ants[i].curr == anthill->end)
+		{
+			all_ants[i].move = NO;
 			continue ;
+		}
 		next = next_unoccupied(all_ants[i], occupied, anthill, matrix);
 		if (next != -1)
 		{
@@ -65,6 +67,8 @@ static int	one_step(t_pos *all_ants, t_anthill *anthill, int *occupied,
 			else
 				all_ants[i].hub = NO;
 			all_ants[i].move = YES;
+			occupied[all_ants[i].prev] = NO;
+			occupied[next] = YES;
 			if (all_ants[i].curr == anthill->end)
 				arrived++;
 		}
@@ -138,6 +142,7 @@ t_dstring	*print_ek(t_anthill *anthill, int **matrix)
 	}
 	anthill->lines = 0;
 	ret = move_ants(all_ants, anthill, occupied, matrix);
+	//ft_putstr(ret->str);
 	printf("nb of lines is %d\n", anthill->lines);
 	return (ret);
 }

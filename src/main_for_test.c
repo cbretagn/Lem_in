@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/12 19:13:09 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/20 16:16:34 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void		print_smallergraph(t_anthill *anthill)
 	int		j;
 
 	i = -1;
-	while (++i < anthill->nb_room)
+	while (++i < anthill->nb_room * 2)
 	{
 		if (!CONNECTORS[i])
 			continue ;
@@ -133,7 +133,7 @@ int				main(int argc, char **argv)
 		print_smallergraph(anthill);
 		print_solo_and_connectors(anthill->nodes, anthill->nb_room);
 		// floating point exception with very small graphs
-		routes = next_shortest_path(anthill);
+		/*routes = next_shortest_path(anthill);
 		routes = get_nb_ants(routes, anthill->ants);
 		while (++j < routes->size)
 		{
@@ -147,11 +147,11 @@ int				main(int argc, char **argv)
 				printf("total length is \033[1;32m%d\033[0m\n",
 						routes->path_length[j]);
 				printf("nb ants\033[1;32m %d\033[0m\n", routes->nb_ants[j]);
-		}
+		}*/
 		int		**matrix;
 		matrix = edmond_karps(anthill);
-		printf("nb_lines first algo %d\n", nb_lines(routes));
-		t_dstring *ret = print_ek(anthill, matrix);
+		//printf("nb_lines first algo %d\n", nb_lines(routes));
+		//t_dstring *ret = print_ek(anthill, matrix);*/
 	}
 	free_data(data);
 	return (0);

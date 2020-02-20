@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 16:41:09 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/12 17:24:00 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/20 16:21:23 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,13 @@ t_dynode	*fetch_routes(t_dynode *path, t_anthill *anthill, int **matrix,
 	{
 		i = -1;
 		dist = INT_MAX;
-		while (++i < anthill->nb_room)
+		while (++i < anthill->nb_room * 2)
 		{
 			if (matrix[node][i] != -1 && matrix[i][node] == -1 
 					&& get_dist(node, i, matrix[node][i], anthill) < dist)
 			{
-				next = i;
 				from = matrix[node][i];
+				next = i;
 				dist = get_dist(node, i, matrix[node][i], anthill);
 			}
 		}
@@ -139,10 +139,13 @@ t_path		*get_paths(t_anthill *anthill, int **matrix)
 		exit(-1);
 	if (!(routes = create_path_tab(i)))
 		exit(-1);
+	routes = get_direct_path(routes, anthill);
 	i = -1;
-	path = 0;
-	while (++i < anthill->nb_room)
+	path = routes->size;
+	while (++i < anthill->nb_room * 2)
 	{
+		if (i == anthill->end)
+			continue ;
 		if (matrix[anthill->start][i] != -1 && matrix[i][anthill->start] == -1)
 		{
 			routes->path_length[path] = get_dist(anthill->start, i,
@@ -160,7 +163,8 @@ t_path		*get_paths(t_anthill *anthill, int **matrix)
 		routes->tab[i] = fetch_routes(routes->tab[i], anthill, matrix, distance);
 		routes->path_length[i] = *distance;
 	}
-	routes = handle_collision(routes, anthill);
+	//routes = handle_collision(routes, anthill);
+	routes = get_real_route(routes, anthill);
 	routes = sort_routes(routes);
 	routes = get_nb_ants(routes, anthill->ants);
 	print_debug(routes, anthill);

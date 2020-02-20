@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 13:52:11 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/12 18:51:42 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/20 15:05:16 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static int		dijkstra(t_anthill *anthill, t_dijkstra *tab, int **matrix)
 	{
 		check_neighbours2(anthill, tab, curr, matrix);
 		tab[curr].visited = VISITED;
-		curr = find_min_dist(tab, anthill->nb_room);
+		curr = find_min_dist(tab, anthill->nb_room * 2);
 		if (curr == -1)
 			return (-1);
 	}
@@ -124,7 +124,7 @@ static void		init_table(t_dijkstra *tab, t_anthill *anthill)
 	int		i;
 
 	i = -1;
-	while (++i < anthill->nb_room)
+	while (++i < anthill->nb_room * 2)
 	{
 		if (!(anthill->connectors[i]))
 			tab[i].visited = NAN;
@@ -148,7 +148,7 @@ static void		update_matrix(int **matrix, t_dijkstra *table, t_anthill *anthill)
 		while (anthill->connectors[table[node].prev]->tab[from].name != node)
 			from++;
 		matrix[table[node].prev][node] 
-			= anthill->connectors[table[node].prev]->tab[from].from;;
+			= anthill->connectors[table[node].prev]->tab[from].from;
 		node = table[node].prev;
 	}
 }
@@ -168,7 +168,7 @@ static void		print_matrix(int **matrix, int nb)
 	}
 }
 
-static void		print_paths(int **matrix, t_anthill *anthill)
+/*static void		print_paths(int **matrix, t_anthill *anthill)
 {
 	int		node;
 	int		i;
@@ -197,7 +197,7 @@ static void		print_paths(int **matrix, t_anthill *anthill)
 			}
 		}
 	}
-}
+}*/
 
 		//parcourir noeud adjacent
 		// then if 0 on one edge out of two mark it then keep going
@@ -209,22 +209,19 @@ int				**edmond_karps(t_anthill *anthill)
 	t_dijkstra 		*tab;
 	int				ret;
 
-	if (!(matrix = create_capacity_matrix(anthill->nb_room)))
+	if (!(matrix = create_capacity_matrix(anthill->nb_room * 2)))
 		exit(-1);
-	if (!(tab = (t_dijkstra *)malloc(sizeof(t_dijkstra) * anthill->nb_room)))
+	if (!(tab = (t_dijkstra *)malloc(sizeof(t_dijkstra) * anthill->nb_room * 2)))
 		exit(-1);
 	while (42)
 	{
 		init_table(tab, anthill);
-		ft_putstr("hey\n");
 		ret = dijkstra(anthill, tab, matrix);
-		printf("ret is %d\n", ret);
 		if (ret == -1)
 			break ;
 		update_matrix(matrix, tab, anthill);
 	}
 	//print_matrix(matrix, anthill->nb_room);
-	//print_paths(matrix, anthill);
 	t_path	*routes = get_paths(anthill, matrix);
 	return (matrix);
 }
