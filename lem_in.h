@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/21 16:56:12 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:59:56 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "lem_in_checker.h"
+# include <stdio.h>
 
 # define NB_ROOM anthill->nb_room
 # define ROOMS anthill->rooms
@@ -35,7 +36,7 @@ typedef struct	s_dijkstra
 {
 	int			prev;
 	int			dist;
-	int			visited;
+	// int			visited;
 }				t_dijkstra;
 
 typedef struct	s_vertex
@@ -190,4 +191,6 @@ void			print_direct(t_anthill *anthill);
 t_path			*get_direct_path(t_path *routes, t_anthill *anthill);
 t_anthill		*add_intermediary_nodes(t_anthill *anthill);
 t_path			*get_real_routes(t_path *routes, t_anthill *anthill);
+
+t_dynode		**create_false_nodes(t_anthill *a);
 #endif

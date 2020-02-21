@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/20 16:35:41 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:58:24 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,13 @@ int				main(int argc, char **argv)
 		print_solo_and_connectors(anthill->nodes, anthill->nb_room);
 		// floating point exception with very small graphs
 		/*routes = next_shortest_path(anthill);
+	routes = edmonds_karp(anthill);
+
+		// print_tab(anthill->rooms, data->rooms);
+		//  print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
+		// print_smallergraph(anthill);
+		// print_solo_and_connectors(anthill->nodes, anthill->nb_room);
+		// routes = next_shortest_path(anthill);
 		routes = get_nb_ants(routes, anthill->ants);
 		while (++j < routes->size)
 		{

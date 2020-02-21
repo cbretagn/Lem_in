@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/02/21 16:19:52 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/02/21 16:59:19 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,11 @@ SRC_NAME	= parsing.c\
 			  get_paths.c\
 			  collisions.c\
 			  main_for_test.c\
+			  util_EK_algo.c\
+			  manage_pile.c\
+			  edmonds_karp.c
+			#   shortest_path.c
+			# EK_2.c
 			  print_ek.c\
 			  shortest_path.c\
 			  handling_direct_routes.c\
