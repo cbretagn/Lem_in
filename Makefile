@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/02/12 19:00:09 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/02/21 16:19:52 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,10 @@ SRC_NAME	= parsing.c\
 			  collisions.c\
 			  main_for_test.c\
 			  print_ek.c\
-			  shortest_path.c
+			  shortest_path.c\
+			  handling_direct_routes.c\
+			  intermediary_nodes.c\
+			  real_routes.c
 			#   print_path.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 16:41:09 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/20 16:21:23 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:55:59 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ t_path		*get_paths(t_anthill *anthill, int **matrix)
 		routes->path_length[i] = *distance;
 	}
 	//routes = handle_collision(routes, anthill);
-	routes = get_real_route(routes, anthill);
+	//routes = get_real_routes(routes, anthill);
 	routes = sort_routes(routes);
 	routes = get_nb_ants(routes, anthill->ants);
 	print_debug(routes, anthill);

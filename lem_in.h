@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/20 16:34:52 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:56:12 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,4 +189,5 @@ int				is_visited(int node, t_dynode *list);
 void			print_direct(t_anthill *anthill);
 t_path			*get_direct_path(t_path *routes, t_anthill *anthill);
 t_anthill		*add_intermediary_nodes(t_anthill *anthill);
+t_path			*get_real_routes(t_path *routes, t_anthill *anthill);
 #endif

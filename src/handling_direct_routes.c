@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:33:19 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/18 17:09:49 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/02/21 16:56:07 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			is_visited(int node, t_dynode *list)
 	return (0);
 }
 
-void		print_direct(t_anthill *anthill)
+/*void		print_direct(t_anthill *anthill)
 {
 	int		i;
 
@@ -35,7 +35,7 @@ void		print_direct(t_anthill *anthill)
 		printf("node %d %s\n", anthill->direct->tab[i], anthill->rooms
 				[anthill->direct->tab[i]]);
 	}
-}
+}*/
 
 t_path		*get_direct_path(t_path *routes, t_anthill *anthill)
 {
