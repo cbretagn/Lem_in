@@ -6,12 +6,11 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 18:03:18 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/02/27 17:58:02 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
-#define SIZE 400
 
 static void		print_tab(char **tab, int size)
 {
@@ -45,6 +44,25 @@ static void		print_dynode(t_dynode **nodes, char **rooms, int size)
 	}
 }
 
+static void		print_smallergraph(t_anthill *anthill)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < anthill->nb_room)
+	{
+		if (!CONNECTORS[i])
+			continue ;
+		printf("\nhub %d is connected to hubs : ", i);
+		j = -1;
+		while (++j < CONNECTORS[i]->size)
+			printf("%d at distance %d from %d, ", CONNECTORS[i]->tab[j].name,
+					CONNECTORS[i]->tab[j].dist, CONNECTORS[i]->tab[j].from);
+	}
+	printf("\n");
+}
+
 static void		print_solo_and_connectors(t_dynode **nodes, int size)
 {
 	int		solo;
@@ -65,28 +83,48 @@ static void		print_solo_and_connectors(t_dynode **nodes, int size)
 			solo, connectors);
 }
 
+static char		*create_file(t_data *data, char *str)
+{
+	char		*file;
+	int			x;
+	char		*graph;
+
+	if (!(file = read_file(str)))
+		exit(-2);
+	x = check_file(file, data);
+	// printf("x = %d\n", x);
+	if (x == 0 || !(graph = ft_strsub(file, 0, x)))
+		exit(-2);
+	return (graph);
+}
+
 int				main(int argc, char **argv)
 {
 	t_anthill	*anthill;
-	char		*file;
 	char		*graph;
 	t_data		*data;
-
-	if (!(data = init_struct()) || argc != 2)
+	t_path		*routes;
+	int			i;
+	int			j;
+	
+	i = -1;
+	j = -1;
+	if (argc != 2 || !(data = init_struct()))
 		return (0);
-	if (!(file = read_file(argv[1])))
-		return (0);
-	if (!(graph = ft_strsub(file, 0, check_file(file, data))))
+	if (!(graph = create_file(data, argv[1])))
 		return (0);
 	anthill = create_anthill(data->rooms);
-	if (anthill)
-		anthill = parser(graph, anthill);
-	if (anthill)
-	{
-		write(1, "\nAnthill is still here !\n", 25);
-		print_tab(anthill->rooms, data->rooms);
-		print_dynode(anthill->nodes, anthill->rooms, anthill->nb_room);
-		print_solo_and_connectors(anthill->nodes, anthill->nb_room);
-	}
+	anthill = parser(graph, anthill, data);
+	anthill = create_connector_graph(anthill);
+	ft_strdel(&graph);
+	routes = next_shortest_path(anthill);
+	routes = get_direct_path(routes, anthill);
+	routes = get_nb_ants(routes, anthill->ants);
+	routes = get_real_routes(routes, anthill);
+	int lines;
+	lines = nb_lines(routes);
+	print_ants(anthill, routes);
+	free_data(data);
+	printf("%d", lines);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:29:45 by sadahan           #+#    #+#             */
-/*   Updated: 2019/11/15 18:08:26 by sadahan          ###   ########.fr       */
+/*   Updated: 2019/12/04 15:48:42 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,13 @@ static int	is_room(char *line)
 		{
 			if (space > 0 && !(ft_isdigit(line[i]))
 				&& line[i] != '-' && line[i] != '+')
-				return (0);
-			if (space == 0 && line[i] == '-')
-				return (0);
+					return (0);
 			i++;
 		}
 		if (line[i] == ' ' && line[i + 1])
 			space++;
-		i++;
+		if (line[i])
+			i++;
 	}
 	if (space != 2)
 		return (0);
@@ -92,13 +91,20 @@ static int	is_tube(char *line)
 	int		i;
 	int		dash;
 
-	i = 0;
 	dash = 0;
+	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '-' || line[i] == ' ')
+		while (line[i] != '-' && line[i])
+			i++;
+		if (line[i] == '-' && line[i + 1])
+		{
 			dash++;
-		i++;
+			if (i == 0)
+				return (0);
+		}
+		if (line[i])
+			i++;
 	}
 	if (dash != 1)
 		return (0);

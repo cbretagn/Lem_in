@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 14:03:21 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/14 13:35:05 by cbretagn         ###   ########.fr       */
+/*   Updated: 2019/12/04 15:52:47 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,20 @@ t_dstring			*push_str_nchar(t_dstring *dest, char *src, int n)
 
 	len = n + 1;
 	temp = dest;
-	if (len < temp->capacity - temp->size)
-		ft_strncpy((temp->str + temp->size), src, n);
+	if (len < temp->capacity)
+		ft_strncpy((temp->str), src, n);
 	else
 	{
 		temp = NULL;
 		new_cap = dest->capacity;
-		while (len >= new_cap - dest->size)
+		while ((int)len >= new_cap)
 			new_cap *= 2;
 		if (!(temp = create_dstring(new_cap, dest->str)))
 			return (NULL);
 		delete_dstring(dest);
-		ft_strncpy((temp->str + temp->size), src, n);
+		ft_strncpy((temp->str), src, n);
 	}
-	temp->str[temp->size + n + 1] = '\0';
+	temp->str[temp->size + n] = '\0';
 	temp->size += len;
 	return (temp);
 }

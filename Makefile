@@ -6,11 +6,11 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2019/11/15 13:15:39 by sadahan          ###   ########.fr        #
+#    Updated: 2020/02/26 15:23:11 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= lem_in
+NAME		= lem-in
 
 SRC_PATH	= src
 
@@ -23,7 +23,20 @@ SRC_NAME	= parsing.c\
 			  get_next_line.c\
 			  hash_table.c\
 			  create_del_struct.c\
-			  main_for_test.c
+			  connector_graph_struct.c\
+			  get_connector_graph.c\
+			  utility_path_algo.c\
+			  get_nb_ants.c\
+			  edmond_karps1.c\
+			  get_paths.c\
+			  main_for_test.c\
+			  shortest_path.c\
+			  collisions.c\
+			  get_real_route.c\
+			  print_ants.c\
+			  utility_print_ants.c\
+			  handling_direct_routes.c
+			#   print_path.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)
 
@@ -35,7 +48,7 @@ LIB_PATH	= libft/libft.a
 
 CC			= gcc
 
-CFLAGS		= -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -g -fsanitize=address
 
 .PHONY		: all clean fclean re
 
