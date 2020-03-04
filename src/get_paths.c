@@ -3,83 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 16:41:09 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/25 14:16:00 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/04 15:27:26 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 #include <limits.h>
-
-static void	check(t_path *routes, int nb, int end)
-{
-	int		i;
-	int		j;
-	int		check = 0;
-
-	i = -1;
-	while (++i < routes->size)
-	{
-		if (routes->path_length[i] == INT_MAX)
-			continue ;
-		j = 0;
-		while (j < routes->tab[i]->size)
-		{
-			if (routes->tab[i]->tab[j] == nb && routes->tab[i]->tab[j] != end)
-			{
-				check++;
-				if (check > 1)
-					printf("Collision : room %d\n", nb);
-			}
-			j += 2;
-		}
-	}
-}
-
-static void	check_collision(t_path *routes, int end)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	while (++i < routes->size)
-	{
-		if (routes->path_length[i] == INT_MAX)
-			continue ;
-		j = 0;
-		while (j < routes->tab[i]->size)
-		{
-			check(routes, routes->tab[i]->tab[j], end);
-			j += 2;
-		}
-	}
-}
-
-static void	print_debug(t_path	*routes, t_anthill *anthill)
-{
-	int		i;
-
-	i = -1;
-	printf("\n\nprinting path with struct\n\n");
-	while (++i < routes->size)
-	{
-		int j = 0;
-		while (j < routes->tab[i]->size)
-		{
-			printf("\033[1;32m%d \033[0mfrom %d ", routes->tab[i]->tab[j],
-					routes->tab[i]->tab[j + 1]);
-			j += 2;
-		}
-		if (routes->path_length[i] == INT_MAX)
-			printf("\033[1;31mFULL SIZE %d \033[0m", routes->path_length[i]);
-		else
-			printf("\033[1;34mFULL SIZE %d \033[0m", routes->path_length[i]);
-		printf("\033[0;31m ANTS %d\n\033[0m", routes->nb_ants[i]);
-	}
-	check_collision(routes, anthill->end);
-}
 
 int			get_dist(int node, int to, int from, t_anthill *anthill)
 {
@@ -166,7 +98,5 @@ t_path		*get_paths(t_anthill *anthill, int **matrix)
 	routes = handle_collision(routes, anthill);
 	routes = sort_routes(routes);
 	routes = get_nb_ants(routes, anthill->ants);
-	print_debug(routes, anthill);
-	printf("nb_lines w/ edmond karps %d\n", nb_lines(routes));
 	return (routes);
 }

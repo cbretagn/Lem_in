@@ -6,13 +6,11 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2020/02/13 14:55:10 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/04 15:10:44 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in_checker.h"
-
-#include <stdio.h>
 
 t_data			*init_struct(void)
 {
@@ -80,19 +78,18 @@ char			*read_file(char *str)
 
 	file = NULL;
 	fd = open(str, O_RDONLY);
-	if (fd != -1)
+	if (fd == -1)
+		exit(-2);
+	while ((ret = read(fd, buff, 4095)))
 	{
-		while ((ret = read(fd, buff, 4095)))
+		buff[ret] = '\0';
+		if (!file)
 		{
-			buff[ret] = '\0';
-			if (!file)
-			{
-				if (!(file = create_dstring(4096, buff)))
-					return (NULL);
-			}
-			else if (!(file = push_str(file, buff)))
+			if (!(file = create_dstring(4096, buff)))
 				return (NULL);
 		}
+		else if (!(file = push_str(file, buff)))
+			return (NULL);
 	}
 	close(fd);
 	return (file->str);

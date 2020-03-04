@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/04 15:51:00 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/04 15:53:32 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,29 @@
 //receives char *, hash room, check if repetition
 //creates adjency list
 
-int				next_line(char *str, int i)
-{
-	while (str[i] != '\n' && str[i])
-		i++;
-	if (str[i] == '\0')
-		return (i);
-	return (i + 1);
-}
 
 //dynamic string to hold the word
 //reset size to 0 to write new
 //use push_str_nchar with size of room name
 
-t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
+
+static t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
 					t_dstring *word)
 {
 	int			j;
 	int			node;
 	int			connecting;
 
+	j = -1;
+	while (++j < NB_ROOM)
+	{
+		// if (j == anthill->start || j == anthill->end)
+		// 	continue ;
+		NODES[j] = push_int(NODES[j], j + NB_ROOM);
+		NODES[j + NB_ROOM] = push_int(NODES[j + NB_ROOM], j);
+		anthill->nodes2[j] = push_int(anthill->nodes2[j], j + NB_ROOM);
+		// anthill->nodes2[j + NB_ROOM] = push_int(anthill->nodes2[j + NB_ROOM], j);
+	}
 	while (str[i])
 	{
 		while (str[i] == '#')
@@ -53,8 +56,12 @@ t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
 		word->size = 0;
 		word = push_str_nchar(word, str + i, j - i);
 		connecting = search_in_table(word->str, ROOMS, NB_ROOM);
-		NODES[node] = push_int(NODES[node], connecting);
-		NODES[connecting] = push_int(NODES[connecting], node);
+		anthill->nodes2[node + NB_ROOM] = push_int(anthill->nodes2[node + NB_ROOM], connecting);
+		anthill->nodes2[connecting + NB_ROOM] = push_int(anthill->nodes2[connecting + NB_ROOM], node);
+		NODES[node] = push_int(NODES[node], connecting + NB_ROOM);
+		NODES[connecting] = push_int(NODES[connecting], node + NB_ROOM);
+		NODES[node + NB_ROOM] = push_int(NODES[node + NB_ROOM], connecting);
+		NODES[connecting + NB_ROOM] = push_int(NODES[connecting + NB_ROOM], node);
 		word->size = 0;
 		i = next_line(str, i);
 	}
@@ -62,7 +69,7 @@ t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
 	return (anthill);
 }
 
-t_anthill		*parser(char *str, t_anthill *anthill, t_data *data)
+t_anthill		*parser2(char *str, t_anthill *anthill, t_data *data)
 {
 	int			i;
 	int			j;

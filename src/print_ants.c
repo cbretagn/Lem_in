@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_ants.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:53:53 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/04 14:38:50 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/04 15:46:32 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,19 @@ static void		push_in_path(t_path *routes, t_ants *swarm, t_anthill *anthill, int
 	int		j;
 
 	j = -1;
-	while (++j < swarm->path_to_use)
+	while (++j < swarm->path_to_use && swarm->arrived != anthill->ants)
 	{
 		if (routes->nb_ants[j] > 0)
 		{
 			swarm->path[i] = j;
 			swarm->curr[i] = 1;
 			swarm->room[i] = routes->tab[j]->tab[1];
-			if (swarm->room[i] == anthill->end)
-				swarm->arrived++;
 			routes->nb_ants[j] -= 1;
+			if (swarm->room[i] == anthill->end)
+			{
+				j -= 1;
+				swarm->arrived++;
+			}
 			i++;
 		}
 	}

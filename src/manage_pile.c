@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:56:50 by sadahan           #+#    #+#             */
-/*   Updated: 2020/02/06 14:04:20 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/04 17:36:43 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@ int				del_pile(t_pile *pile)
 		tmp = pile->top;
 		pile->top = pile->top->prev;
 		free(tmp);
+		tmp = NULL;
 	}
 	pile->nb_elem = 0;
 	free(pile);
+	pile = NULL;
 	return (data);
 }
 
@@ -78,6 +80,7 @@ int				del_bottom(t_pile *pile)
 		data = pile->bottom->nb;
 		temp->prev = NULL;
 		free(pile->bottom);
+		pile->bottom = NULL;
 		pile->bottom = temp;
 		pile->nb_elem--;
 	}

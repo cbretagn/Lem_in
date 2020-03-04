@@ -6,15 +6,15 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:11:49 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 15:56:58 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/04 15:29:51 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-void		delete_table(char **tab, int size)
+void				delete_table(char **tab, int size)
 {
-	int		i;
+	int				i;
 
 	i = -1;
 	while (++i < size)
@@ -23,11 +23,11 @@ void		delete_table(char **tab, int size)
 	tab = NULL;
 }
 
-int			hash_fun(char *str)
+long int			hash_fun(char *str)
 {
-	char	c;
-	int		i;
-	int		hash;
+	char			c;
+	int				i;
+	long int		hash;
 
 	hash = 456;
 	i = -1;
@@ -36,9 +36,9 @@ int			hash_fun(char *str)
 	return (hash);
 }
 
-char		**put_in_table(char *str, char **tab, int size)
+char				**put_in_table(char *str, char **tab, int size)
 {
-	int		hash;
+	long int		hash;
 
 	hash = hash_fun(str) % size;
 	while (tab[hash] != NULL)

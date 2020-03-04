@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/02/26 15:23:11 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/03/04 16:27:33 by sadahan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,23 +20,25 @@ SRC_NAME	= parsing.c\
 			  check_file.c\
 			  check_format.c\
 			  dynamic_string.c\
-			  get_next_line.c\
 			  hash_table.c\
 			  create_del_struct.c\
 			  connector_graph_struct.c\
 			  get_connector_graph.c\
 			  utility_path_algo.c\
 			  get_nb_ants.c\
-			  edmond_karps1.c\
 			  get_paths.c\
 			  main_for_test.c\
 			  shortest_path.c\
+			  util_EK_algo.c\
+			  manage_pile.c\
+			  edmonds_karp.c\
 			  collisions.c\
+			  edmonds_karp2.c\
+			  parsing2.c\
 			  get_real_route.c\
 			  print_ants.c\
 			  utility_print_ants.c\
 			  handling_direct_routes.c
-			#   print_path.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)
 
