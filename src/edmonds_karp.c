@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 11:13:09 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/04 16:37:10 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/04 18:08:14 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int		bfs(t_anthill *a, int **res, int *parent, int **cap)
 				parent[v] = u;
 				if (v != a->end)
 				{
-					if (queue)
+					if (queue->nb_elem > 0)
 						add_to_top(queue, v);
 					else
 						queue = init_pile(v);
