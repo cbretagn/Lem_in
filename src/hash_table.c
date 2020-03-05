@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:11:49 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/04 15:29:51 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/05 16:54:25 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ long int			hash_fun(char *str)
 
 	hash = 456;
 	i = -1;
-	while ((c = str[++i]))
+	while ((c = str[++i]) && i < 10)
 		hash = hash * 31 + c;
 	return (hash);
 }
@@ -40,7 +40,7 @@ char				**put_in_table(char *str, char **tab, int size)
 {
 	long int		hash;
 
-	hash = hash_fun(str) % size;
+	hash = (int)(hash_fun(str) % size);
 	while (tab[hash] != NULL)
 	{
 		if (ft_strcmp(str, tab[hash]) == 0)
