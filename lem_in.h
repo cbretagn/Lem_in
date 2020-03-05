@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/04 15:54:18 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/05 16:45:42 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define NO 1
 # define YES 0
 # define DIRECT -1
+# define MAX_ANT 100000
 
 typedef struct	s_dijkstra
 {

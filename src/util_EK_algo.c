@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 14:16:14 by sadahan           #+#    #+#             */
-/*   Updated: 2020/02/25 19:16:20 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/05 16:45:24 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	**init_mat_capacity(t_anthill *a)
 		while (++j < a->nodes2[i]->size)
 			m[i][a->nodes2[i]->tab[j]] = 1;
 	}
-	m[a->start][a->start + a->nb_room] = INT_MAX;
-	m[a->start + a->nb_room][a->start] = INT_MAX;
-	m[a->end][a->end + a->nb_room] = INT_MAX;
-	m[a->end + a->nb_room][a->end] = INT_MAX;
+	m[a->start][a->start + a->nb_room] = MAX_ANT;
+	m[a->start + a->nb_room][a->start] = MAX_ANT;
+	m[a->end][a->end + a->nb_room] = MAX_ANT;
+	m[a->end + a->nb_room][a->end] = MAX_ANT;
 	return (m);
 }
 
