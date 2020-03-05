@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:56:50 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/04 17:36:43 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/05 16:21:10 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@ void			add_to_top(t_pile *pile, int data)
 	if (!(new = malloc(sizeof(t_element))))
 		exit(EXIT_FAILURE);
 	new->nb = data;
-	pile->top->next = new;
+	if (pile->nb_elem == 0)
+		new->prev = NULL;
+	else
+	{
+		pile->top->next = new;
+		new->prev = pile->top;
+	}
 	new->next = NULL;
-	new->prev = pile->top;
 	pile->top = new;
 	pile->nb_elem++;
 }
@@ -73,18 +78,26 @@ int				del_bottom(t_pile *pile)
 	int			data;
 	t_element	*temp;
 
-	data = 0;
+	if (!pile)
+		return (-1);
+	data = pile->bottom->nb;
 	if (pile->nb_elem > 1)
 	{
 		temp = pile->bottom->next;
-		data = pile->bottom->nb;
 		temp->prev = NULL;
 		free(pile->bottom);
 		pile->bottom = NULL;
 		pile->bottom = temp;
 		pile->nb_elem--;
+		return (data);
 	}
-	else
-		data = del_pile(pile);
-	return (data);
+	else if (pile->nb_elem == 1)
+	{
+		free(pile->bottom);
+		pile->bottom = NULL;
+		pile->top = NULL;
+		pile->nb_elem--;
+		return (data);
+	}
+	return (-1);
 }
