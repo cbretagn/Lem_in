@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/04 15:10:44 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/05 17:14:47 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,20 @@ char			*read_file(char *str)
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 		exit(-2);
+	if (!(file = create_dstring(4096, "")))
+		return (NULL);
 	while ((ret = read(fd, buff, 4095)))
 	{
+		if (ret == -1)
+			exit(-2);
 		buff[ret] = '\0';
-		if (!file)
-		{
-			if (!(file = create_dstring(4096, buff)))
-				return (NULL);
-		}
-		else if (!(file = push_str(file, buff)))
+		if (buff[0] == '\0')
+			exit(-2);
+		if (!(file = push_str(file, buff)))
 			return (NULL);
 	}
 	close(fd);
+	if (!file->str)
+		exit(-2);
 	return (file->str);
 }
