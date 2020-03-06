@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/04 15:53:32 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/06 11:19:35 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,8 @@ static t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
 	j = -1;
 	while (++j < NB_ROOM)
 	{
-		// if (j == anthill->start || j == anthill->end)
-		// 	continue ;
 		NODES[j] = push_int(NODES[j], j + NB_ROOM);
 		NODES[j + NB_ROOM] = push_int(NODES[j + NB_ROOM], j);
-		anthill->nodes2[j] = push_int(anthill->nodes2[j], j + NB_ROOM);
-		// anthill->nodes2[j + NB_ROOM] = push_int(anthill->nodes2[j + NB_ROOM], j);
 	}
 	while (str[i])
 	{
@@ -56,8 +52,6 @@ static t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
 		word->size = 0;
 		word = push_str_nchar(word, str + i, j - i);
 		connecting = search_in_table(word->str, ROOMS, NB_ROOM);
-		anthill->nodes2[node + NB_ROOM] = push_int(anthill->nodes2[node + NB_ROOM], connecting);
-		anthill->nodes2[connecting + NB_ROOM] = push_int(anthill->nodes2[connecting + NB_ROOM], node);
 		NODES[node] = push_int(NODES[node], connecting + NB_ROOM);
 		NODES[connecting] = push_int(NODES[connecting], node + NB_ROOM);
 		NODES[node + NB_ROOM] = push_int(NODES[node + NB_ROOM], connecting);

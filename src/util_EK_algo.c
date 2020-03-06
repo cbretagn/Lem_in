@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_EK_algo.c                                     :+:      :+:    :+:   */
+/*   util_ek_algo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 14:16:14 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/05 16:45:24 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/06 11:18:08 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,15 @@ int	**init_mat_capacity(t_anthill *a)
 		j = -1;
 		while (++j < a->nb_room * 2)
 			m[i][j] = 0;
-		j = -1;
-		while (++j < a->nodes2[i]->size)
-			m[i][a->nodes2[i]->tab[j]] = 1;
+		if (i < a->nb_room)
+			m[i][i + a->nb_room] = 1;
+		else
+		{
+			j = -1;
+			while (++j < a->nodes[i]->size)
+				if (a->nodes[i]->tab[j] != i - a->nb_room)
+					m[i][a->nodes[i]->tab[j]] = 1;
+		}
 	}
 	m[a->start][a->start + a->nb_room] = MAX_ANT;
 	m[a->start + a->nb_room][a->start] = MAX_ANT;

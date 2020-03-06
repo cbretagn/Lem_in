@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:09:15 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/04 15:22:07 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/06 11:18:39 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,6 @@ t_anthill		*create_anthill(int size)
 	i = -1;
 	while (++i < size * 2)
 		ret->nodes[i] = create_dynode(BASE_DYN_NODES);
-	if (!(ret->nodes2 = (t_dynode **)malloc(sizeof(t_dynode *) * size * 2)))
-		exit(-2);
-	i = -1;
-	while (++i < size * 2)
-		ret->nodes2[i] = create_dynode(BASE_DYN_NODES);
 	ret->nb_room = size;
 	if (!(ret->connectors = malloc(sizeof(t_connector *) * size)))
 		exit(-2);

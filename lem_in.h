@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/05 16:45:42 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/06 11:19:17 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ typedef struct	s_anthill
 	int			end;
 	int			lines;
 	t_dynode	**nodes;
-	t_dynode	**nodes2;
 	t_connector	**connectors;
 }				t_anthill;
 

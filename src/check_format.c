@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:29:45 by sadahan           #+#    #+#             */
-/*   Updated: 2019/12/04 15:48:42 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/05 17:17:53 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	is_room(char *line)
 		{
 			if (space > 0 && !(ft_isdigit(line[i]))
 				&& line[i] != '-' && line[i] != '+')
-					return (0);
+				return (0);
 			i++;
 		}
 		if (line[i] == ' ' && line[i + 1])
