@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 15:44:21 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 16:38:46 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,8 @@ t_path			*next_shortest_path(t_anthill *anthill);
 t_path			*create_path_tab(int size);
 void			delete_path_tab(t_path *del);
 int				find_min(t_dijkstra *tab, int size);
-t_path			*get_route(t_path *routes, t_dijkstra *tab, int end, int start, t_anthill *anthill);
+t_path			*get_route(t_path *routes, t_dijkstra *tab, int end,
+					t_anthill *anthill);
 void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab);
 void			check_neighbours(t_anthill *anthill, t_dijkstra *tab, int curr);
 int				compute_stop(t_path *routes, int ants);
@@ -178,6 +179,9 @@ t_path			*get_real_routes(t_path *routes, t_anthill *anthill);
 
 void			print_ants(t_anthill *anthill, t_path *routes);
 int				nb_path_to_use(t_path *routes);
+
+t_dijkstra		*init_dijkstra_tab(t_dijkstra *tab, t_anthill *anthill);
+t_dijkstra		*refresh_tab(t_dijkstra *tab, t_anthill *anthill);
 
 void			debugger(t_path *routes, t_anthill *anthill, char *name);
 #endif
