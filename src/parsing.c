@@ -6,14 +6,11 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/06 13:17:46 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 17:19:49 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
-
-//receives char *, hash room, check if repetition
-//creates adjency list
 
 int				next_line(char *str, int i)
 {
@@ -24,67 +21,16 @@ int				next_line(char *str, int i)
 	return (i + 1);
 }
 
-static void		init_inter_nodes(t_anthill *anthill)
+static void		fill_anthill_int(t_anthill *anthill, t_data *data)
 {
-	int			i;
-
-	i = -1;
-	while (++i < NB_ROOM)
-	{
-		anthill->inter_nodes[i] = push_int(anthill->inter_nodes[i], i + NB_ROOM);
-		anthill->inter_nodes[i + NB_ROOM] = push_int(anthill->inter_nodes[i + NB_ROOM], i);
-	}
+	anthill->start = search_in_table(data->start_room,
+		anthill->rooms, anthill->nb_room);
+	anthill->end = search_in_table(data->end_room, anthill->rooms,
+		anthill->nb_room);
+	anthill->ants = data->ants;
 }
 
-static void		fill_nodes(t_anthill *anthill, int node, int connecting)
-{
-		NODES[node] = push_int(NODES[node], connecting);
-		NODES[connecting] = push_int(NODES[connecting], node);
-		anthill->inter_nodes[node] = push_int(anthill->inter_nodes[node], connecting + NB_ROOM);
-		anthill->inter_nodes[connecting] = push_int(anthill->inter_nodes[connecting], node + NB_ROOM);
-		anthill->inter_nodes[node + NB_ROOM] = push_int(anthill->inter_nodes[node + NB_ROOM], connecting);
-		anthill->inter_nodes[connecting + NB_ROOM] = push_int(anthill->inter_nodes[connecting + NB_ROOM], node);
-}
-
-//dynamic string to hold the word
-//reset size to 0 to write new
-//use push_str_nchar with size of room name
-
-t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
-					t_dstring *word)
-{
-	int			j;
-	int			node;
-	int			connecting;
-
-	init_inter_nodes(anthill);
-	while (str[i])
-	{
-		while (str[i] == '#')
-			i = next_line(str, i);
-		if (!str[i])
-			break ;
-		j = i;
-		while (str[j] != '-')
-			j++;
-		word = push_str_nchar(word, str + i, j - i);
-		node = search_in_table(word->str, ROOMS, NB_ROOM);
-		j++;
-		i = j;
-		while (str[j] != '\n' && str[j])
-			j++;
-		word->size = 0;
-		word = push_str_nchar(word, str + i, j - i);
-		connecting = search_in_table(word->str, ROOMS, NB_ROOM);
-		fill_nodes(anthill, node, connecting);
-		word->size = 0;
-		i = next_line(str, i);
-	}
-	delete_dstring(word);
-	return (anthill);
-}
-
-t_anthill		*parser(char *str, t_anthill *anthill, t_data *data)
+t_anthill		*parser(char *str, t_anthill *anth, t_data *data)
 {
 	int			i;
 	int			j;
@@ -92,7 +38,7 @@ t_anthill		*parser(char *str, t_anthill *anthill, t_data *data)
 
 	i = 0;
 	if (!(word = create_dstring(5, "")))
-		return (NULL); //free anthill
+		return (NULL);
 	while (str[i])
 	{
 		i = next_line(str, i);
@@ -105,12 +51,10 @@ t_anthill		*parser(char *str, t_anthill *anthill, t_data *data)
 			break ;
 		word = push_str_nchar(word, str + i, j - i);
 		word->size = 0;
-		if (!(ROOMS = put_in_table(word->str, ROOMS, data->rooms)))
-			return (NULL); //free anthill
+		if (!(anth->rooms = put_in_table(word->str, anth->rooms, data->rooms)))
+			return (NULL);
 	}
-	anthill->start = search_in_table(data->start_room, ROOMS, NB_ROOM);
-	anthill->end = search_in_table(data->end_room, ROOMS, NB_ROOM);
-	anthill = handle_tubes(anthill, str, i, word);
-	anthill->ants = data->ants;
-	return (anthill);
+	anth = handle_tubes(anth, str, i, word);
+	fill_anthill_int(anth, data);
+	return (anth);
 }
