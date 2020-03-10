@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 12:03:44 by sadahan           #+#    #+#             */
-/*   Updated: 2020/02/25 17:30:43 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 19:18:13 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@
 # include "./libft/libft.h"
 # include "dynamic.h"
 
-typedef struct      s_file_data
+typedef struct		s_file_data
 {
-    int             start;
-    int             end;
-    int             tubes;
-    int             rooms;
-    int             ants;
-    char            *start_room;
-    char            *end_room;
-}                   t_data;
+	int				start;
+	int				end;
+	int				tubes;
+	int				rooms;
+	int				ants;
+	char			*start_room;
+	char			*end_room;
+}					t_data;
 
-int                 check_ant_number(char *file, t_data *data);
+int					check_ant_number(char *file, t_data *data);
 int					check_command(t_data *data, char *file);
-int                 check_tubes_rooms(t_data *data, char *file);
+int					check_tubes_rooms(t_data *data, char *file);
 int					check_file(char *file, t_data *data);
 char				*read_file(char *str);
 #endif
