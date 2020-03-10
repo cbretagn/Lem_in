@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 15:42:11 by cbretagn          #+#    #+#              #
-#    Updated: 2018/11/22 15:47:16 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/03/10 18:21:44 by sadahan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ $(NAME): $(OBJ)
 	ar rc $@ $^
 
 %.o: %.c
-	gcc -c -o $@ $^ $(CFLAGS) -I libft.h
+	clang -c -o $@ $^ $(CFLAGS) -I libft.h
 clean :
 	rm -f $(OBJ)
 
