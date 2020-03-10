@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 11:13:09 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/10 13:57:19 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 14:54:54 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int		bfs_ek1(t_anthill *a, int **res, int *parent, int **cap)
 	return (0);
 }
 
-static int		bfs_paths(t_anthill *a, int **res, int *parent)
+static int		bfs_paths1(t_anthill *a, int **res, int *parent)
 {
 	t_pile		*queue;
 	int			u;
@@ -68,7 +68,7 @@ static int		bfs_paths(t_anthill *a, int **res, int *parent)
 	return (0);
 }
 
-static t_path	*save_paths(t_anthill *a, int **res, t_path *path)
+static t_path	*save_paths1(t_anthill *a, int **res, t_path *path)
 {
 	int			i;
 	int			u;
@@ -77,7 +77,7 @@ static t_path	*save_paths(t_anthill *a, int **res, t_path *path)
 
 	if (!(parent = init_parent(a->nb_room * 2)))
 		exit(-2);
-	while (bfs_paths(a, res, parent))
+	while (bfs_paths1(a, res, parent))
 	{
 		i = 0;
 		v = a->end;
@@ -132,7 +132,7 @@ t_path			*edmonds_karp1(t_anthill *a)
 		|| !(parent = init_parent(a->nb_room * 2)))
 		exit(-2);
 	run_bfs1(a, res, parent, cap);
-	path = save_paths(a, res, path);
+	path = save_paths1(a, res, path);
 	path = reverse_paths(path);
 	return (path);
 }

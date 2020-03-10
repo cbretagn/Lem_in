@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 13:55:36 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 15:00:01 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int				main(int argc, char **argv)
 	ft_putendl(graph);
 	// if (lines <= lines1 && lines <= lines2)
 	// {
-	// 	print_ants(anthill, routes);
+		// print_ants(anthill, routes);
 		// printf("%d", lines);
 	// }
 	// else if (lines1 <= lines && lines1 <= lines2)

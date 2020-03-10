@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/03/10 13:23:37 by sadahan          ###   ########.fr        #
+#    Updated: 2020/03/10 14:40:33 by sadahan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ OBJ			= $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 LIB_PATH	= libft/libft.a
 
-CC			= gcc
+CC			= clang
 
 CFLAGS		= -Wall -Wextra -g -fsanitize=address,undefined
 

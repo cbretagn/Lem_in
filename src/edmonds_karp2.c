@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:17:20 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/10 13:57:18 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 15:02:15 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int		bfs_ek2(t_anthill *a, int **res, int *parent)
 	return (0);
 }
 
-static int		bfs_paths(t_anthill *a, int **res, int *parent)
+static int		bfs_paths2(t_anthill *a, int **res, int *parent)
 {
 	t_pile		*queue;
 	int			u;
@@ -68,17 +68,28 @@ static int		bfs_paths(t_anthill *a, int **res, int *parent)
 	return (0);
 }
 
-static t_path	*save_paths(t_anthill *a, int **res, t_path *path)
+void		update_residual_graph(int v, t_anthill *a, int **res)
+{
+	int	j;
+
+	j = -1;
+	if (v != a->start)
+	{
+		while (++j < a->nb_room)
+			res[v][j] = 1;
+	}
+}
+
+static t_path	*save_paths2(t_anthill *a, int **res, t_path *path)
 {
 	int			i;
 	int			u;
 	int			v;
 	int			*parent;
-	int			j;
 
 	if (!(parent = init_parent(a->nb_room)))
 		exit(-2);
-	while (bfs_paths(a, res, parent))
+	while (bfs_paths2(a, res, parent))
 	{
 		i = 0;
 		v = a->end;
@@ -92,23 +103,18 @@ static t_path	*save_paths(t_anthill *a, int **res, t_path *path)
 			u = parent[v];
 			res[u][v] = 1;
 			v = u;
-			j = -1;
-			if (v != a->start)
-			{
-				while (++j < a->nb_room)
-					res[v][j] = 1;
-			}
+		update_residual_graph(v, a, res);
 		}
 		update_paths(path, v, i);
 	}
 	return (path);
 }
 
-static void			run_bfs2(t_anthill *a, int **res, int *parent)
+static void		run_bfs2(t_anthill *a, int **res, int *parent)
 {
-	int				u;
-	int				v;
-	
+	int			u;
+	int			v;
+
 	u = 0;
 	while (bfs_ek2(a, res, parent))
 	{
@@ -137,7 +143,7 @@ t_path			*edmonds_karp2(t_anthill *a)
 		|| !(parent = init_parent(a->nb_room)))
 		exit(-2);
 	run_bfs2(a, res, parent);
-	path = save_paths(a, res, path);
+	path = save_paths2(a, res, path);
 	path = reverse_paths(path);
 	return (path);
 }
