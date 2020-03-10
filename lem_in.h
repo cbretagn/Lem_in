@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 18:05:25 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 19:06:37 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,8 @@ int				nb_path_to_use(t_path *routes);
 
 t_dijkstra		*init_dijkstra_tab(t_dijkstra *tab, t_anthill *anthill);
 t_dijkstra		*refresh_tab(t_dijkstra *tab, t_anthill *anthill);
+
+t_path			*find_best_routes(t_anthill *anthill, t_path *routes_djk);
 
 void			debugger(t_path *routes, t_anthill *anthill, char *name);
 #endif
