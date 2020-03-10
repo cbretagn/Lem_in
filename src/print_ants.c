@@ -6,13 +6,14 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:53:53 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 14:59:31 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 17:17:20 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-static t_dstring	*display_swarm(t_ants *swarm, t_anthill *anthill, t_dstring *s)
+static t_dstring	*display_swarm(t_ants *swarm, t_anthill *anthill,
+							t_dstring *s)
 {
 	int		i;
 	char	*tmp;
@@ -27,15 +28,7 @@ static t_dstring	*display_swarm(t_ants *swarm, t_anthill *anthill, t_dstring *s)
 		if (swarm->room[i] == anthill->end && swarm->curr[i] == -2)
 			continue ;
 		if (swarm->curr[i] != -1 && swarm->path[i] != -1)
-		{
-			s = push_str(s, "L");
-			tmp = ft_itoa(i + 1);
-			s = push_str(s, tmp);
-			ft_strdel(&tmp);
-			s = push_str(s, "-");
-			s = push_str(s, anthill->rooms[swarm->room[i]]);
-			s = push_str(s, " ");
-		}
+			s = push_ant_str(s, i, swarm, anthill);
 		if (swarm->room[i] == anthill->end)
 			swarm->curr[i] = -2;
 	}
@@ -44,7 +37,8 @@ static t_dstring	*display_swarm(t_ants *swarm, t_anthill *anthill, t_dstring *s)
 	return (s);
 }
 
-static void		push_ant(t_ants *swarm, t_path *routes, t_anthill *anthill, int i)
+static void			push_ant(t_ants *swarm, t_path *routes,
+						t_anthill *anthill, int i)
 {
 	swarm->curr[i] += 1;
 	swarm->room[i] = routes->tab[swarm->path[i]]->tab[swarm->curr[i]];
@@ -52,7 +46,7 @@ static void		push_ant(t_ants *swarm, t_path *routes, t_anthill *anthill, int i)
 		swarm->arrived += 1;
 }
 
-static t_ants	*init_table(t_ants *swarm, int size)
+static t_ants		*init_table(t_ants *swarm, int size)
 {
 	int		i;
 
@@ -76,7 +70,8 @@ static t_ants	*init_table(t_ants *swarm, int size)
 	return (swarm);
 }
 
-static void		push_in_path(t_path *routes, t_ants *swarm, t_anthill *anthill, int i)
+static void			push_in_path(t_path *routes, t_ants *swarm,
+						t_anthill *anthill, int i)
 {
 	int		j;
 
@@ -99,7 +94,7 @@ static void		push_in_path(t_path *routes, t_ants *swarm, t_anthill *anthill, int
 	}
 }
 
-void			print_ants(t_anthill *anthill, t_path *routes)
+void				print_ants(t_anthill *anthill, t_path *routes)
 {
 	t_ants		*swarm;
 	int			i;

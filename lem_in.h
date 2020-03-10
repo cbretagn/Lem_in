@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 16:38:46 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 17:13:08 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,8 @@ t_path			*get_direct_path(t_path *routes, t_anthill *anthill);
 t_path			*get_real_routes(t_path *routes, t_anthill *anthill);
 
 void			print_ants(t_anthill *anthill, t_path *routes);
+t_dstring		*push_ant_str(t_dstring *s, int nb, t_ants *swarm,
+						t_anthill *anthill);
 int				nb_path_to_use(t_path *routes);
 
 t_dijkstra		*init_dijkstra_tab(t_dijkstra *tab, t_anthill *anthill);
