@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 16:38:46 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 17:13:31 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ char			**put_in_table(char *str, char **tab, int size);
 int				search_in_table(char *str, char **tab, int size);
 
 t_anthill		*parser(char *str, t_anthill *anthill, t_data *data);
+t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
+					t_dstring *word);
 
 t_dynode		*create_dynode(int capacity);
 t_dynode		*push_int(t_dynode *node, int nb);
