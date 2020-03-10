@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:53:53 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 17:17:20 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:37:19 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static t_dstring	*display_swarm(t_ants *swarm, t_anthill *anthill,
 
 	i = -1;
 	tmp = ft_itoa(swarm->nb_lines);
+	s = push_str(s, "\033[1;36m");
 	s = push_str(s, tmp);
+	s = push_str(s, "\033[0m");
 	ft_strdel(&tmp);
 	s = push_str(s, " ");
 	while (++i < anthill->ants)

@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 13:59:23 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 17:26:10 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 18:40:00 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,14 @@ t_dstring	*push_ant_str(t_dstring *s, int nb, t_ants *swarm,
 	s = push_str(s, tmp);
 	ft_strdel(&tmp);
 	s = push_str(s, "-");
-	s = push_str(s, anthill->rooms[swarm->room[nb]]);
+	if (swarm->room[nb] == anthill->end)
+	{
+		s = push_str(s, "\033[1;32m");
+		s = push_str(s, anthill->rooms[swarm->room[nb]]);
+		s = push_str(s, "\033[0m");
+	}
+	else
+		s = push_str(s, anthill->rooms[swarm->room[nb]]);
 	s = push_str(s, " ");
 	return (s);
 }
