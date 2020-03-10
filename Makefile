@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/03/05 16:47:22 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/03/05 17:57:37 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRC_NAME	= parsing.c\
 			  get_real_route.c\
 			  print_ants.c\
 			  utility_print_ants.c\
-			  handling_direct_routes.c
+			  handling_direct_routes.c\
+			  debugger.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)
 

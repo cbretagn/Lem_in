@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/04 16:19:40 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/05 17:58:51 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,20 @@ int				main(int argc, char **argv)
 	routes = get_direct_path(routes, anthill);
 	routes = get_nb_ants(routes, anthill->ants);
 	routes = get_real_routes(routes, anthill);
+	debugger(routes, anthill, "log_file_routes");
 	if (anthill)
 	{
 		routes1 = edmonds_karp1(anthill2);
 		routes1 = get_nb_ants(routes1, anthill2->ants);
 		lines1 = routes1->path_length[0] + routes1->nb_ants[0] - 1;
+		debugger(routes1, anthill, "log_file_routes1");
 	}
 	if (anthill2)
 	{
 		routes2 = edmonds_karp2(anthill);
 		routes2 = get_nb_ants(routes2, anthill->ants);
 		lines2 = routes2->path_length[0] + routes2->nb_ants[0] - 1;
+		debugger(routes2, anthill, "log_file_routes2");
 	}
 	int lines;
 	lines = nb_lines(routes);

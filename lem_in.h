@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/05 16:45:42 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/05 17:59:17 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,4 +181,5 @@ t_path			*get_real_routes(t_path *routes, t_anthill *anthill);
 void			print_ants(t_anthill *anthill, t_path *routes);
 int				nb_path_to_use(t_path *routes);
 
+void			debugger(t_path *routes, t_anthill *anthill, char *name);
 #endif
