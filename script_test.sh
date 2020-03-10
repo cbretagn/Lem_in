@@ -38,23 +38,28 @@ do
 			exit
 			;;
 		1) 
-			ret=`./generator --flow-one > test.txt && ./lem-in test.txt`
+			./generator --flow-one > test.txt && ./lem-in test.txt | wc -l > var.txt
+			read ret < var.txt
 			map="flow-one"
 			;;
 		2) 
-			ret=`./generator --flow-ten > test.txt && ./lem-in test.txt`
+			./generator --flow-ten > test.txt && ./lem-in test.txt | wc -l > var.txt
+			read ret < var.txt
 			map="flow-ten"
 			;;
 		3) 
-			ret=`./generator --flow-thousand > test.txt && ./lem-in test.txt`
+			./generator --flow-thousand > test.txt && ./lem-in test.txt | wc -l > var.txt
+			read ret < var.txt
 			map="flow-thousand"
 			;;
 		4) 
-			ret=`./generator --big > test.txt && ./lem-in test.txt`
+			./generator --big > test.txt && ./lem-in test.txt | wc -l > var.txt
+			read ret < var.txt
 			map="big"
 			;;
 		5) 
-			ret=`./generator --big-superposition > test.txt && ./lem-in test.txt`
+			./generator --big-superposition > test.txt && ./lem-in test.txt | wc -l > var.txt
+			read ret < var.txt
 			map="big-superposition"
 			;;
 		*) 
@@ -62,19 +67,19 @@ do
 			exit
 			;;
 	esac
-	# txt_l=`wc -l test.txt | tr -dc '0-9'`
+	txt_l=`wc -l test.txt | tr -dc '0-9'`
 	required=`sed '2!d' test.txt | tr -dc '0-9'`
-	# ((total = $ret - 1 - $txt_l))
-	# ((diff = $total - $required))
-		((diff = $ret - $required))
+	((total = $ret - 1 - $txt_l))
+	((diff = $total - $required))
+		# ((diff = $ret - $required))
 	if [ $diff -le 3 ]
 	then
-		echo -e "\033[1;32m$ret vs $required\033[0m --> $diff"
+		echo -e "\033[1;32m$total vs $required\033[0m --> $diff"
 	elif [ $diff -le 10 ]
 	then
-		echo -e "\033[1;33m$ret vs $required\033[0m --> $diff"
+		echo -e "\033[1;33m$total vs $required\033[0m --> $diff"
 	else
-		echo -e "\033[1;31m$ret vs $required\033[0m --> $diff"
+		echo -e "\033[1;31m$total vs $required\033[0m --> $diff"
 	fi
 	if [ -z $min ] || [ $diff -lt $min ]
 	then

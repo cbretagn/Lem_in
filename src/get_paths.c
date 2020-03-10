@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 16:41:09 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/04 15:27:26 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 12:49:45 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			get_dist(int node, int to, int from, t_anthill *anthill)
 	i = -1;
 	while (++i < anthill->connectors[node]->size)
 	{
-		if (anthill->connectors[node]->tab[i].name == to 
+		if (anthill->connectors[node]->tab[i].name == to
 				&& anthill->connectors[node]->tab[i].from == from)
 			return (anthill->connectors[node]->tab[i].dist);
 	}
@@ -43,7 +43,7 @@ t_dynode	*fetch_routes(t_dynode *path, t_anthill *anthill, int **matrix,
 		dist = INT_MAX;
 		while (++i < anthill->nb_room)
 		{
-			if (matrix[node][i] != -1 && matrix[i][node] == -1 
+			if (matrix[node][i] != -1 && matrix[i][node] == -1
 					&& get_dist(node, i, matrix[node][i], anthill) < dist)
 			{
 				from = matrix[node][i];

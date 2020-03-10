@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/06 11:19:17 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 12:40:21 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct	s_anthill
 	int			end;
 	int			lines;
 	t_dynode	**nodes;
+	t_dynode	**inter_nodes;
 	t_connector	**connectors;
 }				t_anthill;
 
@@ -167,6 +168,7 @@ int				**init_mat_capacity(t_anthill *a);
 t_path			*edmonds_karp1(t_anthill *a);
 t_path			*edmonds_karp2(t_anthill *a);
 int				*init_parent(int size);
+t_path			*reverse_paths(t_path *path);
 void			add_to_top(t_pile *pile, int data);
 t_pile			*init_pile(int data);
 int				del_pile(t_pile *pile);

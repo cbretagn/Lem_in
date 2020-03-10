@@ -6,14 +6,14 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 14:16:14 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/06 11:18:08 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 12:42:18 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 #include <limits.h>
 
-int	**init_mat_capacity(t_anthill *a)
+int			**init_mat_capacity(t_anthill *a)
 {
 	int		**m;
 	int		i;
@@ -21,7 +21,7 @@ int	**init_mat_capacity(t_anthill *a)
 
 	i = -1;
 	if (!(m = (int **)malloc(sizeof(int *) * a->nb_room * 2)))
-		exit (-2);
+		exit(-2);
 	while (++i < a->nb_room * 2)
 	{
 		if (!(m[i] = (int *)malloc(sizeof(int) * a->nb_room * 2)))
@@ -34,9 +34,9 @@ int	**init_mat_capacity(t_anthill *a)
 		else
 		{
 			j = -1;
-			while (++j < a->nodes[i]->size)
-				if (a->nodes[i]->tab[j] != i - a->nb_room)
-					m[i][a->nodes[i]->tab[j]] = 1;
+			while (++j < a->inter_nodes[i]->size)
+				if (a->inter_nodes[i]->tab[j] != i - a->nb_room)
+					m[i][a->inter_nodes[i]->tab[j]] = 1;
 		}
 	}
 	m[a->start][a->start + a->nb_room] = MAX_ANT;
@@ -46,7 +46,7 @@ int	**init_mat_capacity(t_anthill *a)
 	return (m);
 }
 
-int	**init_matrice(int size, int nb)
+int			**init_matrice(int size, int nb)
 {
 	int		**m;
 	int		i;
@@ -54,7 +54,7 @@ int	**init_matrice(int size, int nb)
 
 	i = -1;
 	if (!(m = (int **)malloc(sizeof(int *) * size)))
-		exit (-2);
+		exit(-2);
 	while (++i < size)
 	{
 		if (!(m[i] = (int *)malloc(sizeof(int) * size)))
@@ -66,10 +66,10 @@ int	**init_matrice(int size, int nb)
 	return (m);
 }
 
-int		*init_parent(int size)
+int			*init_parent(int size)
 {
-	int *parent;
-	int	i;
+	int		*parent;
+	int		i;
 
 	i = -1;
 	if (!(parent = (int *)malloc(sizeof(int) * size)))
@@ -77,4 +77,25 @@ int		*init_parent(int size)
 	while (++i < size)
 		parent[i] = -1;
 	return (parent);
+}
+
+t_path		*reverse_paths(t_path *path)
+{
+	t_path	*rpath;
+	int		i;
+	int		j;
+
+	if (!(rpath = create_path_tab(path->size)))
+		exit(-2);
+	rpath->size = path->size;
+	i = -1;
+	while (++i < path->size)
+	{
+		rpath->path_length[i] = path->path_length[i];
+		j = path->path_length[i] + 1;
+		while (j--)
+			rpath->tab[i] = push_int(rpath->tab[i], path->tab[i]->tab[j]);
+	}
+	free(path);
+	return (rpath);
 }

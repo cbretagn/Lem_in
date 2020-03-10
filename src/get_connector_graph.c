@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:21:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/25 14:11:48 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 12:48:42 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ t_anthill			*create_connector_graph(t_anthill *anthill)
 			while (++j < NODES[i]->size)
 				anthill = find_next_connector(NODES[i]->tab[j], anthill, i);
 		}
-			// it's a connector, create t_vertex at CONNECTORS[i] and fill it
-			// w/ all the vertices it's connected to
 	}
 	return (anthill);
 }
