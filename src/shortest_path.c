@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 15:07:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 18:04:20 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 18:20:33 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@ t_path			*get_route(t_path *routes, t_dijkstra *tab,
 						int end, t_anthill *anthill)
 {
 	int		i;
-	int		length;
-	int		j;
-	int		k;
 
 	if (tab[end].prev < 0)
 		return (routes);
