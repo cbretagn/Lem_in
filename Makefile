@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/03/10 14:40:33 by sadahan          ###   ########.fr        #
+#    Updated: 2020/03/10 15:04:11 by sadahan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC_NAME	= parsing.c\
 			  print_ants.c\
 			  utility_print_ants.c\
 			  handling_direct_routes.c\
+			  debugger.c\
 			  utility_path_ek.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)

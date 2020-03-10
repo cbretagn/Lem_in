@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:53:53 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/04 15:46:32 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 14:59:31 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void		push_in_path(t_path *routes, t_ants *swarm, t_anthill *anthill, int
 	j = -1;
 	while (++j < swarm->path_to_use && swarm->arrived != anthill->ants)
 	{
-		if (routes->nb_ants[j] > 0)
+		if (routes->nb_ants[j] > 0 || routes->tab[j]->tab[1] == anthill->end)
 		{
 			swarm->path[i] = j;
 			swarm->curr[i] = 1;
