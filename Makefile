@@ -6,7 +6,11 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2020/03/10 17:12:17 by sadahan          ###   ########.fr        #
+=======
+#    Updated: 2020/03/10 17:12:25 by cbretagn         ###   ########.fr        #
+>>>>>>> 8f63f85aad6773eb90d3c4e9dfbae4708da66bf2
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +44,9 @@ SRC_NAME	= parsing.c\
 			  handling_direct_routes.c\
 			  debugger.c\
 			  shortest_path_util.c\
-			  utility_path_ek.c\
-			  handle_tubes.c
+			  handle_tubes.c\
+			  print_ants_util.c\
+			  utility_path_ek.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)
 
