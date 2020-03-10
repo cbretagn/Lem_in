@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 13:08:15 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 13:55:36 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int				main(int argc, char **argv)
 	t_data		*data;
 	t_path		*routes = NULL;
 	t_path		*routes1 = NULL;
-	// t_path		*routes2 = NULL;
+	t_path		*routes2 = NULL;
 	int			i;
 	int			j;
 	int			lines1 = 0;
-	// int			lines2 = 0;
+	int			lines2 = 0;
 	
 	i = -1;
 	j = -1;
@@ -57,27 +57,26 @@ int				main(int argc, char **argv)
 		routes1 = edmonds_karp1(anthill);
 		routes1 = get_nb_ants(routes1, anthill->ants);
 		lines1 = routes1->path_length[0] + routes1->nb_ants[0] - 1;
-		// routes2 = edmonds_karp2(anthill);
-		// routes2 = get_nb_ants(routes2, anthill->ants);
-		// lines2 = routes2->path_length[0] + routes2->nb_ants[0] - 1;
+		routes2 = edmonds_karp2(anthill);
+		routes2 = get_nb_ants(routes2, anthill->ants);
+		lines2 = routes2->path_length[0] + routes2->nb_ants[0] - 1;
 	}
 	int lines;
 	lines = nb_lines(routes);
 	ft_putendl(graph);
-	if (lines <= lines1 )//&& lines <= lines2)
-	{
-		print_ants(anthill, routes);
-		// printf("%d", lines);
-	}
-	else
-	//  if (lines1 <= lines && lines1 <= lines2)
+	// if (lines <= lines1 && lines <= lines2)
 	// {
-		print_ants(anthill, routes1);
+	// 	print_ants(anthill, routes);
+		// printf("%d", lines);
+	// }
+	// else if (lines1 <= lines && lines1 <= lines2)
+	// {
+		// print_ants(anthill, routes1);
 		// printf("%d", lines1);
 	// }
 	// else
 	// {
-	// 	print_ants(anthill, routes2);
+		print_ants(anthill, routes2);
 		// printf("%d", lines2);
 	// }
 	free_data(data);

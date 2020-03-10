@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 14:16:14 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/10 12:42:18 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 13:30:54 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,12 @@ int			*init_parent(int size)
 	return (parent);
 }
 
-t_path		*reverse_paths(t_path *path)
+void		reset_parent(int *parent, int size, t_anthill *a)
 {
-	t_path	*rpath;
 	int		i;
-	int		j;
 
-	if (!(rpath = create_path_tab(path->size)))
-		exit(-2);
-	rpath->size = path->size;
 	i = -1;
-	while (++i < path->size)
-	{
-		rpath->path_length[i] = path->path_length[i];
-		j = path->path_length[i] + 1;
-		while (j--)
-			rpath->tab[i] = push_int(rpath->tab[i], path->tab[i]->tab[j]);
-	}
-	free(path);
-	return (rpath);
+	while (++i < size)
+		parent[i] = -1;
+	parent[a->start] = -2;
 }

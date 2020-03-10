@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 12:40:21 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 13:56:32 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,9 @@ void			add_to_top(t_pile *pile, int data);
 t_pile			*init_pile(int data);
 int				del_pile(t_pile *pile);
 int				del_bottom(t_pile *pile);
+void			update_paths(t_path *path, int v, int i);
+void			reset_parent(int *parent, int size, t_anthill *a);
+t_pile			*proceed(int v, t_anthill *a, t_pile *queue);
 
 int				is_visited(int node, t_dynode *list);
 void			print_direct(t_anthill *anthill);
