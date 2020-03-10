@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 14:49:32 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 15:16:57 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ int				del_bottom(t_pile *pile);
 void			update_paths(t_path *path, int v, int i);
 void			reset_parent(int *parent, int size, t_anthill *a);
 t_pile			*proceed(int v, t_anthill *a, t_pile *queue);
+void			update_residual_graph(int v, t_anthill *a, int **res);
 
 int				is_visited(int node, t_dynode *list);
 void			print_direct(t_anthill *anthill);

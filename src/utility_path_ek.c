@@ -6,13 +6,13 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:23:46 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/10 13:57:22 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 15:20:01 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-void			update_paths(t_path *path, int v, int i)
+void		update_paths(t_path *path, int v, int i)
 {
 	path->tab[path->size] = push_int(path->tab[path->size], v);
 	path->path_length[path->size] = i;
@@ -40,7 +40,19 @@ t_path		*reverse_paths(t_path *path)
 	return (rpath);
 }
 
-t_pile			*proceed(int v, t_anthill *a, t_pile *queue)
+void		update_residual_graph(int v, t_anthill *a, int **res)
+{
+	int		j;
+
+	j = -1;
+	if (v != a->start)
+	{
+		while (++j < a->nb_room)
+			res[v][j] = 1;
+	}
+}
+
+t_pile		*proceed(int v, t_anthill *a, t_pile *queue)
 {
 	if (v != a->end)
 	{

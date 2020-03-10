@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:17:20 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/10 15:02:15 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 15:19:24 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,6 @@ static int		bfs_paths2(t_anthill *a, int **res, int *parent)
 	return (0);
 }
 
-void		update_residual_graph(int v, t_anthill *a, int **res)
-{
-	int	j;
-
-	j = -1;
-	if (v != a->start)
-	{
-		while (++j < a->nb_room)
-			res[v][j] = 1;
-	}
-}
-
 static t_path	*save_paths2(t_anthill *a, int **res, t_path *path)
 {
 	int			i;
@@ -96,14 +84,12 @@ static t_path	*save_paths2(t_anthill *a, int **res, t_path *path)
 		while (v != a->start)
 		{
 			if (v < a->nb_room)
-			{
 				path->tab[path->size] = push_int(path->tab[path->size], v);
-				i++;
-			}
+			i = v < a->nb_room ? i + 1 : i;
 			u = parent[v];
 			res[u][v] = 1;
 			v = u;
-		update_residual_graph(v, a, res);
+			update_residual_graph(v, a, res);
 		}
 		update_paths(path, v, i);
 	}
