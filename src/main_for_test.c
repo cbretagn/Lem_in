@@ -6,17 +6,17 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 15:05:20 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 18:19:54 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-static char		*create_file(t_data *data, char *str)
+static char			*create_file(t_data *data, char *str)
 {
-	char		*file;
-	int			x;
-	char		*graph;
+	char			*file;
+	int				x;
+	char			*graph;
 
 	if (!(file = read_file(str)))
 		exit(-2);
@@ -26,28 +26,31 @@ static char		*create_file(t_data *data, char *str)
 	return (graph);
 }
 
-int				main(int argc, char **argv)
+static t_anthill	*parse_anthill(char *graph, t_data *data, t_anthill *anthill)
 {
-	t_anthill	*anthill;
-	char		*graph;
-	t_data		*data;
-	t_path		*routes = NULL;
-	t_path		*routes1 = NULL;
-	t_path		*routes2 = NULL;
-	int			i;
-	int			j;
-	int			lines1 = 0;
-	int			lines2 = 0;
+	anthill = create_anthill(data->rooms);
+	anthill = parser(graph, anthill, data);
+	anthill = create_connector_graph(anthill);
+	return (anthill);
+}
+
+int					main(int argc, char **argv)
+{
+	t_anthill		*anthill = NULL;
+	char			*graph;
+	t_data			*data;
+	t_path			*routes = NULL;
+	t_path			*routes1 = NULL;
+	t_path			*routes2 = NULL;
+	int				lines1 = 0;
+	int				lines2 = 0;
 	
-	i = -1;
-	j = -1;
 	if (argc != 2 || !(data = init_struct()))
 		return (0);
 	if (!(graph = create_file(data, argv[1])))
 		return (0);
-	anthill = create_anthill(data->rooms);
-	anthill = parser(graph, anthill, data);
-	anthill = create_connector_graph(anthill);
+	if (!(anthill = parse_anthill(graph, data, anthill)))
+		return (0);
 	routes = next_shortest_path(anthill);
 	routes = get_direct_path(routes, anthill);
 	routes = get_nb_ants(routes, anthill->ants);
@@ -67,21 +70,18 @@ int				main(int argc, char **argv)
 	int lines;
 	lines = nb_lines(routes);
 	ft_putendl(graph);
-	// if (lines <= lines1 && lines <= lines2)
-	// {
-		// print_ants(anthill, routes);
-		// printf("%d", lines);
-	// }
-	// else if (lines1 <= lines && lines1 <= lines2)
-	// {
-		// print_ants(anthill, routes1);
-		// printf("%d", lines1);
-	// }
-	// else
-	// {
+	if (lines <= lines1 && lines <= lines2)
+	{
+		print_ants(anthill, routes);
+	}
+	else if (lines1 <= lines && lines1 <= lines2)
+	{
+		print_ants(anthill, routes1);
+	}
+	else
+	{
 		print_ants(anthill, routes2);
-		// printf("%d", lines2);
-	// }
+	}
 	free_data(data);
 	ft_strdel(&graph);
 	return (0);
