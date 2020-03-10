@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_real_route.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:04:45 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/28 16:20:28 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 16:22:44 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static int			find_from(int start, int to, t_anthill *anthill)
 	return (ret);
 }
 
-static t_dynode		*get_full_direct(t_dynode *original, t_anthill *anthill, t_dynode *new)
+static t_dynode		*get_full_direct(t_dynode *original, t_anthill *anthill,
+						t_dynode *new)
 {
 	int		push;
 
@@ -61,7 +62,7 @@ static t_dynode		*get_full_direct(t_dynode *original, t_anthill *anthill, t_dyno
 	return (new);
 }
 
-static t_dynode		*get_full_route(t_dynode *original, int size, 
+static t_dynode		*get_full_route(t_dynode *original, int size,
 						t_anthill *anthill, t_dynode *new)
 {
 	int		i;
@@ -99,7 +100,7 @@ t_path				*get_real_routes(t_path *routes, t_anthill *anthill)
 		if (routes->tab[i]->tab[0] == DIRECT)
 			new_route = get_full_direct(routes->tab[i], anthill, new_route);
 		else
-			new_route = get_full_route(routes->tab[i], routes->tab[i]->size, 
+			new_route = get_full_route(routes->tab[i], routes->tab[i]->size,
 						anthill, new_route);
 		tmp = routes->tab[i];
 		routes->tab[i] = new_route;

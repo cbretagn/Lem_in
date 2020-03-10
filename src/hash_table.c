@@ -6,15 +6,15 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:11:49 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/05 16:54:25 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 16:21:18 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-void				delete_table(char **tab, int size)
+void			delete_table(char **tab, int size)
 {
-	int				i;
+	int			i;
 
 	i = -1;
 	while (++i < size)
@@ -23,11 +23,11 @@ void				delete_table(char **tab, int size)
 	tab = NULL;
 }
 
-long int			hash_fun(char *str)
+long int		hash_fun(char *str)
 {
-	char			c;
-	int				i;
-	long int		hash;
+	char		c;
+	int			i;
+	long int	hash;
 
 	hash = 456;
 	i = -1;
@@ -36,9 +36,9 @@ long int			hash_fun(char *str)
 	return (hash);
 }
 
-char				**put_in_table(char *str, char **tab, int size)
+char			**put_in_table(char *str, char **tab, int size)
 {
-	long int		hash;
+	long int	hash;
 
 	hash = (int)(hash_fun(str) % size);
 	while (tab[hash] != NULL)
@@ -58,10 +58,10 @@ char				**put_in_table(char *str, char **tab, int size)
 	return (tab);
 }
 
-int			search_in_table(char *str, char **tab, int size)
+int				search_in_table(char *str, char **tab, int size)
 {
-	int		hash;
-	int		i;
+	int			hash;
+	int			i;
 
 	i = 0;
 	hash = hash_fun(str) % size;

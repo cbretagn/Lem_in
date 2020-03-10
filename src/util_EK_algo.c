@@ -6,18 +6,34 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 14:16:14 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/10 13:30:54 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 16:28:24 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
-#include <limits.h>
 
-int			**init_mat_capacity(t_anthill *a)
+static void		fill_mat_capacity(t_anthill *a, int i, int **m)
 {
-	int		**m;
-	int		i;
-	int		j;
+	int			j;
+
+	j = -1;
+	while (++j < a->nb_room * 2)
+		m[i][j] = 0;
+	if (i < a->nb_room)
+		m[i][i + a->nb_room] = 1;
+	else
+	{
+		j = -1;
+		while (++j < a->inter_nodes[i]->size)
+			if (a->inter_nodes[i]->tab[j] != i - a->nb_room)
+				m[i][a->inter_nodes[i]->tab[j]] = 1;
+	}
+}
+
+int				**init_mat_capacity(t_anthill *a)
+{
+	int			**m;
+	int			i;
 
 	i = -1;
 	if (!(m = (int **)malloc(sizeof(int *) * a->nb_room * 2)))
@@ -26,18 +42,7 @@ int			**init_mat_capacity(t_anthill *a)
 	{
 		if (!(m[i] = (int *)malloc(sizeof(int) * a->nb_room * 2)))
 			exit(-2);
-		j = -1;
-		while (++j < a->nb_room * 2)
-			m[i][j] = 0;
-		if (i < a->nb_room)
-			m[i][i + a->nb_room] = 1;
-		else
-		{
-			j = -1;
-			while (++j < a->inter_nodes[i]->size)
-				if (a->inter_nodes[i]->tab[j] != i - a->nb_room)
-					m[i][a->inter_nodes[i]->tab[j]] = 1;
-		}
+		fill_mat_capacity(a, i, m);
 	}
 	m[a->start][a->start + a->nb_room] = MAX_ANT;
 	m[a->start + a->nb_room][a->start] = MAX_ANT;
@@ -46,11 +51,11 @@ int			**init_mat_capacity(t_anthill *a)
 	return (m);
 }
 
-int			**init_matrice(int size, int nb)
+int				**init_matrice(int size, int nb)
 {
-	int		**m;
-	int		i;
-	int		j;
+	int			**m;
+	int			i;
+	int			j;
 
 	i = -1;
 	if (!(m = (int **)malloc(sizeof(int *) * size)))
@@ -66,10 +71,10 @@ int			**init_matrice(int size, int nb)
 	return (m);
 }
 
-int			*init_parent(int size)
+int				*init_parent(int size)
 {
-	int		*parent;
-	int		i;
+	int			*parent;
+	int			i;
 
 	i = -1;
 	if (!(parent = (int *)malloc(sizeof(int) * size)))
@@ -79,9 +84,9 @@ int			*init_parent(int size)
 	return (parent);
 }
 
-void		reset_parent(int *parent, int size, t_anthill *a)
+void			reset_parent(int *parent, int size, t_anthill *a)
 {
-	int		i;
+	int			i;
 
 	i = -1;
 	while (++i < size)
