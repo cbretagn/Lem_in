@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 15:07:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 16:42:47 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:04:20 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void			check_neighbours(t_anthill *anthill, t_dijkstra *tab, int curr)
 	int		distance;
 
 	i = -1;
-	while (++i < CONNECTORS[curr]->size)
+	while (++i < anthill->connectors[curr]->size)
 	{
-		next = CONNECTORS[curr]->tab[i].name;
-		distance = CONNECTORS[curr]->tab[i].dist;
+		next = anthill->connectors[curr]->tab[i].name;
+		distance = anthill->connectors[curr]->tab[i].dist;
 		if (tab[next].visited == VISITED || tab[next].visited == NAN
 				|| (curr == anthill->start
-					&& CONNECTORS[curr]->tab[i].name == anthill->end))
+					&& anthill->connectors[curr]->tab[i].name == anthill->end))
 			continue ;
 		else
 		{
