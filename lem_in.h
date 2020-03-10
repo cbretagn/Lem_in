@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 17:24:24 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 17:56:51 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # include <stdlib.h>
 # include "lem_in_checker.h"
 
-# define NB_ROOM anthill->nb_room
-# define ROOMS anthill->rooms
-# define NODES anthill->nodes
-# define CONNECTORS anthill->connectors
+// # define NB_ROOM anthill->nb_room
+// # define ROOMS anthill->rooms
+// # define NODES anthill->nodes
+// # define CONNECTORS anthill->connectors
 # define BASE_DYN_NODES 10
 # define BASE_CONNECTORS 10
 # define VISITED 1

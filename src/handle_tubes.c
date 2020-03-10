@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:13:06 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/10 17:27:13 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 17:48:14 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ static void		fill_nodes(t_anthill *anthill, int node, int connecting)
 		push_int(anthill->inter_nodes[connecting + anthill->nb_room], node);
 }
 
+static int		define_node(t_anthill *anthill, t_dstring *word, char *str,
+					int n)
+{
+	int			node;
+
+	word->size = 0;
+	word = push_str_nchar(word, str, n);
+	node = search_in_table(word->str, anthill->rooms, anthill->nb_room);
+	return (node);
+}
+
 t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
 					t_dstring *word)
 {
@@ -57,17 +68,14 @@ t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
 		j = i;
 		while (str[j] != '-')
 			j++;
-		word = push_str_nchar(word, str + i, j - i);
-		node = search_in_table(word->str, anthill->rooms, anthill->nb_room);
+		node = define_node(anthill, word, str + i, j - i);
 		j++;
 		i = j;
 		while (str[j] != '\n' && str[j])
 			j++;
-		word->size = 0;
-		word = push_str_nchar(word, str + i, j - i);
-		connecting = search_in_table(word->str, anthill->rooms, anthill->nb_room);
+		connecting = define_node(anthill, word, str + i, j - i);
 		fill_nodes(anthill, node, connecting);
-		word->size = 0;
+		// word->size = 0;
 		i = next_line(str, i);
 	}
 	delete_dstring(word);
