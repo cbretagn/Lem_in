@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:34:39 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/25 14:47:12 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 16:54:12 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,23 @@ void			delete_path_tab(t_path *del)
 	del = NULL;
 }
 
-//init tab w/ NAN NOTVIS and start at 0
-//quicksort
-
-int			find_min(t_dijkstra *tab, int size)
+int				find_min(t_dijkstra *tab, int size)
 {
- 	int		ret;
- 	int		dist;
- 	int		i;
+	int		ret;
+	int		dist;
+	int		i;
 
- 	i = -1;
- 	dist = INT_MAX;
- 	while (++i < size)
- 	{
- 		if (tab[i].visited != NOTVIS)
- 			continue ;
+	i = -1;
+	dist = INT_MAX;
+	while (++i < size)
+	{
+		if (tab[i].visited != NOTVIS)
+			continue ;
 		if (tab[i].dist < dist)
- 		{
- 			ret = i;
- 			dist = tab[i].dist;
- 		}
- 	}
- 	return (ret);
+		{
+			ret = i;
+			dist = tab[i].dist;
+		}
+	}
+	return (ret);
 }
