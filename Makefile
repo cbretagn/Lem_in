@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/03/05 17:57:37 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/03/10 14:49:56 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,12 @@ SRC_NAME	= parsing.c\
 			  edmonds_karp.c\
 			  collisions.c\
 			  edmonds_karp2.c\
-			  parsing2.c\
 			  get_real_route.c\
 			  print_ants.c\
 			  utility_print_ants.c\
 			  handling_direct_routes.c\
 			  debugger.c
+			  utility_path_ek.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)
 
@@ -51,7 +51,7 @@ LIB_PATH	= libft/libft.a
 
 CC			= gcc
 
-CFLAGS		= -Wall -Wextra -g3 -fsanitize=address,undefined
+CFLAGS		= -Wall -Wextra -g -fsanitize=address,undefined
 
 .PHONY		: all clean fclean re
 

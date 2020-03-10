@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_EK_algo.c                                     :+:      :+:    :+:   */
+/*   util_ek_algo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 14:16:14 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/05 16:45:24 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 13:30:54 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 #include <limits.h>
 
-int	**init_mat_capacity(t_anthill *a)
+int			**init_mat_capacity(t_anthill *a)
 {
 	int		**m;
 	int		i;
@@ -21,7 +21,7 @@ int	**init_mat_capacity(t_anthill *a)
 
 	i = -1;
 	if (!(m = (int **)malloc(sizeof(int *) * a->nb_room * 2)))
-		exit (-2);
+		exit(-2);
 	while (++i < a->nb_room * 2)
 	{
 		if (!(m[i] = (int *)malloc(sizeof(int) * a->nb_room * 2)))
@@ -29,9 +29,15 @@ int	**init_mat_capacity(t_anthill *a)
 		j = -1;
 		while (++j < a->nb_room * 2)
 			m[i][j] = 0;
-		j = -1;
-		while (++j < a->nodes2[i]->size)
-			m[i][a->nodes2[i]->tab[j]] = 1;
+		if (i < a->nb_room)
+			m[i][i + a->nb_room] = 1;
+		else
+		{
+			j = -1;
+			while (++j < a->inter_nodes[i]->size)
+				if (a->inter_nodes[i]->tab[j] != i - a->nb_room)
+					m[i][a->inter_nodes[i]->tab[j]] = 1;
+		}
 	}
 	m[a->start][a->start + a->nb_room] = MAX_ANT;
 	m[a->start + a->nb_room][a->start] = MAX_ANT;
@@ -40,7 +46,7 @@ int	**init_mat_capacity(t_anthill *a)
 	return (m);
 }
 
-int	**init_matrice(int size, int nb)
+int			**init_matrice(int size, int nb)
 {
 	int		**m;
 	int		i;
@@ -48,7 +54,7 @@ int	**init_matrice(int size, int nb)
 
 	i = -1;
 	if (!(m = (int **)malloc(sizeof(int *) * size)))
-		exit (-2);
+		exit(-2);
 	while (++i < size)
 	{
 		if (!(m[i] = (int *)malloc(sizeof(int) * size)))
@@ -60,10 +66,10 @@ int	**init_matrice(int size, int nb)
 	return (m);
 }
 
-int		*init_parent(int size)
+int			*init_parent(int size)
 {
-	int *parent;
-	int	i;
+	int		*parent;
+	int		i;
 
 	i = -1;
 	if (!(parent = (int *)malloc(sizeof(int) * size)))
@@ -71,4 +77,14 @@ int		*init_parent(int size)
 	while (++i < size)
 		parent[i] = -1;
 	return (parent);
+}
+
+void		reset_parent(int *parent, int size, t_anthill *a)
+{
+	int		i;
+
+	i = -1;
+	while (++i < size)
+		parent[i] = -1;
+	parent[a->start] = -2;
 }

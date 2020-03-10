@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:20:29 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/04 15:51:00 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/06 13:17:46 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,28 @@ int				next_line(char *str, int i)
 	return (i + 1);
 }
 
+static void		init_inter_nodes(t_anthill *anthill)
+{
+	int			i;
+
+	i = -1;
+	while (++i < NB_ROOM)
+	{
+		anthill->inter_nodes[i] = push_int(anthill->inter_nodes[i], i + NB_ROOM);
+		anthill->inter_nodes[i + NB_ROOM] = push_int(anthill->inter_nodes[i + NB_ROOM], i);
+	}
+}
+
+static void		fill_nodes(t_anthill *anthill, int node, int connecting)
+{
+		NODES[node] = push_int(NODES[node], connecting);
+		NODES[connecting] = push_int(NODES[connecting], node);
+		anthill->inter_nodes[node] = push_int(anthill->inter_nodes[node], connecting + NB_ROOM);
+		anthill->inter_nodes[connecting] = push_int(anthill->inter_nodes[connecting], node + NB_ROOM);
+		anthill->inter_nodes[node + NB_ROOM] = push_int(anthill->inter_nodes[node + NB_ROOM], connecting);
+		anthill->inter_nodes[connecting + NB_ROOM] = push_int(anthill->inter_nodes[connecting + NB_ROOM], node);
+}
+
 //dynamic string to hold the word
 //reset size to 0 to write new
 //use push_str_nchar with size of room name
@@ -35,6 +57,7 @@ t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
 	int			node;
 	int			connecting;
 
+	init_inter_nodes(anthill);
 	while (str[i])
 	{
 		while (str[i] == '#')
@@ -53,8 +76,7 @@ t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
 		word->size = 0;
 		word = push_str_nchar(word, str + i, j - i);
 		connecting = search_in_table(word->str, ROOMS, NB_ROOM);
-		NODES[node] = push_int(NODES[node], connecting);
-		NODES[connecting] = push_int(NODES[connecting], node);
+		fill_nodes(anthill, node, connecting);
 		word->size = 0;
 		i = next_line(str, i);
 	}

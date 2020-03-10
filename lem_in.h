@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/05 17:59:17 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 14:49:32 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ typedef struct	s_anthill
 	int			end;
 	int			lines;
 	t_dynode	**nodes;
-	t_dynode	**nodes2;
+	t_dynode	**inter_nodes;
 	t_connector	**connectors;
 }				t_anthill;
 
@@ -168,10 +168,14 @@ int				**init_mat_capacity(t_anthill *a);
 t_path			*edmonds_karp1(t_anthill *a);
 t_path			*edmonds_karp2(t_anthill *a);
 int				*init_parent(int size);
+t_path			*reverse_paths(t_path *path);
 void			add_to_top(t_pile *pile, int data);
 t_pile			*init_pile(int data);
 int				del_pile(t_pile *pile);
 int				del_bottom(t_pile *pile);
+void			update_paths(t_path *path, int v, int i);
+void			reset_parent(int *parent, int size, t_anthill *a);
+t_pile			*proceed(int v, t_anthill *a, t_pile *queue);
 
 int				is_visited(int node, t_dynode *list);
 void			print_direct(t_anthill *anthill);
