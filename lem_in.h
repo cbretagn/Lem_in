@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 14:49:32 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/10 15:44:21 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ char			**put_in_table(char *str, char **tab, int size);
 int				search_in_table(char *str, char **tab, int size);
 
 t_anthill		*parser(char *str, t_anthill *anthill, t_data *data);
-t_anthill		*parser2(char *str, t_anthill *anthill, t_data *data);
 
 t_dynode		*create_dynode(int capacity);
 t_dynode		*push_int(t_dynode *node, int nb);
@@ -151,16 +150,8 @@ int				compute_stop(t_path *routes, int ants);
 
 t_path			*get_nb_ants(t_path *routes, int nb_ants);
 
-void			print_suggestions(t_anthill *anthill);
-t_path			*superposition_path(t_anthill *anthill, int node);
-void			shortest_path_to(t_anthill *anthill, t_dijkstra *tab, int node);
-
-int				**edmond_karps(t_anthill *anthill);
 t_path			*get_paths(t_anthill *anthill, int **matrix);
-t_path			*handle_collision(t_path *routes, t_anthill *anthill);
 t_path			*sort_routes(t_path *routes);
-
-t_dstring		*print_ek(t_anthill *anthill, int **matrix);
 
 int				nb_lines(t_path *routes);
 int				**init_matrice(int size, int nb);
@@ -169,13 +160,16 @@ t_path			*edmonds_karp1(t_anthill *a);
 t_path			*edmonds_karp2(t_anthill *a);
 int				*init_parent(int size);
 t_path			*reverse_paths(t_path *path);
+
 void			add_to_top(t_pile *pile, int data);
 t_pile			*init_pile(int data);
 int				del_pile(t_pile *pile);
 int				del_bottom(t_pile *pile);
+
 void			update_paths(t_path *path, int v, int i);
 void			reset_parent(int *parent, int size, t_anthill *a);
 t_pile			*proceed(int v, t_anthill *a, t_pile *queue);
+void			update_residual_graph(int v, t_anthill *a, int **res);
 
 int				is_visited(int node, t_dynode *list);
 void			print_direct(t_anthill *anthill);
