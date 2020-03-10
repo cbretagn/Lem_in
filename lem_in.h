@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 18:05:25 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 19:05:11 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ t_dynode		*create_dynode(int capacity);
 t_dynode		*push_int(t_dynode *node, int nb);
 void			delete_dynode(t_dynode *node);
 t_anthill		*create_anthill(int size);
+t_dynode		**create_node_tab(int size);
 void			delete_anthill(t_anthill *anthill);
 
 t_connector		*create_connector(int size);

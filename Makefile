@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/03/10 17:47:13 by sadahan          ###   ########.fr        #
+#    Updated: 2020/03/10 19:05:26 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC_NAME	= parsing.c\
 			  debugger.c\
 			  shortest_path_util.c\
 			  handle_tubes.c\
+			  utility_create_struct.c\
 			  utility_path_ek.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)
