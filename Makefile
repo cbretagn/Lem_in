@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/03/10 14:49:56 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/03/10 14:56:33 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC_NAME	= parsing.c\
 			  print_ants.c\
 			  utility_print_ants.c\
 			  handling_direct_routes.c\
-			  debugger.c
+			  debugger.c\
 			  utility_path_ek.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)
@@ -49,7 +49,7 @@ OBJ			= $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 LIB_PATH	= libft/libft.a
 
-CC			= gcc
+CC			= clang
 
 CFLAGS		= -Wall -Wextra -g -fsanitize=address,undefined
 
