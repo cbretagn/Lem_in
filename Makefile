@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/03/10 12:45:51 by sadahan          ###   ########.fr        #
+#    Updated: 2020/03/10 13:16:10 by sadahan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ LIB_PATH	= libft/libft.a
 
 CC			= gcc
 
-CFLAGS		= -Wall -Wextra 
+CFLAGS		= -Wall -Wextra -g -fsanitize=address,undefined
 
 .PHONY		: all clean fclean re
 
