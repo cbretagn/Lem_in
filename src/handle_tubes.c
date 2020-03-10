@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 17:13:06 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/10 17:48:14 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/10 18:17:24 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_anthill		*handle_tubes(t_anthill *anthill, char *str, int i,
 			j++;
 		connecting = define_node(anthill, word, str + i, j - i);
 		fill_nodes(anthill, node, connecting);
-		// word->size = 0;
 		i = next_line(str, i);
 	}
 	delete_dstring(word);
