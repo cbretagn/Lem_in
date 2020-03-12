@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 18:54:39 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/12 18:05:09 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 18:32:53 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ t_path			*find_best_routes(t_anthill *anthill, t_path *routes)
 {
 	int			lines;
 
+	routes = edmonds_karp1(anthill);
+	routes = get_nb_ants(routes, anthill->ants);
 	routes = get_dijkstra_routes(anthill, routes);
 	lines = routes == NULL ? 0 : nb_lines(routes);
 	routes = get_ek1_routes(anthill, routes, lines);
