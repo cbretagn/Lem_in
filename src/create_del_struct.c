@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:09:15 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 19:05:32 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:49:58 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ t_anthill		*create_anthill(int size)
 void			delete_anthill(t_anthill *anthill)
 {
 	int			i;
-	int			co;
+	// int			co;
 
 	i = -1;
-	co = 0;
+	// co = 0;
 	while (++i < anthill->nb_room)
 		ft_strdel(&anthill->rooms[i]);
 	free(anthill->rooms);
@@ -100,17 +100,19 @@ void			delete_anthill(t_anthill *anthill)
 	i = -1;
 	while (++i < anthill->nb_room)
 	{
-		if (anthill->nodes[i]->size > 2)
-			co++;
+		// if (anthill->nodes[i]->size > 2)
+		// 	co++;
 		delete_dynode(anthill->nodes[i]);
 	}
 	i = -1;
-	while (++i < co)
+	while (++i < anthill->nb_room)
 		delete_connector(anthill->connectors[i]);
 	free(anthill->connectors);
 	anthill->connectors = NULL;
 	free(anthill->nodes);
 	anthill->nodes = NULL;
+	free(anthill->inter_nodes);
+	anthill->inter_nodes = NULL;
 	free(anthill);
 	anthill = NULL;
 }

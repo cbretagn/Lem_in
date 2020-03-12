@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/12 15:02:49 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:40:20 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,4 +189,6 @@ t_path				*find_best_routes(t_anthill *anthill, t_path *routes_djk);
 
 int				check_verbose(int argc, char **argv);
 void			debugger(t_path *routes, t_anthill *anthill, char *name);
+
+void				free_path(t_path *routes);
 #endif

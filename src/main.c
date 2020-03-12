@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_for_test.c                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/12 15:01:04 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:47:53 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int					main(int argc, char **argv)
 	routes = find_best_routes(anthill, routes);
 	ft_putendl(graph);
 	print_ants(anthill, routes);
+	delete_anthill(anthill);
+	free_path(routes);
 	free_data(data);
 	ft_strdel(&graph);
 	return (0);

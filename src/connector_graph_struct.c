@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:00:30 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 16:05:09 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:50:59 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ t_connector					*create_connector(int size)
 
 void						delete_connector(t_connector *del)
 {
-	free(del->tab);
-	del->tab = NULL;
+	if (del->tab)
+	{
+		free(del->tab);
+		del->tab = NULL;
+	}
 	free(del);
 	del = NULL;
 }
