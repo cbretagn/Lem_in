@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:56:50 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/05 16:21:10 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 17:23:36 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void			add_to_top(t_pile *pile, int data)
 		exit(EXIT_FAILURE);
 	new->nb = data;
 	if (pile->nb_elem == 0)
+	{
 		new->prev = NULL;
+		pile->bottom = new;
+	}
 	else
 	{
 		pile->top->next = new;
@@ -52,14 +55,10 @@ t_pile			*init_pile(int data)
 	return (pile);
 }
 
-int				del_pile(t_pile *pile)
+void				del_pile(t_pile *pile)
 {
-	int			data;
 	t_element	*tmp;
 
-	if (!pile)
-		return (0);
-	data = pile->top->nb;
 	while (pile->top)
 	{
 		tmp = pile->top;
@@ -70,7 +69,6 @@ int				del_pile(t_pile *pile)
 	pile->nb_elem = 0;
 	free(pile);
 	pile = NULL;
-	return (data);
 }
 
 int				del_bottom(t_pile *pile)

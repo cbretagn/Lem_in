@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/05 17:14:47 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 16:21:39 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int				check_file(char *file, t_data *data)
 	return (check_return(i, data));
 }
 
-char			*read_file(char *str)
+t_dstring		*read_file(char *str)
 {
 	int			fd;
 	int			ret;
@@ -95,5 +95,5 @@ char			*read_file(char *str)
 	close(fd);
 	if (!file->str)
 		exit(-2);
-	return (file->str);
+	return (file);
 }

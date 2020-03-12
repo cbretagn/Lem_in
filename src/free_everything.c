@@ -6,13 +6,13 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:37:05 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/12 15:43:10 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:51:46 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-void	free_path(t_path *routes)
+void		free_path(t_path *routes)
 {
 	int	i;
 
@@ -23,6 +23,41 @@ void	free_path(t_path *routes)
 	routes->nb_ants = NULL;
 	while (++i < routes->size)
 		delete_dynode(routes->tab[i]);
+	free(routes->tab);
 	routes->tab = NULL;
+	free(routes);
 	routes = NULL;
+}
+
+int			ret_free_line(char *str)
+{
+	ft_strdel(&str);
+	return (0);
+}
+
+void		free_matrice(int **mat, int size)
+{
+	int		i;
+
+	i = -1;
+	while (++i < size)
+	{
+		free(mat[i]);
+		mat[i] = NULL;
+	}
+	free(mat);
+	mat = NULL;
+}
+
+int			ret_free_q(int ret, t_pile *q)
+{
+	if (q)
+		del_pile(q);
+	return (ret);
+}
+
+void		exit_malloc(int error)
+{
+	write(2, "Malloc error, sorry :'(\n", 24);
+	exit(error);
 }

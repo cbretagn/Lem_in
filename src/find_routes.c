@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 18:54:39 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/12 15:44:01 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:51:40 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ static t_path	*get_ek1_routes(t_anthill *anthill, t_path *routes, int l)
 	routes_ek1 = get_nb_ants(routes_ek1, anthill->ants);
 	lines_ek1 = nb_lines(routes_ek1);
 	if (l == 0 || (lines_ek1 > 0 && lines_ek1 < l))
+	{
+		free_path(routes);
 		return (routes_ek1);
+	}
 	free_path(routes_ek1);
 	return (routes);
 }
@@ -50,7 +53,10 @@ static t_path	*get_ek2_routes(t_anthill *anthill, t_path *routes, int l)
 	routes_ek2 = get_nb_ants(routes_ek2, anthill->ants);
 	lines_ek2 = nb_lines(routes_ek2);
 	if (l == 0 || (lines_ek2 > 0 && lines_ek2 < l))
+	{
+		free_path(routes);
 		return (routes_ek2);
+	}
 	free_path(routes_ek2);
 	return (routes);
 }

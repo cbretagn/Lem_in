@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 13:59:23 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 18:40:00 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 17:49:36 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,16 @@ t_dstring	*push_ant_str(t_dstring *s, int nb, t_ants *swarm,
 		s = push_str(s, anthill->rooms[swarm->room[nb]]);
 	s = push_str(s, " ");
 	return (s);
+}
+
+void			free_swarm(t_ants *swarm)
+{
+	free(swarm->path);
+	swarm->path = NULL;
+	free(swarm->curr);
+	swarm->curr = NULL;
+	free(swarm->room);
+	swarm->room = NULL;
+	free(swarm);
+	swarm = NULL;
 }

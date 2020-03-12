@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 15:42:11 by cbretagn          #+#    #+#              #
-#    Updated: 2020/03/10 18:21:44 by sadahan          ###   ########.fr        #
+#    Updated: 2020/03/12 16:52:37 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,14 +84,15 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $@ $^
+	@ar rc $@ $^
 
 %.o: %.c
-	clang -c -o $@ $^ $(CFLAGS) -I libft.h
+	@clang -c -o $@ $^ $(CFLAGS) -I libft.h
 clean :
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean : clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
-re : fclean all
+re : fclean
+	$(MAKE)

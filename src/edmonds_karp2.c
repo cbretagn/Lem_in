@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:17:20 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/10 15:19:24 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:45:30 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static int		bfs_ek2(t_anthill *a, int **res, int *parent)
 			if (res[u][v] > 0 && parent[v] == -1)
 			{
 				parent[v] = u;
-				if (!(queue = proceed(v, a, queue)))
-					return (1);
+				if (!(proceed(v, a, queue)))
+					return (ret_free_q(1, queue));
 			}
 		}
 	}
-	return (0);
+	return (ret_free_q(0, queue));
 }
 
 static int		bfs_paths2(t_anthill *a, int **res, int *parent)
@@ -60,12 +60,12 @@ static int		bfs_paths2(t_anthill *a, int **res, int *parent)
 			if (res[u][v] == 0 && parent[v] == -1)
 			{
 				parent[v] = u;
-				if (!(queue = proceed(v, a, queue)))
-					return (1);
+				if (!(proceed(v, a, queue)))
+					return (ret_free_q(1, queue));
 			}
 		}
 	}
-	return (0);
+	return (ret_free_q(0, queue));
 }
 
 static t_path	*save_paths2(t_anthill *a, int **res, t_path *path)
@@ -93,6 +93,8 @@ static t_path	*save_paths2(t_anthill *a, int **res, t_path *path)
 		}
 		update_paths(path, v, i);
 	}
+	free(parent);
+	parent = NULL;
 	return (path);
 }
 
@@ -129,7 +131,10 @@ t_path			*edmonds_karp2(t_anthill *a)
 		|| !(parent = init_parent(a->nb_room)))
 		exit(-2);
 	run_bfs2(a, res, parent);
+	free(parent);
+	parent = NULL;
 	path = save_paths2(a, res, path);
 	path = reverse_paths(path);
+	free_matrice(res, a->nb_room);
 	return (path);
 }

@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:53:53 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 18:37:19 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 17:48:42 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,4 +121,6 @@ void				print_ants(t_anthill *anthill, t_path *routes)
 		s = display_swarm(swarm, anthill, s);
 	}
 	ft_putstr(s->str);
+	delete_dstring(s);
+	free_swarm(swarm);
 }

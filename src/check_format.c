@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:29:45 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/05 17:17:53 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:50:32 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,15 @@ int			check_command(t_data *data, char *file)
 	{
 		data->start++;
 		if (!(data->start_room = ft_strsub(file, i + 1, j - i)))
-			return (0);
+			return (ret_free_line(cmd));
 	}
 	else if (!ft_strcmp(cmd, "##end"))
 	{
 		data->end++;
 		if (!(data->end_room = ft_strsub(file, i + 1, j - i)))
-			return (0);
+			return (ret_free_line(cmd));
 	}
+	ft_strdel(&cmd);
 	return ((data->start > 1 || data->end > 1) ? 0 : i);
 }
 
@@ -124,12 +125,13 @@ int			check_tubes_rooms(t_data *data, char *file)
 	if (is_room(line) > 0)
 	{
 		if (data->tubes > 0)
-			return (0);
+			return (ret_free_line(line));
 		data->rooms++;
 	}
 	else if (is_tube(line) > 0)
 		data->tubes++;
 	else
-		return (0);
+		return (ret_free_line(line));
+	ft_strdel(&line);
 	return (i);
 }

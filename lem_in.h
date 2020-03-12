@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/12 15:55:54 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:48:06 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,12 +170,12 @@ t_path				*reverse_paths(t_path *path);
 
 void				add_to_top(t_pile *pile, int data);
 t_pile				*init_pile(int data);
-int					del_pile(t_pile *pile);
+void				del_pile(t_pile *pile);
 int					del_bottom(t_pile *pile);
 
 void				update_paths(t_path *path, int v, int i);
 void				reset_parent(int *parent, int size, t_anthill *a);
-t_pile				*proceed(int v, t_anthill *a, t_pile *queue);
+int					proceed(int v, t_anthill *a, t_pile *queue);
 void				update_residual_graph(int v, t_anthill *a, int **res);
 
 int					is_visited(int node, t_dynode *list);
@@ -187,6 +187,7 @@ void				print_ants(t_anthill *anthill, t_path *routes);
 t_dstring			*push_ant_str(t_dstring *s, int nb, t_ants *swarm,
 						t_anthill *anthill);
 int					nb_path_to_use(t_path *routes);
+void				free_swarm(t_ants *swarm);
 
 t_dijkstra			*init_dijkstra_tab(t_dijkstra *tab, t_anthill *anthill);
 t_dijkstra			*refresh_tab(t_dijkstra *tab, t_anthill *anthill);
@@ -198,4 +199,8 @@ void			print_anthill_log(int fd, t_anthill *anthill);
 void			debugger(t_path *routes, t_anthill *anthill, char *name);
 
 void				free_path(t_path *routes);
+void				free_matrice(int **mat, int size);
+int					ret_free_line(char *str);
+void				exit_malloc(int error);
+int					ret_free_q(int ret, t_pile *q);
 #endif

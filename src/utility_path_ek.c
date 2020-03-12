@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 13:23:46 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/10 15:20:01 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 17:27:58 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_path		*reverse_paths(t_path *path)
 		while (j--)
 			rpath->tab[i] = push_int(rpath->tab[i], path->tab[i]->tab[j]);
 	}
-	free(path);
+	free_path(path);
 	return (rpath);
 }
 
@@ -52,16 +52,11 @@ void		update_residual_graph(int v, t_anthill *a, int **res)
 	}
 }
 
-t_pile		*proceed(int v, t_anthill *a, t_pile *queue)
+int		proceed(int v, t_anthill *a, t_pile *queue)
 {
 	if (v != a->end)
-	{
-		if (queue->nb_elem > 0)
-			add_to_top(queue, v);
-		else
-			queue = init_pile(v);
-	}
+		add_to_top(queue, v);
 	else
-		return (NULL);
-	return (queue);
+		return (0);
+	return (1);
 }

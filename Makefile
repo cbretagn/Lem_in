@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/03/12 15:56:23 by sadahan          ###   ########.fr        #
+#    Updated: 2020/03/12 16:51:45 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,19 +56,19 @@ LIB_PATH	= libft/libft.a
 
 CC			= clang
 
-CFLAGS		= -Wall -Wextra # -g3 -fsanitize=address,undefined
+CFLAGS		= -g -Wall -Wextra # -g3 -fsanitize=address,undefined
 
 .PHONY		: all clean fclean re
 
 all			: $(NAME)
 
 $(NAME)		: $(OBJ)
-	make -C ./libft/
-	$(CC) $(CFLAGS) -o $@ $^ $(LIB_PATH)
+	@make -C ./libft/
+	@$(CC) $(CFLAGS) -o $@ $^ $(LIB_PATH)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-		mkdir $(OBJ_PATH) 2> /dev/null || true
-		$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+		@mkdir $(OBJ_PATH) 2> /dev/null || true
+		@$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 analyze		:
 	$(CC) -fsyntax-only $(CFLAGS) $(SRC)

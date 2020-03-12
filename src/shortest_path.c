@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 15:07:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 18:20:33 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 16:51:00 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_path			*next_shortest_path(t_anthill *ant)
 		return (NULL);
 	tab = init_dijkstra_tab(tab, ant);
 	if (!(routes = create_path_tab(ant->connectors[ant->start]->size * 2)))
-		return (NULL);
+		exit_malloc(-2);
 	i = (ant->connectors[ant->start]->size < ant->connectors[ant->end]->size) ?
 		ant->connectors[ant->start]->size : ant->connectors[ant->end]->size;
 	i = ant->ants == 1 ? 1 : i;
@@ -117,5 +117,7 @@ t_path			*next_shortest_path(t_anthill *ant)
 			break ;
 		tab = refresh_tab(tab, ant);
 	}
+	free(tab);
+	tab = NULL;
 	return (routes);
 }
