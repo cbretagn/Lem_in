@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/12 15:01:04 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:38:05 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,18 @@ int					main(int argc, char **argv)
 		return (0);
 	if (!(graph = create_file(data, argv[1 + verbose])))
 		return (0);
+	if (verbose == YES)
+		write(1, "file is valid\n", 14);
 	if (!(anthill = parse_anthill(graph, data, anthill)))
 		return (0);
+	if (verbose == YES)
+	{
+		verbose = open("log_file", O_CREAT | O_TRUNC | O_RDWR);
+		print_anthill_log(verbose, anthill);
+	}
 	routes = find_best_routes(anthill, routes);
+	if (verbose != NO)
+		close(verbose);
 	ft_putendl(graph);
 	print_ants(anthill, routes);
 	free_data(data);

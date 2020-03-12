@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/03/12 14:53:59 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/03/12 15:53:18 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC_NAME	= parsing.c\
 			  get_connector_graph.c\
 			  utility_path_algo.c\
 			  get_nb_ants.c\
-			  main_for_test.c\
+			  main.c\
 			  shortest_path.c\
 			  util_ek_algo.c\
 			  manage_pile.c\
@@ -55,7 +55,7 @@ LIB_PATH	= libft/libft.a
 
 CC			= clang
 
-CFLAGS		= -Wall -Wextra -g -fsanitize=address,undefined
+CFLAGS		= -Wall -Wextra # -g3 -fsanitize=address,undefined
 
 .PHONY		: all clean fclean re
 

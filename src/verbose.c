@@ -6,7 +6,7 @@
 /*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 19:18:15 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/12 15:01:17 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:54:26 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ static void		exit_usage(void)
 	exit(0);
 }
 
+static void		fd_putstr(int fd, char *str)
+{
+	write(fd, str, ft_strlen(str));
+}
+
 int				check_verbose(int argc, char **argv)
 {
 	if (argc < 2 || (argc == 2 && ft_strcmp(argv[1], "-v") == 0) || argc > 3)
@@ -41,4 +46,33 @@ int				check_verbose(int argc, char **argv)
 	else
 		exit_usage();
 	return (-1);
+}
+
+void			print_anthill_log(int fd, t_anthill *anthill)
+{
+	int		i;
+	int		j;
+
+	fd_putstr(fd, "Simplified representation of anthill (connector nodes)\n");
+	i = -1;
+	while (++i < anthill->nb_room)
+	{
+		if (!anthill->connectors[i])
+			continue ;
+		j = -1;
+		if (i == anthill->end || i == anthill->start)
+			fd_putstr(fd, MAGENTA);
+		else
+			fd_putstr(fd, BLUE);
+		fd_putstr(fd, anthill->rooms[i]);
+		fd_putstr(fd, RES);
+		fd_putstr(fd, " :");
+		while (++j < anthill->connectors[i]->size)
+		{
+			fd_putstr(fd, " ");
+			fd_putstr(fd, anthill->rooms[anthill->connectors[i]->tab[j].name]);
+		}
+		fd_putstr(fd, "\n");
+	}
+	fd_putstr(fd, "\n\n");
 }

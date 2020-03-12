@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/12 15:02:49 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:52:15 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@
 # define YES 1
 # define DIRECT -1
 # define MAX_ANT 100000
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define BLUE "\033[1;34m"
+# define MAGENTA "\033[1;35m"
+# define CYAN "\033[1;36m"
+# define RES "\033[0m"
 
 typedef struct		s_dijkstra
 {
@@ -188,5 +194,6 @@ t_dijkstra			*refresh_tab(t_dijkstra *tab, t_anthill *anthill);
 t_path				*find_best_routes(t_anthill *anthill, t_path *routes_djk);
 
 int				check_verbose(int argc, char **argv);
+void			print_anthill_log(int fd, t_anthill *anthill);
 void			debugger(t_path *routes, t_anthill *anthill, char *name);
 #endif
