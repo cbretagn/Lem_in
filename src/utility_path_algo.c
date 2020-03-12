@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:34:39 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/12 18:25:28 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 18:36:46 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ t_path			*create_path_tab(int size)
 
 	i = -1;
 	if (!(ret = (t_path *)malloc(sizeof(t_path))))
-		return (NULL);
+		exit_malloc(-2);
 	if (!(ret->tab = (t_dynode **)malloc(sizeof(t_dynode *) * size)))
-		return (NULL);
+		exit_malloc(-2);
 	if (!(ret->path_length = (int *)malloc(sizeof(int) * size)))
-		return (NULL);
+		exit_malloc(-2);
 	if (!(ret->nb_ants = (int *)malloc(sizeof(int) * size)))
-		return (NULL);
+		exit_malloc(-2);
 	while (++i < size)
 	{
 		if (!(ret->tab[i] = create_dynode(BASE_DYN_NODES)))

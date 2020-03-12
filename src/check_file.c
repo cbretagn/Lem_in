@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/12 18:21:15 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 18:40:07 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_data			*init_struct(void)
 	t_data		*data;
 
 	if (!(data = malloc(sizeof(t_data))))
-		return (NULL);
+		exit_malloc(-2);
 	data->end = 0;
 	data->start = 0;
 	data->tubes = 0;
@@ -79,7 +79,7 @@ t_dstring		*read_file(char *str)
 	if (fd == -1)
 		exit(-2);
 	if (!(file = create_dstring(4096, "")))
-		return (NULL);
+		exit_malloc(-2);
 	while ((ret = read(fd, buff, 4095)))
 	{
 		if (ret == -1)
@@ -88,7 +88,7 @@ t_dstring		*read_file(char *str)
 		if (buff[0] == '\0')
 			exit(-2);
 		if (!(file = push_str(file, buff)))
-			return (NULL);
+			exit_malloc(-2);
 	}
 	close(fd);
 	if (!file->str)
