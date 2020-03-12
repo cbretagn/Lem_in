@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:37:05 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/12 17:51:46 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:15:06 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		free_path(t_path *routes)
 	routes->path_length = NULL;
 	free(routes->nb_ants);
 	routes->nb_ants = NULL;
-	while (++i < routes->size)
+	while (++i < routes->cap)
 		delete_dynode(routes->tab[i]);
 	free(routes->tab);
 	routes->tab = NULL;
