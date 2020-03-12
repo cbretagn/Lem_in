@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:34:39 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 16:54:12 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:25:28 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_path			*create_path_tab(int size)
 	while (++i < size)
 	{
 		if (!(ret->tab[i] = create_dynode(BASE_DYN_NODES)))
-			return (NULL);
+			exit_malloc(-2);
 	}
 	ret->size = 0;
 	ret->cap = size;
@@ -63,6 +63,7 @@ int				find_min(t_dijkstra *tab, int size)
 
 	i = -1;
 	dist = INT_MAX;
+	ret = -1;
 	while (++i < size)
 	{
 		if (tab[i].visited != NOTVIS)

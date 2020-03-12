@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/12 16:21:39 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:21:15 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int				check_file(char *file, t_data *data)
 	int			i;
 	int			j;
 
-	i = 0;
-	j = 0;
 	if (!(i = check_ant_number(file, data)))
 		return (0);
 	while (file[++i])

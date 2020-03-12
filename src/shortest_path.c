@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 15:07:34 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/12 16:51:00 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:26:55 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void			rec_dijkstra(t_anthill *anthill, t_dijkstra *tab)
 		check_neighbours(anthill, tab, curr);
 		tab[curr].visited = VISITED;
 		curr = find_min(tab, anthill->nb_room);
+		if (curr == -1)
+			return ;
 	}
 }
 

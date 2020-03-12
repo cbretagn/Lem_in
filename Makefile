@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/03/12 16:51:45 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/03/12 18:29:06 by sadahan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,5 +82,6 @@ clean		:
 fclean		: clean
 	rm -f $(NAME)
 	make fclean -C ./libft/
+	rm *.plist
 
 re 			: fclean all

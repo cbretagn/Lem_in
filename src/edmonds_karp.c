@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 11:13:09 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/12 17:25:41 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:17:23 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ static void		run_bfs1(t_anthill *a, int **res, int *parent, int **cap)
 	int			u;
 	int			v;
 
-	u = 0;
 	while (bfs_ek1(a, res, parent, cap))
 	{
 		v = a->end;

@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:00:30 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/12 16:13:04 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:23:56 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 t_connector					*create_connector(int size)
 {
 	t_connector	*ret;
-	int			i;
 
-	i = -1;
 	if (!(ret = (t_connector *)malloc(sizeof(t_connector))))
 		exit(-2);
 	ret->size = 0;

@@ -6,11 +6,11 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 14:03:21 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/12/04 15:52:47 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:23:10 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lem_in_checker.h"
+#include "../lem_in.h"
 
 t_dstring			*create_dstring(unsigned int cap, char *str)
 {
@@ -18,12 +18,12 @@ t_dstring			*create_dstring(unsigned int cap, char *str)
 	unsigned int	len;
 
 	if (!(ret = (t_dstring *)malloc(sizeof(t_dstring))))
-		return (NULL);
+		exit_malloc(-2);
 	len = ft_strlen(str);
 	ret->capacity = cap;
 	ret->size = len;
 	if (!(ret->str = ft_strnew(ret->capacity)))
-		return (NULL);
+		exit_malloc(-2);
 	if (str[0] != '\0')
 		ft_strcpy(ret->str, str);
 	return (ret);

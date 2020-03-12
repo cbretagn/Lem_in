@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:17:20 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/12 17:45:30 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:17:36 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ static void		run_bfs2(t_anthill *a, int **res, int *parent)
 	int			u;
 	int			v;
 
-	u = 0;
 	while (bfs_ek2(a, res, parent))
 	{
 		v = a->end;
