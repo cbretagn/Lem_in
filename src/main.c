@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:28:48 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/10 19:09:33 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 15:01:04 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,14 @@ int					main(int argc, char **argv)
 	char			*graph;
 	t_data			*data;
 	t_path			*routes;
+	int				verbose;
 
 	anthill = NULL;
 	routes = NULL;
-	if (argc != 2 || !(data = init_struct()))
+	verbose = check_verbose(argc, argv);
+	if (!(data = init_struct()))
 		return (0);
-	if (!(graph = create_file(data, argv[1])))
+	if (!(graph = create_file(data, argv[1 + verbose])))
 		return (0);
 	if (!(anthill = parse_anthill(graph, data, anthill)))
 		return (0);
