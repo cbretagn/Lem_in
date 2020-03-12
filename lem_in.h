@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:12:42 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/12 17:48:06 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 19:04:23 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,9 +192,11 @@ void				free_swarm(t_ants *swarm);
 t_dijkstra			*init_dijkstra_tab(t_dijkstra *tab, t_anthill *anthill);
 t_dijkstra			*refresh_tab(t_dijkstra *tab, t_anthill *anthill);
 
-t_path				*find_best_routes(t_anthill *anthill, t_path *routes_djk);
+t_path				*find_best_routes(t_anthill *anthill, t_path *routes_djk,
+						int fd);
 
 int				check_verbose(int argc, char **argv);
+void			print_routes_log(int fd, t_path *routes, int lines, char *str);
 void			print_anthill_log(int fd, t_anthill *anthill);
 void			debugger(t_path *routes, t_anthill *anthill, char *name);
 

@@ -6,7 +6,7 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 18:54:39 by sadahan           #+#    #+#             */
-/*   Updated: 2020/03/12 18:32:53 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/03/12 19:25:11 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static t_path	*get_dijkstra_routes(t_anthill *anthill, t_path *routes)
 	return (routes);
 }
 
-static t_path	*get_ek1_routes(t_anthill *anthill, t_path *routes, int l)
+static t_path	*get_ek1_routes(t_anthill *anthill, t_path *routes, int l,
+						int fd)
 {
 	t_path		*routes_ek1;
 	int			lines_ek1;
@@ -32,6 +33,7 @@ static t_path	*get_ek1_routes(t_anthill *anthill, t_path *routes, int l)
 		return (routes);
 	routes_ek1 = get_nb_ants(routes_ek1, anthill->ants);
 	lines_ek1 = nb_lines(routes_ek1);
+	print_routes_log(fd, routes_ek1, lines_ek1, "Edmond Karps :\n");
 	if (l == 0 || (lines_ek1 > 0 && lines_ek1 < l))
 	{
 		free_path(routes);
@@ -41,7 +43,8 @@ static t_path	*get_ek1_routes(t_anthill *anthill, t_path *routes, int l)
 	return (routes);
 }
 
-static t_path	*get_ek2_routes(t_anthill *anthill, t_path *routes, int l)
+static t_path	*get_ek2_routes(t_anthill *anthill, t_path *routes, int l,
+						int fd)
 {
 	t_path		*routes_ek2;
 	int			lines_ek2;
@@ -52,6 +55,8 @@ static t_path	*get_ek2_routes(t_anthill *anthill, t_path *routes, int l)
 		return (routes);
 	routes_ek2 = get_nb_ants(routes_ek2, anthill->ants);
 	lines_ek2 = nb_lines(routes_ek2);
+	print_routes_log(fd, routes_ek2, lines_ek2, 
+			"Edmond Karps with intermediary nodes :\n");
 	if (l == 0 || (lines_ek2 > 0 && lines_ek2 < l))
 	{
 		free_path(routes);
@@ -61,16 +66,15 @@ static t_path	*get_ek2_routes(t_anthill *anthill, t_path *routes, int l)
 	return (routes);
 }
 
-t_path			*find_best_routes(t_anthill *anthill, t_path *routes)
+t_path			*find_best_routes(t_anthill *anthill, t_path *routes, int fd)
 {
 	int			lines;
 
-	routes = edmonds_karp1(anthill);
-	routes = get_nb_ants(routes, anthill->ants);
 	routes = get_dijkstra_routes(anthill, routes);
 	lines = routes == NULL ? 0 : nb_lines(routes);
-	routes = get_ek1_routes(anthill, routes, lines);
+	print_routes_log(fd, routes, lines, "Djikstra :\n");
+	routes = get_ek1_routes(anthill, routes, lines, fd);
 	lines = routes == NULL ? 0 : nb_lines(routes);
-	routes = get_ek2_routes(anthill, routes, lines);
+	routes = get_ek2_routes(anthill, routes, lines, fd);
 	return (routes);
 }

@@ -6,7 +6,7 @@
 #    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/03/12 18:29:06 by sadahan          ###   ########.fr        #
+#    Updated: 2020/03/12 19:16:23 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC_NAME	= parsing.c\
 			  find_routes.c\
 			  utility_create_struct.c\
 			  verbose.c\
+			  verbose2.c\
 			  utility_path_ek.c\
 			  free_everything.c
 
@@ -82,6 +83,5 @@ clean		:
 fclean		: clean
 	rm -f $(NAME)
 	make fclean -C ./libft/
-	rm *.plist
 
 re 			: fclean all
