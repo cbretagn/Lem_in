@@ -40,7 +40,7 @@ int			nb_path_to_use(t_path *routes)
 }
 
 t_dstring	*push_ant_str(t_dstring *s, int nb, t_ants *swarm,
-					t_anthill *anthill)
+				t_anthill *anthill)
 {
 	char	*tmp;
 
@@ -61,7 +61,7 @@ t_dstring	*push_ant_str(t_dstring *s, int nb, t_ants *swarm,
 	return (s);
 }
 
-void			free_swarm(t_ants *swarm)
+void		free_swarm(t_ants *swarm)
 {
 	free(swarm->path);
 	swarm->path = NULL;

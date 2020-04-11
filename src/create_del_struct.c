@@ -86,13 +86,8 @@ t_anthill		*create_anthill(int size)
 	return (ret);
 }
 
-void			delete_anthill(t_anthill *anthill)
+void			delete_anthill(t_anthill *anthill, int i)
 {
-	int			i;
-	// int			co;
-
-	i = -1;
-	// co = 0;
 	while (++i < anthill->nb_room)
 		ft_strdel(&anthill->rooms[i]);
 	free(anthill->rooms);

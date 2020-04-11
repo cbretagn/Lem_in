@@ -135,7 +135,7 @@ t_dynode			*push_int(t_dynode *node, int nb);
 void				delete_dynode(t_dynode *node);
 t_anthill			*create_anthill(int size);
 t_dynode			**create_node_tab(int size);
-void				delete_anthill(t_anthill *anthill);
+void				delete_anthill(t_anthill *anthill, int i);
 
 t_connector			*create_connector(int size);
 void				delete_connector(t_connector *del);

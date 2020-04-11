@@ -58,7 +58,7 @@ int					main(int argc, char **argv)
 		return (0);
 	if (verbose == YES)
 	{
-		verbose = open("log_file", O_CREAT | O_TRUNC | S_IWOTH | S_IROTH);
+		verbose = open("log_file", O_CREAT | O_TRUNC, S_IWOTH | S_IROTH);
 		print_anthill_log(verbose, anthill);
 	}
 	routes = find_best_routes(anthill, routes, verbose);
@@ -66,7 +66,7 @@ int					main(int argc, char **argv)
 		close(verbose);
 	ft_putendl(graph);
 	print_ants(anthill, routes);
-	delete_anthill(anthill);
+	delete_anthill(anthill, -1);
 	free_path(routes);
 	free_data(data);
 	ft_strdel(&graph);
