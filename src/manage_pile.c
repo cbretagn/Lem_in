@@ -55,7 +55,7 @@ t_pile			*init_pile(int data)
 	return (pile);
 }
 
-void				del_pile(t_pile *pile)
+void			del_pile(t_pile *pile)
 {
 	t_element	*tmp;
 

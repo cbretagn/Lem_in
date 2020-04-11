@@ -57,7 +57,7 @@ int				check_file(char *file, t_data *data)
 			return (check_return(i, data));
 		if (file[i] == '#')
 		{
-			if ((j = check_command(data, &file[i])) == 0)
+			if ((j = check_command(data, &file[i], 0)) == 0)
 				return (check_return(i, data));
 		}
 		else if ((j = check_tubes_rooms(data, &file[i])) == 0)

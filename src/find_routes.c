@@ -55,7 +55,7 @@ static t_path	*get_ek2_routes(t_anthill *anthill, t_path *routes, int l,
 		return (routes);
 	routes_ek2 = get_nb_ants(routes_ek2, anthill->ants);
 	lines_ek2 = nb_lines(routes_ek2);
-	print_routes_log(fd, routes_ek2, lines_ek2, 
+	print_routes_log(fd, routes_ek2, lines_ek2,
 			"Edmond Karps with intermediary nodes :\n");
 	if (l == 0 || (lines_ek2 > 0 && lines_ek2 < l))
 	{

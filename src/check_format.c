@@ -29,13 +29,11 @@ int			check_ant_number(char *file, t_data *data)
 	return (i);
 }
 
-int			check_command(t_data *data, char *file)
+int			check_command(t_data *data, char *file, int i)
 {
-	int		i;
 	char	*cmd;
 	int		j;
 
-	i = 0;
 	while (file[i] && file[i] != '\n')
 		i++;
 	j = i;

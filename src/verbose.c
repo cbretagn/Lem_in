@@ -12,18 +12,6 @@
 
 #include "../lem_in.h"
 
-//print "file is valid"
-//print "anthill created"
-//print "connector graph created"
-//logfile --> anthill contains X nodes, Y connectors, Z solo nodes
-//logfile --> print smaller graph
-//djikstra lines
-//ek lines
-//ek int nodes lines
-//print + logfile
-//Algo X selected
-//print result
-
 static void		exit_usage(void)
 {
 	write(1, "usage: lem-in (-v) [file_name]\n", 31);

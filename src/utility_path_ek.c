@@ -52,7 +52,7 @@ void		update_residual_graph(int v, t_anthill *a, int **res)
 	}
 }
 
-int		proceed(int v, t_anthill *a, t_pile *queue)
+int			proceed(int v, t_anthill *a, t_pile *queue)
 {
 	if (v != a->end)
 		add_to_top(queue, v);

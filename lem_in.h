@@ -13,10 +13,10 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-# include "libft/libft.h"
-# include "dynamic.h"
-# include <unistd.h>
-# include <stdlib.h>
+// # include "libft/libft.h"
+// # include "dynamic.h"
+// # include <unistd.h>
+// # include <stdlib.h>
 # include "lem_in_checker.h"
 
 # define BASE_DYN_NODES 10
@@ -195,10 +195,10 @@ t_dijkstra			*refresh_tab(t_dijkstra *tab, t_anthill *anthill);
 t_path				*find_best_routes(t_anthill *anthill, t_path *routes_djk,
 						int fd);
 
-int				check_verbose(int argc, char **argv);
-void			print_routes_log(int fd, t_path *routes, int lines, char *str);
-void			print_anthill_log(int fd, t_anthill *anthill);
-void			debugger(t_path *routes, t_anthill *anthill, char *name);
+int					check_verbose(int argc, char **argv);
+void				print_routes_log(int fd, t_path *routes, int lines, char *str);
+void				print_anthill_log(int fd, t_anthill *anthill);
+void				debugger(t_path *routes, t_anthill *anthill, char *name);
 
 void				free_path(t_path *routes);
 void				free_matrice(int **mat, int size);

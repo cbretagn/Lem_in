@@ -33,7 +33,7 @@ typedef struct		s_file_data
 }					t_data;
 
 int					check_ant_number(char *file, t_data *data);
-int					check_command(t_data *data, char *file);
+int					check_command(t_data *data, char *file, int i);
 int					check_tubes_rooms(t_data *data, char *file);
 int					check_file(char *file, t_data *data);
 t_dstring			*read_file(char *str);

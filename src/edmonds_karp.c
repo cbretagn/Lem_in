@@ -60,7 +60,7 @@ static int		bfs_paths1(t_anthill *a, int **res, int *parent)
 			if (res[u][v] >= 1 && parent[v] == -1)
 			{
 				parent[v] = u;
-				if (!( proceed(v, a, queue)))
+				if (!(proceed(v, a, queue)))
 					return (ret_free_q(1, queue));
 			}
 		}
@@ -84,10 +84,8 @@ static t_path	*save_paths1(t_anthill *a, int **res, t_path *path)
 		while (v != a->start)
 		{
 			if (v < a->nb_room)
-			{
 				path->tab[path->size] = push_int(path->tab[path->size], v);
-				i++;
-			}
+			i = v < a->nb_room ? i + 1 : i;
 			u = parent[v];
 			res[u][v] -= 1;
 			v = u;

@@ -68,9 +68,9 @@ static int		bfs_paths2(t_anthill *a, int **res, int *parent)
 	return (ret_free_q(0, queue));
 }
 
-static t_path	*save_paths2(t_anthill *a, int **res, t_path *path)
+static t_path	*save_paths2(t_anthill *a, int **res, t_path *path,
+					int i)
 {
-	int			i;
 	int			u;
 	int			v;
 	int			*parent;
@@ -132,7 +132,7 @@ t_path			*edmonds_karp2(t_anthill *a)
 	run_bfs2(a, res, parent);
 	free(parent);
 	parent = NULL;
-	path = save_paths2(a, res, path);
+	path = save_paths2(a, res, path, 0);
 	path = reverse_paths(path);
 	free_matrice(res, a->nb_room);
 	return (path);
