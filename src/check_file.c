@@ -83,24 +83,15 @@ t_dstring		*read_file(char *str)
 	while ((ret = read(fd, buff, 4095)))
 	{
 		if (ret == -1)
-		{
-			delete_dstring(file);
-			return (NULL);
-		}
+			return (delete_dstring(file));
 		buff[ret] = '\0';
 		if (buff[0] == '\0')
-		{
-			delete_dstring(file);
-			return (NULL);
-		}
+			return (delete_dstring(file));
 		if (!(file = push_str(file, buff)))
 			exit_malloc(-2);
 	}
 	close(fd);
 	if (!file->str)
-	{
-		delete_dstring(file);
-		return (NULL);
-	}
+		return (delete_dstring(file));
 	return (file);
 }

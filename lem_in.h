@@ -192,7 +192,8 @@ t_path				*find_best_routes(t_anthill *anthill, t_path *routes_djk,
 						int fd);
 
 int					check_verbose(int argc, char **argv);
-void				print_routes_log(int fd, t_path *routes, int lines, char *str);
+void				print_routes_log(int fd, t_path *routes, int lines,
+					char *str);
 void				print_anthill_log(int fd, t_anthill *anthill);
 void				debugger(t_path *routes, t_anthill *anthill, char *name);
 

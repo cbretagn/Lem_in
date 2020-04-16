@@ -29,11 +29,12 @@ t_dstring			*create_dstring(unsigned int cap, char *str)
 	return (ret);
 }
 
-void				delete_dstring(t_dstring *del)
+t_dstring			*delete_dstring(t_dstring *del)
 {
 	ft_strdel(&del->str);
 	free(del);
 	del = NULL;
+	return (NULL);
 }
 
 t_dstring			*push_str(t_dstring *dest, char *src)

@@ -46,6 +46,17 @@ static t_anthill	*parse_anthill(char *graph, t_data *data,
 	return (anthill);
 }
 
+static void			print_clean(char *graph, t_anthill *anthill,
+					t_path *routes, t_data *data)
+{
+	ft_putendl(graph);
+	print_ants(anthill, routes);
+	delete_anthill(anthill, -1);
+	free_path(routes);
+	free_data(data);
+	ft_strdel(&graph);
+}
+
 int					main(int argc, char **argv)
 {
 	t_anthill		*anthill;
@@ -60,10 +71,7 @@ int					main(int argc, char **argv)
 	if (!(data = init_struct()))
 		return (0);
 	if (!(graph = create_file(data, argv[1 + verbose])))
-	{
-		free_data(data);
 		return (0);
-	}
 	if (!(anthill = parse_anthill(graph, data, anthill)))
 		return (0);
 	if (verbose == YES)
@@ -74,11 +82,6 @@ int					main(int argc, char **argv)
 	routes = find_best_routes(anthill, routes, verbose);
 	if (verbose != NO)
 		close(verbose);
-	ft_putendl(graph);
-	print_ants(anthill, routes);
-	delete_anthill(anthill, -1);
-	free_path(routes);
-	free_data(data);
-	ft_strdel(&graph);
+	print_clean(graph, anthill, routes, data);
 	return (0);
 }
