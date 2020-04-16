@@ -13,10 +13,6 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-// # include "libft/libft.h"
-// # include "dynamic.h"
-// # include <unistd.h>
-// # include <stdlib.h>
 # include "lem_in_checker.h"
 
 # define BASE_DYN_NODES 10

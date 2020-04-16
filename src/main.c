@@ -19,10 +19,17 @@ static char			*create_file(t_data *data, char *str)
 	char			*graph;
 
 	if (!(file = read_file(str)))
+	{
+		free_data(data);
 		exit(-2);
+	}
 	x = check_file(file->str, data);
 	if (x == 0 || !(graph = ft_strsub(file->str, 0, x)))
+	{
+		delete_dstring(file);
+		free_data(data);
 		exit(-2);
+	}
 	delete_dstring(file);
 	return (graph);
 }
@@ -53,7 +60,10 @@ int					main(int argc, char **argv)
 	if (!(data = init_struct()))
 		return (0);
 	if (!(graph = create_file(data, argv[1 + verbose])))
+	{
+		free_data(data);
 		return (0);
+	}
 	if (!(anthill = parse_anthill(graph, data, anthill)))
 		return (0);
 	if (verbose == YES)

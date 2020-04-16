@@ -77,21 +77,30 @@ t_dstring		*read_file(char *str)
 	file = NULL;
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-		exit(-2);
+		return (NULL);
 	if (!(file = create_dstring(4096, "")))
 		exit_malloc(-2);
 	while ((ret = read(fd, buff, 4095)))
 	{
 		if (ret == -1)
-			exit(-2);
+		{
+			delete_dstring(file);
+			return (NULL);
+		}
 		buff[ret] = '\0';
 		if (buff[0] == '\0')
-			exit(-2);
+		{
+			delete_dstring(file);
+			return (NULL);
+		}
 		if (!(file = push_str(file, buff)))
 			exit_malloc(-2);
 	}
 	close(fd);
 	if (!file->str)
-		exit(-2);
+	{
+		delete_dstring(file);
+		return (NULL);
+	}
 	return (file);
 }

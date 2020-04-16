@@ -18,11 +18,6 @@ static void		exit_usage(void)
 	exit(0);
 }
 
-static void		fd_putstr(int fd, char *str)
-{
-	write(fd, str, ft_strlen(str));
-}
-
 int				check_verbose(int argc, char **argv)
 {
 	if (argc < 2 || (argc == 2 && ft_strcmp(argv[1], "-v") == 0) || argc > 3)
@@ -41,7 +36,7 @@ void			print_anthill_log(int fd, t_anthill *anthill)
 	int		i;
 	int		j;
 
-	fd_putstr(fd, "Simplified representation of anthill (connector nodes)\n");
+	ft_putstr_fd("Simplified representation of anthill (connector nodes)\n", fd);
 	i = -1;
 	while (++i < anthill->nb_room)
 	{
@@ -49,18 +44,18 @@ void			print_anthill_log(int fd, t_anthill *anthill)
 			continue ;
 		j = -1;
 		if (i == anthill->end || i == anthill->start)
-			fd_putstr(fd, MAGENTA);
+			ft_putstr_fd(MAGENTA, fd);
 		else
-			fd_putstr(fd, BLUE);
-		fd_putstr(fd, anthill->rooms[i]);
-		fd_putstr(fd, RES);
-		fd_putstr(fd, " :");
+			ft_putstr_fd(BLUE, fd);
+		ft_putstr_fd(anthill->rooms[i], fd);
+		ft_putstr_fd(RES, fd);
+		ft_putstr_fd(" :", fd);
 		while (++j < anthill->connectors[i]->size)
 		{
-			fd_putstr(fd, " ");
-			fd_putstr(fd, anthill->rooms[anthill->connectors[i]->tab[j].name]);
+			ft_putstr_fd(" ", fd);
+			ft_putstr_fd(anthill->rooms[anthill->connectors[i]->tab[j].name], fd);
 		}
-		fd_putstr(fd, "\n");
+		ft_putstr_fd("\n", fd);
 	}
-	fd_putstr(fd, "\n\n");
+	ft_putstr_fd("\n\n", fd);
 }
