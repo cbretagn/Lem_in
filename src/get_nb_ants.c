@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_nb_ants.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 16:07:52 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/25 14:37:56 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:30:22 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,38 @@ static int		get_nb_paths(t_path *routes, int nb_ants)
 	return (ret);
 }
 
+static t_path	*fill_nb_ants(int nb_path, int nb_ants, t_path *routes)
+{
+	int		i;
+	int		tmp;
+
+	i = nb_path - 1;
+	while (--i >= 0)
+	{
+		tmp = (routes->path_length[nb_path - 1] - routes->path_length[i]);
+		routes->nb_ants[i] += tmp;
+		nb_ants -= tmp;
+	}
+	routes->nb_ants[nb_path - 1] = 1;
+	nb_ants -= 1;
+	while (nb_ants > 0)
+	{
+		i = -1;
+		while (++i < nb_path)
+		{
+			routes->nb_ants[i]++;
+			nb_ants--;
+			if (nb_ants < 1)
+				break ;
+		}
+	}
+	return (routes);
+}
+
 t_path			*get_nb_ants(t_path *routes, int nb_ants)
 {
 	int		nb_path;
 	int		i;
-	int		tmp;
 
 	routes = sort_routes(routes);
 	nb_path = get_nb_paths(routes, nb_ants);
@@ -92,28 +119,7 @@ t_path			*get_nb_ants(t_path *routes, int nb_ants)
 	while (++i < routes->size)
 		routes->nb_ants[i] = 0;
 	if (nb_path > 1)
-	{
-		i = nb_path - 1;
-		while (--i >= 0)
-		{
-			tmp = (routes->path_length[nb_path - 1] - routes->path_length[i]);
-			routes->nb_ants[i] += tmp;
-			nb_ants -= tmp;
-		}
-		routes->nb_ants[nb_path - 1] = 1;
-		nb_ants -= 1;
-		while (nb_ants > 0)
-		{
-			i = -1;
-			while (++i < nb_path)
-			{
-				routes->nb_ants[i]++;
-				nb_ants--;
-				if (nb_ants < 1)
-					break ;
-			}
-		}
-	}
+		routes = fill_nb_ants(nb_path, nb_ants, routes);
 	else
 		routes->nb_ants[0] = nb_ants;
 	return (routes);

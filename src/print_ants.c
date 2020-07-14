@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   print_ants.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cbretagn <cbretagn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 15:53:53 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/03/04 15:38:00 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/04/27 14:48:03 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-static t_dstring	*display_swarm(t_ants *swarm, t_anthill *anthill, t_dstring *s)
+static t_dstring	*display_swarm(t_ants *swarm, t_anthill *anthill,
+							t_dstring *s)
 {
 	int		i;
 	char	*tmp;
 
 	i = -1;
 	tmp = ft_itoa(swarm->nb_lines);
+	s = push_str(s, "\033[1;36m");
 	s = push_str(s, tmp);
+	s = push_str(s, "\033[0m");
 	ft_strdel(&tmp);
 	s = push_str(s, " ");
 	while (++i < anthill->ants)
@@ -27,15 +30,7 @@ static t_dstring	*display_swarm(t_ants *swarm, t_anthill *anthill, t_dstring *s)
 		if (swarm->room[i] == anthill->end && swarm->curr[i] == -2)
 			continue ;
 		if (swarm->curr[i] != -1 && swarm->path[i] != -1)
-		{
-			s = push_str(s, "L");
-			tmp = ft_itoa(i + 1);
-			s = push_str(s, tmp);
-			ft_strdel(&tmp);
-			s = push_str(s, "-");
-			s = push_str(s, anthill->rooms[swarm->room[i]]);
-			s = push_str(s, " ");
-		}
+			s = push_ant_str(s, i, swarm, anthill);
 		if (swarm->room[i] == anthill->end)
 			swarm->curr[i] = -2;
 	}
@@ -44,7 +39,8 @@ static t_dstring	*display_swarm(t_ants *swarm, t_anthill *anthill, t_dstring *s)
 	return (s);
 }
 
-static void		push_ant(t_ants *swarm, t_path *routes, t_anthill *anthill, int i)
+static void			push_ant(t_ants *swarm, t_path *routes,
+						t_anthill *anthill, int i)
 {
 	swarm->curr[i] += 1;
 	swarm->room[i] = routes->tab[swarm->path[i]]->tab[swarm->curr[i]];
@@ -52,19 +48,19 @@ static void		push_ant(t_ants *swarm, t_path *routes, t_anthill *anthill, int i)
 		swarm->arrived += 1;
 }
 
-static t_ants	*init_table(t_ants *swarm, int size)
+static t_ants		*init_table(t_ants *swarm, int size)
 {
 	int		i;
 
 	i = -1;
 	if (!(swarm = (t_ants *)malloc(sizeof(t_ants))))
-		exit(-1);
+		exit(-2);
 	if (!(swarm->path = (int *)malloc(sizeof(int) * size)))
-		exit(-1);
+		exit(-2);
 	if (!(swarm->curr = (int *)malloc(sizeof(int) * size)))
-		exit(-1);
+		exit(-2);
 	if (!(swarm->room = (int *)malloc(sizeof(int) * size)))
-		exit(-1);
+		exit(-2);
 	while (++i < size)
 	{
 		swarm->path[i] = -1;
@@ -76,14 +72,15 @@ static t_ants	*init_table(t_ants *swarm, int size)
 	return (swarm);
 }
 
-static void		push_in_path(t_path *routes, t_ants *swarm, t_anthill *anthill, int i)
+static void			push_in_path(t_path *routes, t_ants *swarm,
+						t_anthill *anthill, int i)
 {
 	int		j;
 
 	j = -1;
 	while (++j < swarm->path_to_use && swarm->arrived != anthill->ants)
 	{
-		if (routes->nb_ants[j] > 0)
+		if (routes->nb_ants[j] > 0 || routes->tab[j]->tab[1] == anthill->end)
 		{
 			swarm->path[i] = j;
 			swarm->curr[i] = 1;
@@ -99,7 +96,7 @@ static void		push_in_path(t_path *routes, t_ants *swarm, t_anthill *anthill, int
 	}
 }
 
-void			print_ants(t_anthill *anthill, t_path *routes)
+void				print_ants(t_anthill *anthill, t_path *routes)
 {
 	t_ants		*swarm;
 	int			i;
@@ -109,7 +106,7 @@ void			print_ants(t_anthill *anthill, t_path *routes)
 	swarm = init_table(swarm, anthill->ants);
 	swarm->path_to_use = nb_path_to_use(routes);
 	if (!(s = create_dstring(BUFFER_SIZE, "")))
-		exit(-1);
+		exit(-2);
 	while (swarm->arrived != anthill->ants)
 	{
 		i = -1;
@@ -124,4 +121,6 @@ void			print_ants(t_anthill *anthill, t_path *routes)
 		s = display_swarm(swarm, anthill, s);
 	}
 	ft_putstr(s->str);
+	delete_dstring(s);
+	free_swarm(swarm);
 }

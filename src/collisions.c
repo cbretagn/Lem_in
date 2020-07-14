@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collisions.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 15:13:01 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/12 15:54:05 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/05 17:18:23 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ static void	check_path(t_path *routes, int curr_path, int curr_room, int end)
 		j = 0;
 		while (j < routes->tab[i]->size)
 		{
-			if (routes->tab[i]->tab[j] != end 
+			if (routes->tab[i]->tab[j] != end
 					&& routes->tab[i]->tab[j] == curr_room)
 			{
 				del = routes->path_length[i] > routes->path_length[curr_path] ?
 					i : curr_path;
 				routes->path_length[del] = INT_MAX;
 			}
-			j +=2;
+			j += 2;
 		}
 	}
 }

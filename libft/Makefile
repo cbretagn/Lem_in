@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cbretagn <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 15:42:11 by cbretagn          #+#    #+#              #
-#    Updated: 2018/11/22 15:47:16 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/03/12 16:52:37 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,14 +84,15 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $@ $^
+	@ar rc $@ $^
 
 %.o: %.c
-	gcc -c -o $@ $^ $(CFLAGS) -I libft.h
+	@clang -c -o $@ $^ $(CFLAGS) -I libft.h
 clean :
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean : clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
-re : fclean all
+re : fclean
+	$(MAKE)

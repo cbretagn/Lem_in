@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_del_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cbretagn <cbretagn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:09:15 by cbretagn          #+#    #+#             */
-/*   Updated: 2020/02/25 14:14:21 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/04/27 14:58:11 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ t_dynode		*create_dynode(int capacity)
 	t_dynode	*node;
 
 	if (!(node = (t_dynode *)malloc(sizeof(t_dynode))))
-		return (NULL);
+		exit(-2);
 	node->cap = capacity;
 	node->size = 0;
 	if (!(node->tab = (int *)malloc(sizeof(int) * capacity)))
-	{
-		exit(-1);
-	}
+		exit(-2);
 	return (node);
 }
 
@@ -75,11 +73,8 @@ t_anthill		*create_anthill(int size)
 	i = -1;
 	while (++i < size)
 		ret->rooms[i] = NULL;
-	if (!(ret->nodes = (t_dynode **)malloc(sizeof(t_dynode *) * size)))
-		exit(-2);
-	i = -1;
-	while (++i < size)
-		ret->nodes[i] = create_dynode(BASE_DYN_NODES);
+	ret->nodes = create_node_tab(size * 2);
+	ret->inter_nodes = create_node_tab(size * 2);
 	ret->nb_room = size;
 	if (!(ret->connectors = malloc(sizeof(t_connector *) * size)))
 		exit(-2);
@@ -89,31 +84,31 @@ t_anthill		*create_anthill(int size)
 	return (ret);
 }
 
-void			delete_anthill(t_anthill *anthill)
+void			delete_anthill(t_anthill *anthill, int i)
 {
-	int			i;
-	int			co;
-
-	i = -1;
-	co = 0;
 	while (++i < anthill->nb_room)
 		ft_strdel(&anthill->rooms[i]);
 	free(anthill->rooms);
 	anthill->rooms = NULL;
 	i = -1;
-	while (++i < anthill->nb_room)
+	while (++i < anthill->nb_room * 2)
 	{
-		if (anthill->nodes[i]->size > 2)
-			co++;
 		delete_dynode(anthill->nodes[i]);
+		delete_dynode(anthill->inter_nodes[i]);
 	}
 	i = -1;
-	while (++i < co)
+	while (++i < anthill->nb_room)
+	{
+		if (!anthill->connectors[i])
+			continue ;
 		delete_connector(anthill->connectors[i]);
+	}
 	free(anthill->connectors);
 	anthill->connectors = NULL;
 	free(anthill->nodes);
 	anthill->nodes = NULL;
+	free(anthill->inter_nodes);
+	anthill->inter_nodes = NULL;
 	free(anthill);
 	anthill = NULL;
 }

@@ -1,0 +1,20 @@
+10
+##start
+1 23 3
+2 16 7
+#room 1 linked to 3 linked to nothing
+3 16 3
+4 16 5
+5 9 3
+6 1 5
+7 4 8
+##end
+0 9 5
+0-4
+0-6
+1-3
+5-2
+#another comment
+2-1
+7-2
+#another comment

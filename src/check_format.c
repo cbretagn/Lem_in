@@ -6,62 +6,73 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 16:29:45 by sadahan           #+#    #+#             */
-/*   Updated: 2019/12/04 15:48:42 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/05/26 19:01:25 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in_checker.h"
 #include "../lem_in.h"
 
-int			check_ant_number(char *file, t_data *data)
+int				check_ant_number(char *file, t_data *data)
 {
-	int		i;
+	int			i;
+	long int	ants;
+	int			zero;
 
+	zero = 0;
 	i = 0;
+	ants = 0;
 	while (file[i] && file[i] != '\n')
 	{
 		if (!ft_isdigit(file[i]))
 			return (0);
 		while (ft_isdigit(file[i]))
+		{
+			if (file[i] == '0')
+				zero++;
 			i++;
+		}
 	}
-	data->ants = ft_atoi(file);
+	if ((i - zero) > 10)
+		return (0);
+	ants = ft_atoi(file);
+	if (ants == 0 || ants > 200000)
+		return (0);
+	data->ants = (int)ants;
 	return (i);
 }
 
-int			check_command(t_data *data, char *file)
+int				check_command(t_data *data, char *file, int i)
 {
-	int		i;
-	char	*cmd;
-	int		j;
+	char		*cmd;
+	int			j;
 
-	i = 0;
 	while (file[i] && file[i] != '\n')
 		i++;
-	j = i;
-	while (file[j] && file[j + 1] != ' ')
-		j++;
 	if (!(cmd = ft_strsub(file, 0, i)))
 		return (0);
 	if (!ft_strcmp(cmd, "##start"))
 	{
-		data->start++;
-		if (!(data->start_room = ft_strsub(file, i + 1, j - i)))
-			return (0);
+		j = cmd_start(data, &file[i], 0);
+		if (j == -1)
+			return (ret_free_line(cmd));
+		i += j;
 	}
 	else if (!ft_strcmp(cmd, "##end"))
 	{
-		data->end++;
-		if (!(data->end_room = ft_strsub(file, i + 1, j - i)))
-			return (0);
+		j = cmd_end(data, &file[i], 0);
+		if (j == -1)
+			return (ret_free_line(cmd));
+		i += j;
 	}
+	ft_strdel(&cmd);
 	return ((data->start > 1 || data->end > 1) ? 0 : i);
 }
 
-static int	is_room(char *line)
+int				is_room(char *line)
 {
-	int		i;
-	int		space;
+	int			i;
+	int			space;
 
 	if (line[0] == 'L')
 		return (0);
@@ -73,7 +84,7 @@ static int	is_room(char *line)
 		{
 			if (space > 0 && !(ft_isdigit(line[i]))
 				&& line[i] != '-' && line[i] != '+')
-					return (0);
+				return (0);
 			i++;
 		}
 		if (line[i] == ' ' && line[i + 1])
@@ -86,10 +97,10 @@ static int	is_room(char *line)
 	return (1);
 }
 
-static int	is_tube(char *line)
+int				is_tube(char *line)
 {
-	int		i;
-	int		dash;
+	int			i;
+	int			dash;
 
 	dash = 0;
 	i = 0;
@@ -111,10 +122,10 @@ static int	is_tube(char *line)
 	return (1);
 }
 
-int			check_tubes_rooms(t_data *data, char *file)
+int				check_tubes_rooms(t_data *data, char *file)
 {
-	int		i;
-	char	*line;
+	int			i;
+	char		*line;
 
 	i = 0;
 	while (file[i] != '\n' && file[i])
@@ -124,12 +135,13 @@ int			check_tubes_rooms(t_data *data, char *file)
 	if (is_room(line) > 0)
 	{
 		if (data->tubes > 0)
-			return (0);
+			return (ret_free_line(line));
 		data->rooms++;
 	}
 	else if (is_tube(line) > 0)
 		data->tubes++;
 	else
-		return (0);
+		return (ret_free_line(line));
+	ft_strdel(&line);
 	return (i);
 }

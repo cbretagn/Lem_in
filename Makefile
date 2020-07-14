@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+         #
+#    By: cbretagn <cbretagn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/03 16:54:48 by cbretagn          #+#    #+#              #
-#    Updated: 2020/02/26 15:23:11 by cbretagn         ###   ########.fr        #
+#    Updated: 2020/05/25 16:12:05 by cbretagn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,23 +20,32 @@ SRC_NAME	= parsing.c\
 			  check_file.c\
 			  check_format.c\
 			  dynamic_string.c\
-			  get_next_line.c\
 			  hash_table.c\
 			  create_del_struct.c\
 			  connector_graph_struct.c\
 			  get_connector_graph.c\
 			  utility_path_algo.c\
 			  get_nb_ants.c\
-			  edmond_karps1.c\
-			  get_paths.c\
-			  main_for_test.c\
+			  main.c\
 			  shortest_path.c\
+			  util_ek_algo.c\
+			  manage_pile.c\
+			  edmonds_karp.c\
 			  collisions.c\
+			  edmonds_karp2.c\
 			  get_real_route.c\
 			  print_ants.c\
 			  utility_print_ants.c\
-			  handling_direct_routes.c
-			#   print_path.c
+			  handling_direct_routes.c\
+			  shortest_path_util.c\
+			  handle_tubes.c\
+			  find_routes.c\
+			  utility_create_struct.c\
+			  verbose.c\
+			  verbose2.c\
+			  check_read.c\
+			  utility_path_ek.c\
+			  free_everything.c
 
 OBJ_NAME	:= $(SRC_NAME:.c=.o)
 
@@ -46,21 +55,21 @@ OBJ			= $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 LIB_PATH	= libft/libft.a
 
-CC			= gcc
+CC			= clang
 
-CFLAGS		= -Wall -Wextra -g -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror #-g3 -fsanitize=address,undefined
 
 .PHONY		: all clean fclean re
 
 all			: $(NAME)
 
 $(NAME)		: $(OBJ)
-	make -C ./libft/
-	$(CC) $(CFLAGS) -o $@ $^ $(LIB_PATH)
+	@make -C ./libft/
+	@$(CC) $(CFLAGS) -o $@ $^ $(LIB_PATH)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-		mkdir $(OBJ_PATH) 2> /dev/null || true
-		$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+		@mkdir $(OBJ_PATH) 2> /dev/null || true
+		@$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 analyze		:
 	$(CC) -fsyntax-only $(CFLAGS) $(SRC)

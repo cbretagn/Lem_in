@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   hash_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cbretagn <cbretagn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:11:49 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/11/15 15:56:58 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/04/27 21:23:15 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-void		delete_table(char **tab, int size)
+void			delete_table(char **tab, int size)
 {
-	int		i;
+	int			i;
 
 	i = -1;
 	while (++i < size)
@@ -23,24 +23,24 @@ void		delete_table(char **tab, int size)
 	tab = NULL;
 }
 
-int			hash_fun(char *str)
+long int		hash_fun(char *str)
 {
-	char	c;
-	int		i;
-	int		hash;
+	char		c;
+	int			i;
+	long int	hash;
 
 	hash = 456;
 	i = -1;
-	while ((c = str[++i]))
+	while ((c = str[++i]) && i < 10)
 		hash = hash * 31 + c;
 	return (hash);
 }
 
-char		**put_in_table(char *str, char **tab, int size)
+char			**put_in_table(char *str, char **tab, int size)
 {
-	int		hash;
+	long int	hash;
 
-	hash = hash_fun(str) % size;
+	hash = (int)(hash_fun(str) % size);
 	while (tab[hash] != NULL)
 	{
 		if (ft_strcmp(str, tab[hash]) == 0)
@@ -58,10 +58,10 @@ char		**put_in_table(char *str, char **tab, int size)
 	return (tab);
 }
 
-int			search_in_table(char *str, char **tab, int size)
+int				search_in_table(char *str, char **tab, int size)
 {
-	int		hash;
-	int		i;
+	int			hash;
+	int			i;
 
 	i = 0;
 	hash = hash_fun(str) % size;
@@ -71,6 +71,6 @@ int			search_in_table(char *str, char **tab, int size)
 		i++;
 	}
 	if (i == size)
-		exit(EXIT_FAILURE);
+		return (-1);
 	return (hash);
 }

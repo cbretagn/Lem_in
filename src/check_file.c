@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cbretagn <cbretagn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:57:05 by sadahan           #+#    #+#             */
-/*   Updated: 2020/02/13 14:55:10 by sadahan          ###   ########.fr       */
+/*   Updated: 2020/05/26 13:23:10 by cbretagn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lem_in_checker.h"
-
-#include <stdio.h>
+#include "../lem_in.h"
 
 t_data			*init_struct(void)
 {
 	t_data		*data;
 
 	if (!(data = malloc(sizeof(t_data))))
-		return (NULL);
+		exit_malloc(-2);
 	data->end = 0;
 	data->start = 0;
 	data->tubes = 0;
@@ -51,8 +49,6 @@ int				check_file(char *file, t_data *data)
 	int			i;
 	int			j;
 
-	i = 0;
-	j = 0;
 	if (!(i = check_ant_number(file, data)))
 		return (0);
 	while (file[++i])
@@ -61,7 +57,7 @@ int				check_file(char *file, t_data *data)
 			return (check_return(i, data));
 		if (file[i] == '#')
 		{
-			if ((j = check_command(data, &file[i])) == 0)
+			if ((j = check_command(data, &file[i], 0)) == 0)
 				return (check_return(i, data));
 		}
 		else if ((j = check_tubes_rooms(data, &file[i])) == 0)
@@ -71,29 +67,29 @@ int				check_file(char *file, t_data *data)
 	return (check_return(i, data));
 }
 
-char			*read_file(char *str)
+t_dstring		*read_file(void)
 {
-	int			fd;
-	int			ret;
+	ssize_t		ret;
 	char		buff[4096];
 	t_dstring	*file;
+	int			format;
+	int			direct_read;
 
 	file = NULL;
-	fd = open(str, O_RDONLY);
-	if (fd != -1)
+	format = 0;
+	direct_read = -1;
+	if (!(file = create_dstring(4096, "")))
+		exit_malloc(-2);
+	while ((ret = read(0, buff, 4095)))
 	{
-		while ((ret = read(fd, buff, 4095)))
-		{
-			buff[ret] = '\0';
-			if (!file)
-			{
-				if (!(file = create_dstring(4096, buff)))
-					return (NULL);
-			}
-			else if (!(file = push_str(file, buff)))
-				return (NULL);
-		}
+		if (ret == -1)
+			return (delete_dstring(file));
+		buff[ret] = '\0';
+		file = check_error(&direct_read, buff, ret, file);
+		if (direct_read == 1 && !check_read_buff(buff, &format))
+			break ;
 	}
-	close(fd);
-	return (file->str);
+	if (!file->str)
+		return (delete_dstring(file));
+	return (file);
 }

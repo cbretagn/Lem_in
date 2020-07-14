@@ -21,7 +21,7 @@ static int	ft_sep(char c)
 	return (0);
 }
 
-int			ft_atoi(const char *str)
+long		ft_atoi(const char *str)
 {
 	long	nbr;
 	int		neg;
@@ -40,5 +40,5 @@ int			ft_atoi(const char *str)
 		str++;
 	}
 	nbr = nbr * neg;
-	return (int)nbr;
+	return (nbr);
 }

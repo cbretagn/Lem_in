@@ -6,11 +6,11 @@
 /*   By: sadahan <sadahan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 14:03:21 by cbretagn          #+#    #+#             */
-/*   Updated: 2019/12/04 15:52:47 by cbretagn         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:23:10 by sadahan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lem_in_checker.h"
+#include "../lem_in.h"
 
 t_dstring			*create_dstring(unsigned int cap, char *str)
 {
@@ -18,22 +18,26 @@ t_dstring			*create_dstring(unsigned int cap, char *str)
 	unsigned int	len;
 
 	if (!(ret = (t_dstring *)malloc(sizeof(t_dstring))))
-		return (NULL);
-	len = ft_strlen(str);
+		exit_malloc(-2);
+	if (str)
+		len = ft_strlen(str);
+	else
+		len = 0;
 	ret->capacity = cap;
 	ret->size = len;
 	if (!(ret->str = ft_strnew(ret->capacity)))
-		return (NULL);
-	if (str[0] != '\0')
+		exit_malloc(-2);
+	if (str && str[0])
 		ft_strcpy(ret->str, str);
 	return (ret);
 }
 
-void				delete_dstring(t_dstring *del)
+t_dstring			*delete_dstring(t_dstring *del)
 {
 	ft_strdel(&del->str);
 	free(del);
 	del = NULL;
+	return (NULL);
 }
 
 t_dstring			*push_str(t_dstring *dest, char *src)
@@ -42,6 +46,8 @@ t_dstring			*push_str(t_dstring *dest, char *src)
 	int				new_cap;
 	unsigned int	len;
 
+	if (!src || !src[0])
+		return (dest);
 	len = ft_strlen(src);
 	temp = dest;
 	if (len < temp->capacity - temp->size)
@@ -67,6 +73,8 @@ t_dstring			*push_str_nchar(t_dstring *dest, char *src, int n)
 	int				new_cap;
 	unsigned int	len;
 
+	if (!src || !src[0])
+		return (dest);
 	len = n + 1;
 	temp = dest;
 	if (len < temp->capacity)
