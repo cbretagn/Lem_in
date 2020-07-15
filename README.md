@@ -2,7 +2,7 @@
 
 ## Assignment
 
-Write a program, named lem-in, which reads on standard entry the map of an ant-farm and finds a solution to send all ants from start to end in as few turns as possible.
+Write a program, named lem-in, which reads on standard input the map of an ant-farm and finds a solution to send all ants from start to end in as few turns as possible.
 Each turn, each ant can move from one room to another adjacent room provided there's never more than one ant per room at any given time.
 The ant-farm must be formatted as followed, else the program exits with an error statement :
 - number of ants
@@ -19,7 +19,7 @@ The program prints the ant-farm then its solution, formatted as follows :
 `./lem-in < map`
 
 Use `./generator --options > map` (generator runs on Linux) or use one of the maps in maps_valid
-You can also run `./lem-in` and type the map on standard entry
+You can also run `./lem-in` and type the map on standard input
 
 ## Notions
 
