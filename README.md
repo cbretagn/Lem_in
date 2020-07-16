@@ -15,8 +15,10 @@ The program prints the ant-farm then its solution, formatted as follows :
 
 ## How to run it
 
-`make`
-`./lem-in < map`
+```
+make
+./lem-in < map
+```
 
 Use `./generator --options > map` (generator runs on Linux) or use one of the maps in maps_valid
 You can also run `./lem-in` and type the map on standard input
